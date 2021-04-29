@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TipoTelefoneService } from 'src/app/service/generico/tipo-telefone.service';
+import { Telefone } from 'src/models/telefone.model';
+import { TipoTelefone } from 'src/models/tipoTelefone.model';
 
 @Component({
   selector: 'form-telefone',
@@ -7,16 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelefoneComponent implements OnInit {
 
-  telefones = [1];
+  @Input() telefone: Telefone;
+  tiposTelefone: TipoTelefone[];
 
-  constructor() { }
+  constructor(private tipoTelefoneService: TipoTelefoneService) { }
 
   ngOnInit(): void {
-
-  }
-
-  addTelefone() {
-    this.telefones.push(1);
+    this.tipoTelefoneService.getTipoTelefone().subscribe(result => {
+      this.tiposTelefone = result
+    });
   }
 
 }

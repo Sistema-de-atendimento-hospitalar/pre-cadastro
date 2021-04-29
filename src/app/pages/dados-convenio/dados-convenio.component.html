@@ -8,12 +8,12 @@
                     <h1>Possui Convênio</h1>
 
                     <button mat-raised-button color="warn" (click)="temConvenio(true)">
-                                Sim
-                            </button>
+                        Sim
+                    </button>
 
                     <button mat-raised-button color="warn" (click)="temConvenio(false)">
-                                Não
-                            </button>
+                        Não
+                    </button>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="respondeuConvenio && !hasConvenio">
@@ -56,14 +56,14 @@
                         <h1>Cadastro cartão</h1>
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input type="text" class="form-control" id="convenio" name="convenio" required placeholder="Convênio" />
-                            <input type="text" class="form-control" id="rede" name="rede" required placeholder="Rede" />
-                            <input type="text" class="form-control" id="validade" name="validade" required placeholder="Validade" />
+                            <input [(ngModel)]="paciente.convenio" type="text" class="form-control" id="convenio" name="convenio" required placeholder="Convênio" />
+                            <input [(ngModel)]="paciente.rede" type="text" class="form-control" id="rede" name="rede" required placeholder="Rede" />
+                            <input [(ngModel)]="paciente.validade" type="date" class="form-control" id="validade" name="validade" required placeholder="Validade" />
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input type="text" class="form-control" id="tpContrato" name="tpContrato" required placeholder="Tipo contrato" />
-                            <input type="text" class="form-control" id="nrCarteira" name="nrCarteira" required placeholder="N° da carteira" />
+                            <input [(ngModel)]="paciente.tipoContrato" type="text" class="form-control" id="tpContrato" name="tpContrato" required placeholder="Tipo contrato" />
+                            <input [(ngModel)]="paciente.numeroCarteira" type="text" class="form-control" id="nrCarteira" name="nrCarteira" required placeholder="N° da carteira" />
                         </div>
 
                         <button class="btn btn-prosseguir btn-danger btn-round">

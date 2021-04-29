@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Paciente } from 'src/models/paciente.model';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-dados-pessoais',
   templateUrl: './dados-pessoais.component.html',
@@ -14,7 +16,7 @@ export class DadosPessoaisComponent implements OnInit {
   private disableDominio: boolean = false;
   public hasError: boolean = false;
 
-  constructor(private router: Router, private pacienteService: PacienteService) { }
+  constructor(private router: Router, private pacienteService: PacienteService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
@@ -26,15 +28,22 @@ export class DadosPessoaisComponent implements OnInit {
     if (!emailPaciente.includes("@")) {
       this.paciente.email = `${this.paciente.email}${this.dominio}`;
     }
-    console.log(this.paciente);
 
-    this.pacienteService.savePaciente(this.paciente).subscribe(result => {
-      this.paciente = result;
-      localStorage.setItem("paciente", JSON.stringify(this.paciente));
-      if (result) {
-        this.router.navigate(['/passo2']);
-      }
-    })
+    if (this.paciente.pacienteId) {
+      this._snackBar.open(`Processo para atualizar ${this.paciente.nome}`, "Fechar");
+      this.router.navigate(['/passo2']);
+    } else {
+      this.pacienteService.savePaciente(this.paciente).subscribe(result => {
+        this.paciente = result;
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        if (result) {
+          this.router.navigate(['/passo2']);
+        }
+      }, (errorResponse: HttpErrorResponse) => {
+        this._snackBar.open(errorResponse.error.message, "Error");
+        console.log(errorResponse);
+      });
+    }
   }
 
   validateEmail() {

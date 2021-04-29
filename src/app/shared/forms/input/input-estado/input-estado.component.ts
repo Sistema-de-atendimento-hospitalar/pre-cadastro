@@ -47,7 +47,6 @@ export class InputEstadoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(`estado ${this.estado}`)
   }
 
 }

@@ -1,9 +1,9 @@
-import { CartaoSaude } from "./convenio.model";
+import { CartaoSaude } from "./CartaoSaude.model";
 import { Endereco } from "./endereco.model";
 import { Telefone } from "./telefone.model";
 
 export class Paciente {
-    public idPaciente: number;
+    public pacienteId: number;
     public nome: string;
     public cpf: string;
     public email: string;
@@ -12,11 +12,9 @@ export class Paciente {
     public emissaoRg: Date;
     public dtNascimento: Date;
     public sexo: string;
-    public telefone:Telefone[];
-    public endereco:Endereco[];
-    public cartaoSaude?:CartaoSaude;
+    public telefone: Telefone[];
+    public endereco: Endereco[];
+    public cartaoSaude?: CartaoSaude;
 
-
-
-    constructor(){}
+    constructor() { }
 }

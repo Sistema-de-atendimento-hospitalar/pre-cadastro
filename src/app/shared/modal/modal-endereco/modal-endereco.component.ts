@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DadosEnderecoComponent } from 'src/app/pages/dados-endereco/dados-endereco.component';
+import { Endereco } from 'src/models/endereco.model';
 @Component({
   selector: 'app-modal-endereco',
   templateUrl: './modal-endereco.component.html',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalEnderecoComponent implements OnInit {
 
-  constructor() { }
+  endereco: Endereco;
+
+  constructor(public dialogRef: MatDialogRef<DadosEnderecoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Endereco) { }
 
   ngOnInit(): void {
+    this.endereco = new Endereco();
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
