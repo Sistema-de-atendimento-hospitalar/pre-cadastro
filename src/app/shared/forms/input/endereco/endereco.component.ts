@@ -1,8 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CepService } from '../../../../service/cep/cep.service';
 import { EnderecoCorreios } from '../../../../../models/enderecoCorreios.model';
-import { MatDialog } from '@angular/material/dialog';
-import { ModalEnderecoComponent } from 'src/app/shared/modal/modal-endereco/modal-endereco.component';
 import { Endereco } from 'src/models/endereco.model';
 
 @Component({
@@ -12,18 +10,13 @@ import { Endereco } from 'src/models/endereco.model';
 })
 export class EnderecoComponent implements OnInit {
 
-  enderecos = [1];
-
-  private endereco: Endereco;
-  @Output() enderecoEvent = new EventEmitter<Endereco>();
+  @Input() endereco: Endereco;
   private enderecoCorreios: EnderecoCorreios;
-  private disableInput: boolean = false;
 
-  constructor(private cepService: CepService, public dialog: MatDialog) { }
+  constructor(private cepService: CepService) { }
 
   ngOnInit(): void {
     this.enderecoCorreios = new EnderecoCorreios();
-    this.endereco = new Endereco();
   }
 
   convetion() {
@@ -34,19 +27,6 @@ export class EnderecoComponent implements OnInit {
     this.endereco.bairro = this.enderecoCorreios.bairro;
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(ModalEnderecoComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-
-  // addEndereco() {
-  //   this.enderecos.push(1);
-  // }
-
   verifyCep() {
     let cepRequest = this.endereco;
     let cepLength: number = 8;
@@ -54,8 +34,6 @@ export class EnderecoComponent implements OnInit {
       this.cepService.searchCep(cepRequest.cep).subscribe(result => {
         this.enderecoCorreios = result
         this.convetion()
-        localStorage.setItem("endereco", JSON.stringify(this.endereco))
-        this.enderecoEvent.emit(this.endereco);
       });
     }
   }

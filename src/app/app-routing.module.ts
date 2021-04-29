@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
-
 import { IndexComponent } from "./pages/index/index.component";
 import { DadosPessoaisComponent } from "./pages/dados-pessoais/dados-pessoais.component";
 import { DadosEnderecoComponent } from "./pages/dados-endereco/dados-endereco.component";

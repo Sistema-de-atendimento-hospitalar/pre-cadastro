@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { CartaoSaude } from 'src/models/CartaoSaude.model';
+import { Paciente } from 'src/models/paciente.model';
 
 @Component({
   selector: 'app-dados-convenio',
@@ -8,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class DadosConvenioComponent implements OnInit {
 
+  private paciente: Paciente;
+  private cartaoSaude: CartaoSaude;
   hasConvenio: boolean = false
   hasPagamentoParticular: boolean = false
   acessoViaCodigo: boolean = false
@@ -16,14 +21,21 @@ export class DadosConvenioComponent implements OnInit {
   respondeuPagamento: boolean = false
   respondeuModoAcesso: boolean = false
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private pacienteService: PacienteService) {}
 
   ngOnInit(): void {
+    this.paciente = this.pacienteService.getPacienteFromLocalStore();
   }
 
   nextPage() {
-    // Realizar validação com o cpf
-    this.router.navigate(['/passo1']);
+
+    this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
+      if (result) {
+        this.router.navigate(['/confirmacao-dados']);
+      }
+    }, error => {
+      console.log(error);
+    });
   }
 
   temConvenio(resp: boolean) {

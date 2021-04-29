@@ -22,21 +22,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
-
-
-
-
-
-
-
-
-import { IndexComponent } from "./index/index.component";
-// import { ProfilepageComponent } from "./profilepage/profilepage.component";
-// import { RegisterpageComponent } from "./registerpage/registerpage.component";
-// import { LandingpageComponent } from "./landingpage/landingpage.component";
-// import { LoginComponent } from './login/login.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
 import { SquareComponent } from '../shared/square/square.component';
@@ -45,10 +34,9 @@ import { InputEstadoComponent } from '../shared/forms/input/input-estado/input-e
 import { InputCidadeComponent } from '../shared/forms/input/input-cidade/input-cidade.component';
 import { EnderecoComponent } from '../shared/forms/input/endereco/endereco.component';
 import { TelefoneComponent } from '../shared/forms/input/telefone/telefone.component';
-import { ModalComponent } from '../shared/modal/modal.component';
+import { ModalTelefoneComponent } from '../shared/modal/modal-telefone/modal-telefone.component';
 
-
-
+import { IndexComponent } from "./index/index.component";
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { DadosEnderecoComponent } from './dados-endereco/dados-endereco.component';
 import { DadosTelefoneComponent } from './dados-telefone/dados-telefone.component';
@@ -56,11 +44,10 @@ import { DadosConvenioComponent } from './dados-convenio/dados-convenio.componen
 import { DadosConfirmacaoComponent } from './dados-confirmacao/dados-confirmacao.component';
 import { ModalEnderecoComponent } from "../shared/modal/modal-endereco/modal-endereco.component";
 
-
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
-
 @NgModule({
   imports: [
+    //angular modules
     MatInputModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -71,6 +58,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     BrowserModule,
     FormsModule,
     RouterModule,
+    MatSnackBarModule,
+
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
@@ -87,10 +76,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   ],
   declarations: [
     IndexComponent,
-    // ProfilepageComponent,
-    // RegisterpageComponent,
-    // LandingpageComponent,
-    // LoginComponent,
     FooterComponent,
     HeaderComponent,
     SquareComponent,
@@ -99,9 +84,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     InputCidadeComponent,
     EnderecoComponent,
     TelefoneComponent,
-    ModalComponent,
+    ModalTelefoneComponent,
     ModalEnderecoComponent,
-
     DadosPessoaisComponent,
     DadosEnderecoComponent,
     DadosTelefoneComponent,
@@ -110,9 +94,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   ],
   exports: [
     IndexComponent,
-    // ProfilepageComponent,
-    // RegisterpageComponent,
-    // LandingpageComponent
+    ScrollingModule
   ],
   providers: [],
   entryComponents: [ModalEnderecoComponent]

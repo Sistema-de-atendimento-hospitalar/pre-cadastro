@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Endereço {{arrayEndereco}}</h2>
+<h2 mat-dialog-title>Endereço</h2>
 <mat-dialog-content>
-    <form-endereco></form-endereco>
+    <form-endereco [endereco]="endereco"></form-endereco>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Fechar</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Salvar</button>
+    <button mat-button [mat-dialog-close]="endereco" cdkFocusInitial>Salvar</button>
 </mat-dialog-actions>
