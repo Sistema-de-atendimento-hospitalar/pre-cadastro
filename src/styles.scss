@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+.btn-prosseguir {
+    margin-top: 6% !important;
+    padding: 0.4em !important;
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+// body {
+//     margin: 0;
+//     font-family: Roboto, "Helvetica Neue", sans-serif;
+//     background-color: rgba(185, 212, 245, ) !important;
+//     background-image: url(./assets/img/medical.webp) !important;
+// }
+html,
+body {
+    height: 100%;
+}
+
+.form-control.is-invalid {
+    border-color: brown !important;
+    background-color: transparent !important;
+}

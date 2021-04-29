@@ -1,0 +1,20 @@
+<div *ngFor="let item of telefones; let i = index" class="form-row">
+
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <label for="ddd" class="col-sm-12 col-form-label">DDD</label>
+        <input type="text" class="form-control" id="ddd" name="ddd" required minlength="2" placeholder="DDD" />
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <label for="telefone" class="col-sm-12 col-form-label">Telefone</label>
+        <input type="text" class="form-control" id="telefone" name="telefone" required minlength="8" placeholder="Telefone" />
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <label for="tpTelefone" class="col-sm-12 col-form-label">Tipo de Telefone</label>
+        <mat-select class="form-control">
+            <mat-option>Selecione</mat-option>
+            <mat-option value="celular">Celular</mat-option>
+            <mat-option value="residencial">Residencial</mat-option>
+            <mat-option value="escritorio">Escritorio</mat-option>
+        </mat-select>
+    </div>
+</div>

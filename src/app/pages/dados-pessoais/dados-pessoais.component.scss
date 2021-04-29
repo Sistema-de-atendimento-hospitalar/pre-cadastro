@@ -1,0 +1,32 @@
+.form-row {
+    margin-top: 2% !important;
+}
+
+.email-select {
+    padding-left: 0 !important;
+}
+
+#emailSelect {
+    border-left: transparent !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.email {
+    padding-right: 0 !important;
+}
+
+#email {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+// Aprendendo a utilizar o SCSS SINTAX, retirar do código depois 
+// @mixin transform($property) {
+//     -webkit-transform: $property;
+//     -ms-transform: $property;
+//     transform: $property;
+// }
+// .btn {
+//     @include transform(rotate(60deg));
+// }

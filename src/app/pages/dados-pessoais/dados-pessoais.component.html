@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="wrapper">
+    <div class="page-header header-filter">
+        <div class="container">
+            <div class="content-center">
+                <h1>Dados Pessoais</h1>
+                <!-- <h3 class="h3-seo"></h3> -->
+                <form #myForm="ngForm" (ngSubmit)="nextPage()" ngNativeValidate>
+                    <div class="form-row text-left">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-row">
+                                <div class="col-lg-9 col-md-9 col-sm-9">
+                                    <label for="nome" class="col-sm-12 col-form-label">Nome</label>
+                                    <input type="text" class="form-control is-invalid" [ngClass]="{'is-invalid': hasError}" id="nome" name="nome" [(ngModel)]="paciente.nome" required minlength="3" placeholder="Nome" />
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <label for="dtNascimento" class="col-sm-12 col-form-label">Data de Nascimento</label>
+                                    <input type="date" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="dtNascimento" name="dtNascimento" [(ngModel)]="paciente.dtNascimento" required minlength="10" placeholder="26/06/1994" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-9 col-md-9 col-sm-9">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 email">
+                                            <label for="email" class="col-sm-12 col-form-label">Email</label>
+                                            <input type="text" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="email" name="email" [(ngModel)]="paciente.email" required minlength="7" placeholder="Email" (change)="validateEmail()" />
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 email-select">
+                                            <label for="email" class="col-sm-12 col-form-label">Dominio</label>
+                                            <mat-select class="form-control" id="emailSelect" name="dominio" [(ngModel)]="dominio" [disabled]="disableDominio">
+                                                <mat-option value="none"></mat-option>
+                                                <mat-option value="@gmail.com">@gmail.com</mat-option>
+                                                <mat-option value="@hotmail.com">@hotmail.com</mat-option>
+                                                <mat-option value="@outlook.com">@outlook.com</mat-option>
+                                            </mat-select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <label for="sexo" class="col-sm-12 col-form-label">Sexo</label>
+                                    <mat-select class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="sexo" name="sexo" [(ngModel)]="paciente.sexo" required>
+                                        <mat-option value="M">Masculino</mat-option>
+                                        <mat-option value="F">Feminino</mat-option>
+                                    </mat-select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <label for="rg" class="col-sm-12 col-form-label">Rg</label>
+                                    <input type="string" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="rg" name="rg" required minlength="13" [(ngModel)]="paciente.rg" placeholder="00.000.000-00" [(ngModel)]="rg" mask="00.000.000-00" />
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <label for="orgExpedidor" class="col-sm-12 col-form-label">Orgão Expedidor</label>
+                                    <input type="text" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="orgaoExpedidor" name="orgaoExpedidor" [(ngModel)]="paciente.orgExpedidorRg" required minlength="3" placeholder="SSP" />
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <label for="dtEmissaoFor" class="col-sm-12 col-form-label">Data de Emissão</label>
+                                    <input type="date" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="dtEmissao" name="dtEmissao" required minlength="10" [(ngModel)]="paciente.emissaoRg" placeholder="26/06/1994" />
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="hasError">
+                            Preencha os campos obrigatórios!
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <button class="btn btn-prosseguir btn-danger btn-round">
+                                Prosseguir
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
