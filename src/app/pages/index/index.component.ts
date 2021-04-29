@@ -2,14 +2,14 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from '@angular/router';
 import { PacienteService} from '../../service/paciente/paciente.service';
 import { Paciente } from "src/models/paciente.model";
-import { NgForm } from "@angular/forms";
+
 @Component({
   selector: "app-index",
   templateUrl: "index.component.html",
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit, OnDestroy {
 
+export class IndexComponent implements OnInit, OnDestroy {
   dataText = ["Olá, seja bem vindo!", "Informe seu CPF", "Obrigada!"];
 
   public hasError: Boolean = false;
@@ -17,7 +17,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   private paciente: Paciente;
 
-  constructor(private router: Router, private pacienteService:PacienteService) { }
+  constructor(private router: Router, private pacienteService:PacienteService,) { }
 
   ngOnInit() {
     this.paciente = new Paciente()
@@ -68,10 +68,8 @@ export class IndexComponent implements OnInit, OnDestroy {
           this.paciente = result;
           if (result) {
             localStorage.setItem("paciente",JSON.stringify(this.paciente));
-            this.router.navigate(['/confirmacao-dados']);
-          } else {
-            this.router.navigate(['/passo1']);
           }
+          this.router.navigate(['/passo1']);
         });
     } else {
       this.hasError = true;
@@ -103,5 +101,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     if (resto != parseInt(strCPF.substring(10, 11))) return false;
     return true;
   }
+
 
 }

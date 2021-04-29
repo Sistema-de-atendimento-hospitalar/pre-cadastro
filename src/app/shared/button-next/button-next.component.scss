@@ -1,0 +1,30 @@
+section {
+    display: table;
+}
+
+.example-button-row {
+    display: table-cell;
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    background-color: rgb(3, 152, 158);
+    font-size: 2em;
+    font-weight: normal;
+}
+
+button span {
+    font-size: 1.5em;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0%;
+}
+
+.material-icons {
+    margin-left: 75%;
+}

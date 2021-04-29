@@ -1,5 +1,29 @@
-<app-header></app-header>
-<div class="wrapper">
+<!-- Header -->
+<mat-grid-list cols="1" rowHeight="1:1">
+    <mat-grid-tile-header>
+        <app-header></app-header>
+    </mat-grid-tile-header>
+</mat-grid-list>
+
+<!-- Content -->
+<mat-grid-list cols="6" rowHeight="1:1">
+    <mat-grid-tile colspan="6" class="content-form-cpf">
+        <h1></h1>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="6">
+        <input type="text">
+    </mat-grid-tile>
+</mat-grid-list>
+
+<!--Footer -->
+<mat-grid-list cols="1" rowHeight="1:1" class="footer">
+    <mat-grid-tile-footer>
+        <app-button-next></app-button-next>
+    </mat-grid-tile-footer>
+</mat-grid-list>
+
+
+<!-- <div class="wrapper">
     <div class="page-header header-filter">
         <div class="container">
             <div class="content-center brand">
@@ -12,9 +36,9 @@
                         <div *ngIf="hasError" class="alert-error">
                             Este cpf é inválido!
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <!-- oCaso tenha cpf na base de dados ir para confirmação de dados, caso contrário continuar com o cadastro -->
-                            <button class="btn btn-prosseguir btn-danger btn-round">
+                        <div class="col-lg-12 col-md-12 col-sm-12"> -->
+<!-- oCaso tenha cpf na base de dados ir para confirmação de dados, caso contrário continuar com o cadastro -->
+<!-- <button class="btn btn-prosseguir btn-danger btn-round">
                                 Prosseguir
                             </button>
                         </div>
@@ -23,10 +47,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- <ng-template #defaultHeader>
     Some Header
-</ng-template> -->-->
+</ng-template> -->
 
 <!-- <app-modal title="Alerta" botaoClose="Fechar" botaoConfirmar=confirmar template="../../shared/template/modal/default.html"></app-modal> -->

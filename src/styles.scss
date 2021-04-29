@@ -7,20 +7,11 @@
     padding-right: 2em !important;
 }
 
-html,
 body {
-    height: 100%;
-}
-
-// body {
-//     margin: 0;
-//     font-family: Roboto, "Helvetica Neue", sans-serif;
-//     background-color: rgba(185, 212, 245, ) !important;
-//     background-image: url(./assets/img/medical.webp) !important;
-// }
-html,
-body {
-    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF!important;
+    font-family: "Open Sans", sans-serif;
 }
 
 .form-control.is-invalid {

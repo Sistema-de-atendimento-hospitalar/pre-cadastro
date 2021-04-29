@@ -18,25 +18,17 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { PopoverModule } from "ngx-bootstrap/popover";
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule} from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
-
-
-
-
-
-
-
+/* Componentes shared*/
 import { IndexComponent } from "./index/index.component";
-// import { ProfilepageComponent } from "./profilepage/profilepage.component";
-// import { RegisterpageComponent } from "./registerpage/registerpage.component";
-// import { LandingpageComponent } from "./landingpage/landingpage.component";
-// import { LoginComponent } from './login/login.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
 import { SquareComponent } from '../shared/square/square.component';
@@ -46,9 +38,8 @@ import { InputCidadeComponent } from '../shared/forms/input/input-cidade/input-c
 import { EnderecoComponent } from '../shared/forms/input/endereco/endereco.component';
 import { TelefoneComponent } from '../shared/forms/input/telefone/telefone.component';
 import { ModalComponent } from '../shared/modal/modal.component';
-
-
-
+import { ButtonNextComponent } from '../shared/button-next/button-next.component';
+/* Componentes pages*/
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { DadosEnderecoComponent } from './dados-endereco/dados-endereco.component';
 import { DadosTelefoneComponent } from './dados-telefone/dados-telefone.component';
@@ -61,7 +52,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   imports: [
+    MatGridListModule,
     MatInputModule,
+    MatToolbarModule,
     MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -87,10 +80,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   ],
   declarations: [
     IndexComponent,
-    // ProfilepageComponent,
-    // RegisterpageComponent,
-    // LandingpageComponent,
-    // LoginComponent,
+    ButtonNextComponent,
     FooterComponent,
     HeaderComponent,
     SquareComponent,
@@ -110,9 +100,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   ],
   exports: [
     IndexComponent,
-    // ProfilepageComponent,
-    // RegisterpageComponent,
-    // LandingpageComponent
   ],
   providers: [],
   entryComponents: [ModalEnderecoComponent]

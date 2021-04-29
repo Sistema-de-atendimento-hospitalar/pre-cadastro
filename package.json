@@ -28,6 +28,7 @@
     "chart.js": "2.9.4",
     "core-js": "3.8.2",
     "jw-bootstrap-switch-ng2": "2.0.5",
+    "material-design-icons": "^3.0.1",
     "ngcpf": "^1.0.7",
     "ngx-bootstrap": "^6.2.0",
     "ngx-mask": "^11.1.5",
