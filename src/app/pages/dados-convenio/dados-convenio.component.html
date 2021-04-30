@@ -51,19 +51,19 @@
                     </div>
                 </div>
 
-                <form #myForm="ngForm" (ngSubmit)="nextPage()">
+                <form #myForm="ngForm" ngNativeValidate (ngSubmit)="nextPage()">
                     <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="respondeuConvenio && hasConvenio && respondeuModoAcesso && !acessoViaCodigo">
                         <h1>Cadastro cartão</h1>
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input [(ngModel)]="paciente.convenio" type="text" class="form-control" id="convenio" name="convenio" required placeholder="Convênio" />
-                            <input [(ngModel)]="paciente.rede" type="text" class="form-control" id="rede" name="rede" required placeholder="Rede" />
-                            <input [(ngModel)]="paciente.validade" type="date" class="form-control" id="validade" name="validade" required placeholder="Validade" />
+                            <input [(ngModel)]="cartaoSaude.convenio" type="text" class="form-control" id="convenio" name="convenio" required placeholder="Convênio" />
+                            <input [(ngModel)]="cartaoSaude.rede" type="text" class="form-control" id="rede" name="rede" required placeholder="Rede" />
+                            <input [(ngModel)]="cartaoSaude.validade" type="date" class="form-control" id="validade" name="validade" required placeholder="Validade" />
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input [(ngModel)]="paciente.tipoContrato" type="text" class="form-control" id="tpContrato" name="tpContrato" required placeholder="Tipo contrato" />
-                            <input [(ngModel)]="paciente.numeroCarteira" type="text" class="form-control" id="nrCarteira" name="nrCarteira" required placeholder="N° da carteira" />
+                            <input [(ngModel)]="cartaoSaude.tipoContrato" type="text" class="form-control" id="tpContrato" name="tpContrato" required placeholder="Tipo contrato" />
+                            <input [(ngModel)]="cartaoSaude.numeroCarteira" type="number" mask="0000000000" class="form-control" id="nrCarteira" name="nrCarteira" required placeholder="N° da carteira" />
                         </div>
 
                         <button class="btn btn-prosseguir btn-danger btn-round">

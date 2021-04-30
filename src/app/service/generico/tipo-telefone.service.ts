@@ -13,6 +13,6 @@ export class TipoTelefoneService {
   constructor(private http: HttpClient) { }
 
   getTipoTelefone(): Observable<TipoTelefone[]> {
-    return this.http.get<TipoTelefone[]>(`${this.API_URL}/tipo-telefone`).pipe();
+    return this.http.get<TipoTelefone[]>(`${this.API_URL}/tipo-telefone`);
   }
 }
