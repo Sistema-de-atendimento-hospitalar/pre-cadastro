@@ -1,11 +1,11 @@
 <mat-accordion class="example-headers-align">
-    <mat-expansion-panel (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 Dados Pessoais
             </mat-panel-title>
             <mat-panel-description>
-                Type your name and age
+                Documentação
                 <mat-icon>account_circle</mat-icon>
             </mat-panel-description>
         </mat-expansion-panel-header>

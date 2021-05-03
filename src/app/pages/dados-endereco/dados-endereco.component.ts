@@ -38,6 +38,7 @@ export class DadosEnderecoComponent implements OnInit {
 
     if (!valid) {
       this._snackBar.open("Preencha todos os endereços corretamente", "Alerta");
+      return false;
     }
 
     this.pacienteService.saveEndereco(this.enderecos, this.paciente).subscribe(

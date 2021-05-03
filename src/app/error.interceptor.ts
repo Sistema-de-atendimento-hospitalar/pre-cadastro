@@ -29,7 +29,7 @@ export class ErrorIntercept implements HttpInterceptor {
                     if (error.error instanceof ErrorEvent) {
                         errorMessage = `Error: ${error.error.message}`;
                     } else {
-                        errorMessage = `Error Status: ${error.status}\nMessage: ${error.message}`;
+                        errorMessage = `Message: ${error.error.detail}`;
                     }
                     this._snackBar.open(errorMessage, "Error");
                     return throwError(errorMessage);
