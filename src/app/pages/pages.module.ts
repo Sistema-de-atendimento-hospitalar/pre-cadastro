@@ -4,6 +4,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
@@ -25,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
@@ -44,6 +46,8 @@ import { DadosConvenioComponent } from './dados-convenio/dados-convenio.componen
 import { DadosConfirmacaoComponent } from './dados-confirmacao/dados-confirmacao.component';
 import { ModalEnderecoComponent } from "../shared/modal/modal-endereco/modal-endereco.component";
 
+import { ErrorIntercept } from '../error.interceptor';
+
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   imports: [
@@ -59,6 +63,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     FormsModule,
     RouterModule,
     MatSnackBarModule,
+    HttpClientModule,
+    MatExpansionModule,
 
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
@@ -96,7 +102,13 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     IndexComponent,
     ScrollingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorIntercept,
+      multi: true
+    }
+  ],
   entryComponents: [ModalEnderecoComponent]
 })
 export class PagesModule { }

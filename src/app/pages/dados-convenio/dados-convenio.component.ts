@@ -25,14 +25,13 @@ export class DadosConvenioComponent implements OnInit {
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
+    this.cartaoSaude = new CartaoSaude();
   }
 
   nextPage() {
 
     this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
-      if (result) {
         this.router.navigate(['/confirmacao-dados']);
-      }
     }, error => {
       console.log(error);
     });

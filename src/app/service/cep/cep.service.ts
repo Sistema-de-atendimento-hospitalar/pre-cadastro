@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EnderecoCorreios } from 'src/models/enderecoCorreios.model';
 
@@ -12,6 +12,6 @@ export class CepService {
   constructor(private http: HttpClient) { }
 
   searchCep(cep: string): Observable<EnderecoCorreios> {
-    return this.http.get<EnderecoCorreios>(`${this.API_URL}/${cep}/json/`).pipe();
+    return this.http.get<EnderecoCorreios>(`${this.API_URL}/${cep}/json/`);
   }
 }
