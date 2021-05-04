@@ -11,11 +11,26 @@ import { CartaoSaude } from 'src/models/CartaoSaude.model';
 })
 export class PacienteService {
   private API_URL: string = "http://localhost:8080/v1/paciente";
+  private API_URL_V2: string = "http://localhost:8080/v2/paciente"
+
 
   constructor(private http: HttpClient) { }
 
   verifyPacienteFromCpf(cpf: string): Observable<Paciente> {
     return this.http.get<Paciente>(`${this.API_URL}/cpf/${cpf}`);
+  }
+
+  getPacienteFromLocalStore(): Paciente {
+    let pacienteJsonConfirm = localStorage.getItem("paciente")
+    let paciente: Paciente;
+
+    if (pacienteJsonConfirm) {
+      paciente = JSON.parse(pacienteJsonConfirm);
+    } else {
+      paciente = new Paciente();
+
+    }
+    return paciente;
   }
 
   savePaciente(paciente: Paciente): Observable<Paciente> {
@@ -34,18 +49,8 @@ export class PacienteService {
     return this.http.post<Paciente>(`${this.API_URL}/${paciente.pacienteId}/cartaoSaude`, cartaoSaude);
   }
 
-  getPacienteFromLocalStore(): Paciente {
-    let pacienteJsonConfirm = localStorage.getItem("paciente")
-    let paciente: Paciente;
-
-    if (pacienteJsonConfirm) {
-      paciente = JSON.parse(pacienteJsonConfirm);
-    } else {
-      paciente = new Paciente();
-
-    }
-    return paciente;
+  updatePaciente(paciente:Paciente): Observable<Paciente>{
+    return this.http.put<Paciente>(`${this.API_URL_V2}/${paciente.pacienteId}`, paciente);
   }
-
 
 }

@@ -15,6 +15,8 @@ export class DadosPessoaisComponent implements OnInit {
   private dominio: string = null;
   private disableDominio: boolean = false;
   public hasError: boolean = false;
+  private temDeficiencia: boolean = false;
+  private dominios:string[] = ['gmail.com', 'hotmail.com', 'outlook.com'];
 
   constructor(private router: Router, private pacienteService: PacienteService, private _snackBar: MatSnackBar) { }
 
@@ -30,7 +32,7 @@ export class DadosPessoaisComponent implements OnInit {
     }
 
     if (this.paciente.pacienteId) {
-      this._snackBar.open(`Processo para atualizar ${this.paciente.nome}`, "Fechar");
+      localStorage.setItem("paciente", JSON.stringify(this.paciente));
       this.router.navigate(['/passo2']);
     } else {
       this.pacienteService.savePaciente(this.paciente).subscribe(result => {
@@ -43,6 +45,12 @@ export class DadosPessoaisComponent implements OnInit {
         this._snackBar.open(errorResponse.error.message, "Error");
         console.log(errorResponse);
       });
+    }
+  }
+
+  concatDominio(dominio:string){
+    if(!this.paciente.email.includes("@")){
+      this.paciente.email = `${this.paciente.email}@${dominio}`
     }
   }
 

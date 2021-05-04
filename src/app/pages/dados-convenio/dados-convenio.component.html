@@ -7,13 +7,10 @@
                 <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="!respondeuConvenio">
                     <h1>Possui Convênio</h1>
 
-                    <button mat-raised-button color="warn" (click)="temConvenio(true)">
-                        Sim
-                    </button>
-
-                    <button mat-raised-button color="warn" (click)="temConvenio(false)">
-                        Não
-                    </button>
+                    <mat-radio-group aria-label="Selecione a opção">
+                        <mat-radio-button value="1">Sim</mat-radio-button>
+                        <mat-radio-button value="2">Não</mat-radio-button>
+                    </mat-radio-group>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="respondeuConvenio && !hasConvenio">

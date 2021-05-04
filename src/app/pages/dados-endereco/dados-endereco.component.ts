@@ -24,8 +24,12 @@ export class DadosEnderecoComponent implements OnInit {
     private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.enderecos.push(new Endereco());
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
+    if (!!this.paciente.enderecos && this.paciente.enderecos.length > 0){
+      this.paciente.enderecos.map(endereco => this.enderecos.push(endereco));
+    } else{
+      this.enderecos.push(new Endereco());
+    }
   }
 
   nextPage() {
@@ -41,16 +45,22 @@ export class DadosEnderecoComponent implements OnInit {
       return false;
     }
 
-    this.pacienteService.saveEndereco(this.enderecos, this.paciente).subscribe(
-      result => { 
-        if (result) {
-          this.router.navigate(['/passo3']);
+    if (this.paciente.pacienteId) {
+      this.paciente.enderecos = this.enderecos;
+      localStorage.setItem("paciente", JSON.stringify(this.paciente));
+      this.router.navigate(['/passo3']);
+    } else {
+      this.pacienteService.saveEndereco(this.enderecos, this.paciente).subscribe(
+        result => { 
+          if (result) {
+            this.router.navigate(['/passo3']);
+          }
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this._snackBar.open(errorResponse.error.message, "Error");
         }
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this._snackBar.open(errorResponse.error.message, "Error");
-      }
-    );
+      );
+    }
   }
 
   openDialog() {

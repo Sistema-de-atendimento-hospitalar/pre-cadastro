@@ -2,31 +2,16 @@
     margin-top: 2% !important;
 }
 
-.email-select {
-    padding-left: 0 !important;
+.mat-radio-button~.mat-radio-button {
+    margin-left: 16px;
+    margin-top: 12px;
 }
 
-#emailSelect {
-    border-left: transparent !important;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+.mat-chip {
+    margin-top: 12px !important;
+    background-color: brown;
 }
 
-.email {
-    padding-right: 0 !important;
+.wrapper {
+    margin-top: 60px !important;
 }
-
-#email {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-// Aprendendo a utilizar o SCSS SINTAX, retirar do código depois 
-// @mixin transform($property) {
-//     -webkit-transform: $property;
-//     -ms-transform: $property;
-//     transform: $property;
-// }
-// .btn {
-//     @include transform(rotate(60deg));
-// }

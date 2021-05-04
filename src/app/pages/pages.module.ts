@@ -27,6 +27,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatChipsModule} from '@angular/material/chips';
+
+
 
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
@@ -65,6 +69,10 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatSnackBarModule,
     HttpClientModule,
     MatExpansionModule,
+    MatRadioModule,
+    MatChipsModule,
+    
+
 
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
