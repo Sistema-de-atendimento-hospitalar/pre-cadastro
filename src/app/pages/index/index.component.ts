@@ -43,7 +43,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     if (typeof this.dataText[i] == 'undefined') {
       setTimeout(() => {
         this.startTextAnimation(0);
-      }, 20000);
+      }, 2000);
     }
 
     if (i < this.dataText.length) {

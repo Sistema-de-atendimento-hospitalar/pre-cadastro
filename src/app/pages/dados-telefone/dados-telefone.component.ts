@@ -25,23 +25,33 @@ export class DadosTelefoneComponent implements OnInit {
     private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.telefones.push(new Telefone());
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
+    if (!!this.paciente.telefones && this.paciente.telefones.length > 0) {
+      this.paciente.telefones.map(telefone => this.telefones.push(telefone));
+    } else {
+      this.telefones.push(new Telefone());
+    }
   }
 
   nextPage() {
-    console.log(this.telefones);    
+    console.log(this.telefones);
 
-    this.pacienteService.saveTelefone(this.telefones, this.paciente).subscribe(
-      result => { 
-        if (result) {
-          this.router.navigate(['/passo4']);
+    if (this.paciente.pacienteId) {
+      this.paciente.telefones = this.telefones;
+      localStorage.setItem("paciente", JSON.stringify(this.paciente));
+      this.router.navigate(['/passo4']);
+    } else{
+      this.pacienteService.saveTelefone(this.telefones, this.paciente).subscribe(
+        result => {
+          if (result) {
+            this.router.navigate(['/passo4']);
+          }
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this._snackBar.open(errorResponse.error.message, "Error");
         }
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this._snackBar.open(errorResponse.error.message, "Error");
-      }
-    );
+      );
+    }
   }
 
   openDialog() {

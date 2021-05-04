@@ -1,4 +1,5 @@
-<app-header></app-header>
+<app-header>
+</app-header>
 <div class="wrapper">
     <div class="page-header header-filter">
         <div class="container">
@@ -20,21 +21,11 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-lg-9 col-md-9 col-sm-9">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 email">
-                                            <label for="email" class="col-sm-12 col-form-label">Email</label>
-                                            <input type="text" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="email" name="email" [(ngModel)]="paciente.email" required minlength="7" placeholder="Email" (change)="validateEmail()" />
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 email-select">
-                                            <label for="email" class="col-sm-12 col-form-label">Dominio</label>
-                                            <mat-select class="form-control" id="emailSelect" name="dominio" [(ngModel)]="dominio" [disabled]="disableDominio">
-                                                <mat-option value="none"></mat-option>
-                                                <mat-option value="@gmail.com">@gmail.com</mat-option>
-                                                <mat-option value="@hotmail.com">@hotmail.com</mat-option>
-                                                <mat-option value="@outlook.com">@outlook.com</mat-option>
-                                            </mat-select>
-                                        </div>
-                                    </div>
+                                    <label for="email" class="col-sm-12 col-form-label">Email</label>
+                                    <input type="text" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="email" name="email" [(ngModel)]="paciente.email" required minlength="7" placeholder="Email" (change)="validateEmail()" />
+                                    <mat-chip-list aria-label="Dominio">
+                                        <mat-chip color="accent" *ngFor="let dominio of dominios; let i = index" (click)="concatDominio(dominio)">{{dominio}}</mat-chip>
+                                    </mat-chip-list>
                                 </div>
 
                                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -60,6 +51,19 @@
                                     <input type="date" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="dtEmissao" name="dtEmissao" required minlength="10" [(ngModel)]="paciente.emissaoRg" placeholder="26/06/1994" />
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <label class="col-sm-12 col-form-label">Possui Deficiência?</label>
+                                    <mat-radio-group aria-label="Selecione a opção" [(ngModel)]="temDeficiencia" name="temDeficiencia">
+                                        <mat-radio-button [value]="true">Sim</mat-radio-button>
+                                        <mat-radio-button [value]="false">Não</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-12" *ngIf="temDeficiencia">
+                                    <label for="tipoDeficiencia" class="col-sm-12 col-form-label">Qual?</label>
+                                    <input type="text" class="form-control is-invalid" [ngClass]="{ 'is-invalid': hasError}" id="tipoDeficiencia" name="tipoDeficiencia" [(ngModel)]="paciente.deficiencia" required minlength="3" />
+                                </div>
+                            </div>
                         </div>
                         <div *ngIf="hasError">
                             Preencha os campos obrigatórios!
@@ -67,9 +71,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <button class="btn btn-prosseguir btn-danger btn-round">
-                                Prosseguir
-                            </button>
+                            <app-button></app-button>
                         </div>
                     </div>
                 </form>

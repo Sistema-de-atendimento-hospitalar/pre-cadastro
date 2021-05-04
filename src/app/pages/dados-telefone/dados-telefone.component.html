@@ -10,16 +10,14 @@
                             <form-telefone [telefone]="telefone"></form-telefone>
                         </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                            <button mat-fab color="primary" aria-label="Botão Adicionar" class="plus">
+                        <div class="col-lg-3 col-md-3 col-sm-3 plusDiv">
+                            <button mat-mini-fab color="primary" aria-label="Botão Adicionar" class="plus" type="button">
                                 <mat-icon (click)="openDialog()">add</mat-icon>
                             </button>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <button class="btn btn-prosseguir btn-danger btn-round">
-                            Prosseguir
-                        </button>
+                        <app-button></app-button>
                     </div>
                 </form>
             </div>

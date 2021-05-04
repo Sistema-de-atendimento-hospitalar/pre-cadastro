@@ -27,6 +27,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatStepperModule } from '@angular/material/stepper';
+
 
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
@@ -37,6 +41,7 @@ import { InputCidadeComponent } from '../shared/forms/input/input-cidade/input-c
 import { EnderecoComponent } from '../shared/forms/input/endereco/endereco.component';
 import { TelefoneComponent } from '../shared/forms/input/telefone/telefone.component';
 import { ModalTelefoneComponent } from '../shared/modal/modal-telefone/modal-telefone.component';
+import { ButtonComponent } from '../shared/button/button.component';
 
 import { IndexComponent } from "./index/index.component";
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
@@ -65,6 +70,10 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatSnackBarModule,
     HttpClientModule,
     MatExpansionModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatStepperModule,
+
 
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
@@ -97,6 +106,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     DadosTelefoneComponent,
     DadosConvenioComponent,
     DadosConfirmacaoComponent,
+    ButtonComponent,
   ],
   exports: [
     IndexComponent,

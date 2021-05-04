@@ -12,8 +12,8 @@ export class Paciente {
     public emissaoRg: Date;
     public dtNascimento: Date;
     public sexo: string;
-    public telefone: Telefone[];
-    public endereco: Endereco[];
+    public telefones: Telefone[];
+    public enderecos: Endereco[];
     public cartaoSaude?: CartaoSaude;
 
     constructor() { }
