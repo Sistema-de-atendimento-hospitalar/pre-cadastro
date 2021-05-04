@@ -5,22 +5,22 @@
             <div class="content-center">
 
                 <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="!respondeuConvenio">
-                    <h1>Possui Convênio</h1>
+                    <h1>Possui Convênio?</h1>
 
-                    <mat-radio-group aria-label="Selecione a opção">
-                        <mat-radio-button value="1">Sim</mat-radio-button>
-                        <mat-radio-button value="2">Não</mat-radio-button>
+                    <mat-radio-group aria-label="Selecione a opção" [(ngModel)]="convenio" name="convenio">
+                        <mat-radio-button [value]="true">Sim</mat-radio-button>
+                        <mat-radio-button [value]="false">Não</mat-radio-button>
                     </mat-radio-group>
                 </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="respondeuConvenio && !hasConvenio">
-                    <h1>Pagamento Particular</h1>
+                <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="respondeuConvenio && !convenio">
+                    <h1 name="convenio">Pagamento Particular</h1>
 
-                    <button mat-raised-button color="warn" (click)="pagamentoParticular(true)">
+                    <button mat-raised-button color="warn" (click)="pagamentoParticular(true)" name="convenio">
                         Sim
                     </button>
 
-                    <button mat-raised-button color="warn" (click)="pagamentoParticular(false)">
+                    <button mat-raised-button color="warn" (click)="pagamentoParticular(false)" name="convenio">
                         Não
                     </button>
                 </div>

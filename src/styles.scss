@@ -1,15 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '~bootstrap/dist/css/bootstrap.min.css';
 .btn-prosseguir {
-    margin-top: 6% !important;
-    padding: 0.4em !important;
-    padding-left: 2em !important;
-    padding-right: 2em !important;
-}
-
-html,
-body {
-    height: 100%;
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    width: 100vw;
 }
 
 // body {
@@ -21,9 +20,10 @@ body {
 html,
 body {
     height: 100%;
+    background-color: rgb(238, 246, 248)!important;
 }
 
 .form-control.is-invalid {
-    border-color: brown !important;
-    background-color: transparent !important;
+    border-color: brown;
+    background-color: transparent;
 }

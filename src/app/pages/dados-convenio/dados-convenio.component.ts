@@ -13,6 +13,7 @@ export class DadosConvenioComponent implements OnInit {
 
   private paciente: Paciente;
   private cartaoSaude: CartaoSaude;
+  private convenio: boolean = false;
   hasConvenio: boolean = false
   hasPagamentoParticular: boolean = false
   acessoViaCodigo: boolean = false
