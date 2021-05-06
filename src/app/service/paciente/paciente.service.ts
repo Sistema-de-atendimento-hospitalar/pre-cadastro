@@ -5,6 +5,7 @@ import { Paciente } from '../../../models/paciente.model'
 import { Endereco } from 'src/models/endereco.model';
 import { Telefone } from 'src/models/telefone.model';
 import { CartaoSaude } from 'src/models/CartaoSaude.model';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +50,31 @@ export class PacienteService {
     return this.http.post<Paciente>(`${this.API_URL}/${paciente.pacienteId}/cartaoSaude`, cartaoSaude);
   }
 
-  updatePaciente(paciente:Paciente): Observable<Paciente>{
-    return this.http.put<Paciente>(`${this.API_URL_V2}/${paciente.pacienteId}`, paciente);
+  updatePaciente(paciente: Paciente): Observable<Paciente> {
+    return this.http.put<Paciente>(`${this.API_URL}/${paciente.pacienteId}`, paciente);
+  }
+
+  updateEndereco(enderecos: Endereco[], paciente:Paciente): Observable<Endereco[]> {
+    return this.http.put<Endereco[]>(`${this.API_URL}/${paciente.pacienteId}/endereco`, enderecos);
+  }
+
+  updateTelefone(telefone:Telefone[], paciente: Paciente): Observable<Telefone[]> {
+    return this.http.put<Telefone[]>(`${this.API_URL}/${paciente.pacienteId}/telefone`, telefone);
+  }
+  
+  updateCartaoSaude(cartaoSaude: CartaoSaude, paciente: Paciente): Observable<CartaoSaude> {
+    return this.http.put<CartaoSaude>(`${this.API_URL}/${paciente.pacienteId}/cartaoSaude`, cartaoSaude);
+  }
+
+  validateCodigoConvenio(codigoConvenio: number): Observable<CartaoSaude> {
+    let cartaoSaude = new CartaoSaude();
+    cartaoSaude.convenio = "Bradesco"
+    cartaoSaude.numeroCarteira = 123456
+    cartaoSaude.rede = "Nacional"
+    cartaoSaude.tipoContrato = "Empresarial"
+    cartaoSaude.validade = new Date();
+
+    return of(cartaoSaude);
   }
 
 }

@@ -22,6 +22,7 @@ export class DadosPessoaisComponent implements OnInit {
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
+    this.temDeficiencia = !!this.paciente.deficiencia
   }
 
   nextPage() {
@@ -32,8 +33,10 @@ export class DadosPessoaisComponent implements OnInit {
     }
 
     if (this.paciente.pacienteId) {
-      localStorage.setItem("paciente", JSON.stringify(this.paciente));
-      this.router.navigate(['/passo2']);
+      this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        this.router.navigate(['/passo2']);
+      });
     } else {
       this.pacienteService.savePaciente(this.paciente).subscribe(result => {
         this.paciente = result;

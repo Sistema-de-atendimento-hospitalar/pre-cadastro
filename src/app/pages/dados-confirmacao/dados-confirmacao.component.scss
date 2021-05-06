@@ -11,3 +11,32 @@
 .example-headers-align .mat-form-field+.mat-form-field {
     margin-left: 8px;
 }
+
+h1 {
+    font-size: 2.5em;
+    margin-top: 3%;
+    color: rgb(3, 152, 158);
+    justify-content: center;
+}
+
+mat-panel-title {
+    font-size: 1.5em;
+    color: rgb(109, 214, 218);
+}
+
+div {
+    color: rgb(97, 100, 107);
+}
+
+mat-expansion-panel {
+    background-color: transparent;
+}
+
+.mat-button {
+    background-color: rgb(109, 214, 218);
+    color: #fff;
+}
+
+mat-label {
+    font-weight: bold;
+}

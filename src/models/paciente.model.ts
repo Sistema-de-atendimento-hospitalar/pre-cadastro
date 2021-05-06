@@ -12,6 +12,7 @@ export class Paciente {
     public emissaoRg: Date;
     public dtNascimento: Date;
     public sexo: string;
+    public deficiencia:string;
     public telefones: Telefone[];
     public enderecos: Endereco[];
     public cartaoSaude?: CartaoSaude;

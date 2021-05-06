@@ -47,8 +47,10 @@ export class DadosEnderecoComponent implements OnInit {
 
     if (this.paciente.pacienteId) {
       this.paciente.enderecos = this.enderecos;
-      localStorage.setItem("paciente", JSON.stringify(this.paciente));
-      this.router.navigate(['/passo3']);
+      this.pacienteService.updateEndereco(this.enderecos, this.paciente).subscribe(result => {
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        this.router.navigate(['/passo3']);
+      });
     } else {
       this.pacienteService.saveEndereco(this.enderecos, this.paciente).subscribe(
         result => { 

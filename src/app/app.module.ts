@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
@@ -16,6 +16,8 @@ import { AlertModule } from "ngx-bootstrap/alert";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { PagesModule } from "./pages/pages.module";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpRequestInterceptor } from "./http-request-interceptor"
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { PagesModule } from "./pages/pages.module";
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
+    MatProgressSpinnerModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
@@ -38,7 +41,13 @@ import { PagesModule } from "./pages/pages.module";
     BsDatepickerModule.forRoot(),
     CarouselModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

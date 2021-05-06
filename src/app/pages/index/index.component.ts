@@ -28,7 +28,7 @@ export class IndexComponent implements OnInit, OnDestroy {
       document.querySelector("h1").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
       setTimeout(() => {
         this.typeWriter(text, i + 1, fnCallback)
-      }, 100);
+      }, 90);
     }
 
     else if (typeof fnCallback == 'function') {

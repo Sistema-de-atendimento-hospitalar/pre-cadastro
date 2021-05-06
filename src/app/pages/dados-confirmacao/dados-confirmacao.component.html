@@ -1,127 +1,133 @@
-<mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Dados Pessoais
-            </mat-panel-title>
-            <mat-panel-description>
-                Documentação
-                <mat-icon>account_circle</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+<app-header></app-header>
+<div class="container">
+    <div class="content">
+        <h1>Confirmação de dados</h1>
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Dados Pessoais
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
 
-        <div>
-            <mat-label>Nome:</mat-label> {{paciente.nome}}
-        </div>
-        <mat-label>CPF:</mat-label> {{paciente.cpf}}
-        <div>
-            <mat-label>Data de Nascimento:</mat-label> {{paciente.dtNascimento}}
-        </div>
-        <div>
-            <mat-label>Email:</mat-label> {{paciente.email}}
-        </div>
-        <div>
-            <mat-label>Sexo:</mat-label> {{paciente.sexo}}
-        </div>
-        <div>
-            <mat-label>Rg:</mat-label> {{paciente.rg}}
-        </div>
-        <div>
-            <mat-label>Orgão Expedidor:</mat-label> {{paciente.orgExpedidorRg}}
-        </div>
-        <div>
-            <mat-label>Data de Emissão:</mat-label> {{paciente.emissaoRg}}
-        </div>
+                <div>
+                    <mat-label>Nome:</mat-label> {{paciente.nome}}
+                </div>
+                <div>
+                    <mat-label>CPF:</mat-label> {{paciente.cpf}}
+                </div>
 
-        <mat-action-row>
-            <button mat-button color="primary" (click)="nextStep()">Next</button>
-        </mat-action-row>
-    </mat-expansion-panel>
+                <div>
+                    <mat-label>Data de Nascimento:</mat-label> {{paciente.dtNascimento}}
+                </div>
+                <div>
+                    <mat-label>Email:</mat-label> {{paciente.email}}
+                </div>
+                <div>
+                    <mat-label>Sexo:</mat-label> {{paciente.sexo}}
+                </div>
+                <div>
+                    <mat-label>Rg:</mat-label> {{paciente.rg}}
+                </div>
+                <div>
+                    <mat-label>Orgão Expedidor:</mat-label> {{paciente.orgExpedidorRg}}
+                </div>
+                <div>
+                    <mat-label>Data de Emissão:</mat-label> {{paciente.emissaoRg}}
+                </div>
+                <div>
+                    <mat-label *ngIf="paciente.deficiencia">Deficiência:</mat-label> {{paciente.deficiencia}}
+                </div>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Endereço
-            </mat-panel-title>
-            <mat-panel-description>
-                Type the country name
-                <mat-icon>map</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+                <mat-action-row>
+                    <button mat-button (click)="nextStep()">Próximo</button>
+                </mat-action-row>
+            </mat-expansion-panel>
 
-        <div *ngFor="let endereco of paciente.enderecos; let i = index">
-            <div>
-                <mat-label>Cep:</mat-label> {{endereco.cep}}
-            </div>
-            <mat-label>Logradouro:</mat-label> {{endereco.logradouro}}
-            <div>
-                <mat-label>Num° Imovel:</mat-label> {{endereco.numImovel}}
-            </div>
-            <div>
-                <mat-label>Complemento:</mat-label> {{endereco.dsComplemento}}
-            </div>
-            <div>
-                <mat-label>Bairro:</mat-label> {{endereco.bairro}}
-            </div>
-            <div>
-                <mat-label>Estado:</mat-label> {{paciente.estado}}
-            </div>
-            <div>
-                <mat-label>Cidade:</mat-label> {{endereco.cidade}}
-            </div>
-            <br><br>
-        </div>
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Endereço
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
 
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary" (click)="nextStep()">Next</button>
-        </mat-action-row>
-    </mat-expansion-panel>
+                <div *ngFor="let endereco of paciente.enderecos; let i = index">
+                    <div>
+                        <mat-label>Cep:</mat-label> {{endereco.cep}}
+                    </div>
+                    <mat-label>Logradouro:</mat-label> {{endereco.logradouro}}
+                    <div>
+                        <mat-label>Num° Imovel:</mat-label> {{endereco.numImovel}}
+                    </div>
+                    <div>
+                        <mat-label>Complemento:</mat-label> {{endereco.dsComplemento}}
+                    </div>
+                    <div>
+                        <mat-label>Bairro:</mat-label> {{endereco.bairro}}
+                    </div>
+                    <div>
+                        <mat-label>Estado:</mat-label> {{paciente.estado}}
+                    </div>
+                    <div>
+                        <mat-label>Cidade:</mat-label> {{endereco.cidade}}
+                    </div>
+                    <br><br>
+                </div>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Telefone
-            </mat-panel-title>
-            <mat-panel-description>
-                Inform the date you wish to travel
-                <mat-icon>date_range</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+                <mat-action-row>
+                    <button mat-button (click)="prevStep()">Voltar</button>
+                    <button mat-button (click)="nextStep()">Próximo</button>
+                </mat-action-row>
+            </mat-expansion-panel>
 
-        <mat-form-field>
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-        </mat-form-field>
-        <mat-datepicker #picker></mat-datepicker>
+            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Telefone
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
 
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary" (click)="nextStep()">End</button>
-        </mat-action-row>
-    </mat-expansion-panel>
+                <div *ngFor="let telefone of paciente.telefones; let i = index">
+                    <mat-label>Telefone:</mat-label> ({{telefone.numDdd}}) {{telefone.numTelefone}} {{telefone.tipoTelefone}}
+                </div>
+                <mat-action-row>
+                    <button mat-button (click)="prevStep()">Voltar</button>
+                    <button mat-button (click)="nextStep()">Próximo</button>
+                </mat-action-row>
+            </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Cartão Saude
-            </mat-panel-title>
-            <mat-panel-description>
-                Inform the date you wish to travel
-                <mat-icon>date_range</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+            <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Cartão Saude
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
 
-        <mat-form-field>
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-        </mat-form-field>
-        <mat-datepicker #picker></mat-datepicker>
+                <mat-form-field>
+                    <div>
+                        <mat-label>Convênio:</mat-label> {{paciente.cartaoSaude.convenio}}
+                    </div>
+                    <div>
+                        <mat-label>Tipo de Contrato:</mat-label> {{paciente.cartaoSaude.tipoContrato}}
+                    </div>
+                    <div>
+                        <mat-label>Rede:</mat-label> {{paciente.cartaoSaude.rede}}
+                    </div>
+                    <div>
+                        <mat-label>Numero da Carteira:</mat-label> {{paciente.cartaoSaude.numeroCarteira}}
+                    </div>
+                    <div>
+                        <mat-label>Validade:</mat-label> {{paciente.cartaoSaude.validade}}
+                    </div>
 
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary" (click)="nextStep()">End</button>
-        </mat-action-row>
-    </mat-expansion-panel>
+                </mat-form-field>
 
-</mat-accordion>
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Voltar</button>
+                    <button mat-button color="primary" (click)="nextStep()">Confirmar e Finalizar</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </div>
+</div>

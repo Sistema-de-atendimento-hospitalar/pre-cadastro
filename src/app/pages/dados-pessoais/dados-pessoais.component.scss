@@ -10,4 +10,22 @@
 .mat-chip {
     margin-top: 12px !important;
     background-color: rgb(109, 214, 218);
+    color: #fff;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-top: 3%;
+    color: rgb(3, 152, 158);
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    background-color: transparent;
+    color: rgb(97, 100, 107);
+}
+
+mat-select {
+    background-color: transparent;
 }

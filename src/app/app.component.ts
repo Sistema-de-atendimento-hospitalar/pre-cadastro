@@ -7,6 +7,8 @@ import {
 } from "@angular/core";
 import { Location } from "@angular/common";
 import { DOCUMENT } from "@angular/common";
+import { LoadingService } from "./service/loading/loading.service";
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: "app-root",
@@ -14,11 +16,17 @@ import { DOCUMENT } from "@angular/common";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
+
+  loading: boolean = false;
+
   constructor(
     private renderer: Renderer2,
     public location: Location,
+    private _loading: LoadingService,
     @Inject(DOCUMENT) document
-  ) {}
+  ) { }
+
+
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(e) {
     if (window.pageYOffset > 100) {
@@ -35,7 +43,17 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
   ngOnInit() {
     this.onWindowScroll(event);
+    this.listenToLoading();
+  }
+
+  listenToLoading(): void {
+    this._loading.loadingSub
+      .pipe(delay(0))
+      .subscribe((loading) => {
+        this.loading = loading;
+      });
   }
 }

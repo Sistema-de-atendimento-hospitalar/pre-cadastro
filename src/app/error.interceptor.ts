@@ -12,7 +12,7 @@ import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class ErrorIntercept implements HttpInterceptor {
 
     constructor(private _snackBar: MatSnackBar) { }

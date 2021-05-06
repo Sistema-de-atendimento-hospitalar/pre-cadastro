@@ -13,6 +13,14 @@ h1 {
 input {
     width: 40vw;
     background-color: transparent;
+    color: rgb(97, 100, 107);
+}
+
+.alert-error {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 1em;
+    color: #dc3545;
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {

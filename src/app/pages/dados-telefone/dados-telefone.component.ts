@@ -38,8 +38,10 @@ export class DadosTelefoneComponent implements OnInit {
 
     if (this.paciente.pacienteId) {
       this.paciente.telefones = this.telefones;
-      localStorage.setItem("paciente", JSON.stringify(this.paciente));
-      this.router.navigate(['/passo4']);
+      this.pacienteService.updateTelefone(this.telefones, this.paciente).subscribe(result => {
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        this.router.navigate(['/passo4']);
+      });
     } else{
       this.pacienteService.saveTelefone(this.telefones, this.paciente).subscribe(
         result => {
