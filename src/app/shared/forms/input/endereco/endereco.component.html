@@ -3,7 +3,7 @@
         <div class="form-row">
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <label for="cep" class="col-sm-12 col-form-label">Cep</label>
-                <input type="text" class="form-control" id="cep" [(ngModel)]="endereco.cep" (change)="verifyCep()" name="cep" required minlength="9" placeholder="00000-000" mask="00000-000" />
+                <input type="text" class="form-control" [(ngModel)]="endereco.cep" (change)="verifyCep()" name="cep" required minlength="9" placeholder="00000-000" mask="00000-000" />
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -18,24 +18,29 @@
         <div class="form-row">
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <label for="logradouro" class="col-sm-12 col-form-label">Logradouro</label>
-                <input type="text" class="form-control" id="logradouro" [(ngModel)]="endereco.logradouro" name="logradouro" required placeholder="Logradouro" />
+                <input type="text" class="form-control" [(ngModel)]="endereco.logradouro" name="logradouro" required placeholder="Logradouro" />
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <label for="bairro" class="col-sm-12 col-form-label">Bairro</label>
-                <input type="text" class="form-control" id="bairro" [(ngModel)]="endereco.bairro" name="bairro" required placeholder="Bairro" />
+                <input type="text" class="form-control" [(ngModel)]="endereco.bairro" name="bairro" required placeholder="Bairro" />
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <label for="numCasa" class="col-sm-12 col-form-label">Nº</label>
-                <input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="endereco.numImovel" required minlength="1" placeholder="Nº" />
+                <input type="text" class="form-control" name="numero" [(ngModel)]="endereco.numImovel" required minlength="1" placeholder="Nº" />
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-9">
                 <label for="complemento" class="col-sm-12 col-form-label">Complemento</label>
-                <input type="text" class="form-control col-lg-11 col-md-11 col-sm-11" id="complemento" [(ngModel)]="endereco.dsComplemento" name="complemento" placeholder="Complemento" />
+                <input type="text" class="form-control col-lg-11 col-md-11 col-sm-11" [(ngModel)]="endereco.dsComplemento" name="complemento" placeholder="Complemento" />
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3" *ngIf="showDeleteOption">
+                <button mat-mini-fab aria-label="Botão Deletar" type="button" (click)="deleteEndereco(endereco)">
+                    <mat-icon>delete</mat-icon>
+                </button>
             </div>
         </div>
     </div>

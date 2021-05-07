@@ -1,5 +1,5 @@
 <label for="estado" class="col-sm-12 col-form-label">Estado</label>
-<mat-select class="form-control" id="estado" name="estado" required [(ngModel)]="estado">
+<mat-select class="form-control" name="estado" required [(ngModel)]="estado">
     <mat-option *ngFor="let estado of estados" [value]="estado.value">
         {{estado.viewValue}}
     </mat-option>

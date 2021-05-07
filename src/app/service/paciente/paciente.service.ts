@@ -66,6 +66,18 @@ export class PacienteService {
     return this.http.put<CartaoSaude>(`${this.API_URL}/${paciente.pacienteId}/cartaoSaude`, cartaoSaude);
   }
 
+  deleteEndereco(endereco:Endereco, paciente:Paciente):Observable<Endereco>{
+    return this.http.delete<Endereco>(`${this.API_URL}/${paciente.pacienteId}/endereco/${endereco.enderecoId}`);
+  }
+
+  deleteTelefone(telefone:Telefone, paciente:Paciente):Observable<Telefone>{
+    return this.http.delete<Telefone>(`${this.API_URL}/${paciente.pacienteId}/telefone/${telefone.telefoneId}`);
+  }
+
+  deleteCartaoSaude(cartaoSaude:CartaoSaude, paciente:Paciente):Observable<CartaoSaude>{
+    return this.http.delete<CartaoSaude>(`${this.API_URL}/${paciente.pacienteId}/cartaoSaude/${cartaoSaude.convenioId}`);
+  }
+
   validateCodigoConvenio(codigoConvenio: number): Observable<CartaoSaude> {
     let cartaoSaude = new CartaoSaude();
     cartaoSaude.convenio = "Bradesco"

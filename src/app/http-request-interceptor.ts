@@ -17,7 +17,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('teste');
         this._loading.setLoading(true, request.url);
         return next.handle(request)
             .pipe(catchError((err) => {

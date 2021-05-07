@@ -7,11 +7,11 @@
                     <div id="divContent">
                         <div *ngFor="let endereco of enderecos; let i = index">
                             <h2>Endereço {{(i+1)}}</h2>
-                            <form-endereco [endereco]="endereco"></form-endereco>
+                            <form-endereco [showDeleteOption]="true" [endereco]="endereco" [enderecos]="enderecos" [indice]="i"></form-endereco>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 plusDiv">
-                            <button mat-mini-fab color="primary" aria-label="Botão Adicionar" class="plus" type="button">
+                            <button mat-mini-fab aria-label="Botão Adicionar" class="plus" type="button">
                                 <mat-icon (click)="openDialog()">add</mat-icon>
                             </button>
                         </div>

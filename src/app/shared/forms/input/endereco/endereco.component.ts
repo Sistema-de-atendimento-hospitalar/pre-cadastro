@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CepService } from '../../../../service/cep/cep.service';
 import { EnderecoCorreios } from '../../../../../models/enderecoCorreios.model';
 import { Endereco } from 'src/models/endereco.model';
+import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { Paciente } from 'src/models/paciente.model';
 
 @Component({
   selector: 'form-endereco',
@@ -11,12 +13,19 @@ import { Endereco } from 'src/models/endereco.model';
 export class EnderecoComponent implements OnInit {
 
   @Input() endereco: Endereco;
+  @Input() enderecos: Endereco[];
+  @Input() indice: number;
+  @Input() showDeleteOption: boolean;
+  private paciente: Paciente;
+
   private enderecoCorreios: EnderecoCorreios;
 
-  constructor(private cepService: CepService) { }
+  constructor(private cepService: CepService, private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
+    console.log(this.showDeleteOption)
     this.enderecoCorreios = new EnderecoCorreios();
+    this.paciente = this.pacienteService.getPacienteFromLocalStore();
   }
 
   convetion() {
@@ -36,6 +45,21 @@ export class EnderecoComponent implements OnInit {
         this.convetion()
       });
     }
+  }
+
+  deleteEndereco(endereco: Endereco) {
+    if (this.enderecos.length == 1) {
+      alert('Não pode remover o único endereço\nSe preferir pode alterar os dados!')
+      return false;
+    }
+
+    if(endereco.enderecoId) {
+      this.pacienteService.deleteEndereco(endereco, this.paciente).subscribe(result => {
+        alert('Exclusão efetuada com sucesso!')
+      });
+    }
+
+    this.enderecos.splice(this.indice, 1);
   }
 
 

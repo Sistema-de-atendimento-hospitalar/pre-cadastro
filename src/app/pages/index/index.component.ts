@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from '@angular/router';
 import { PacienteService } from '../../service/paciente/paciente.service';
 import { Paciente } from "src/models/paciente.model";
+import { LoadingService } from "src/app/service/loading/loading.service";
 @Component({
   selector: "app-index",
   templateUrl: "index.component.html",
@@ -16,7 +17,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   private paciente: Paciente;
 
-  constructor(private router: Router, private pacienteService: PacienteService) { }
+  constructor(private router: Router, private pacienteService: PacienteService, private _loading: LoadingService) { }
 
   ngOnInit() {
     this.paciente = new Paciente()
@@ -65,13 +66,15 @@ export class IndexComponent implements OnInit, OnDestroy {
         .subscribe(result => {
           localStorage.setItem("paciente", JSON.stringify(this.paciente));
           this.paciente = result;
-          console.log(this.paciente);
           if (result) {
             localStorage.setItem("paciente", JSON.stringify(this.paciente));
           }
-          this.router.navigate(['/passo1']);
-        }, error => {
-          console.log(error);
+
+          this._loading.setLoading(true, window.location.href);
+          setTimeout(() => {
+            this._loading.setLoading(false, window.location.href);
+            this.router.navigate(['/passo1']);
+          }, 1000);
         });
     } else {
       this.hasError = true;
