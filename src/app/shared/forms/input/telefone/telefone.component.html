@@ -1,5 +1,5 @@
 <div class="form-row">
-    <div class="col-lg-2 col-md-2 col-sm-2">
+    <div class="col-lg-1 col-md-1 col-sm-1">
         <label for="ddd" class="col-sm-12 col-form-label">DDD</label>
         <input type="text" [(ngModel)]="telefone.numDdd" class="form-control" id="ddd" name="ddd" mask="00" required minlength="2" placeholder="DDD" />
     </div>
@@ -14,5 +14,10 @@
                 {{tipoTelefone.descTipoTelefone}}
             </mat-option>
         </mat-select>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1" *ngIf="showDeleteOption">
+        <button mat-mini-fab aria-label="Botão Deletar" type="button" (click)="deleteTelefone(telefone)">
+            <mat-icon>delete</mat-icon>
+        </button>
     </div>
 </div>

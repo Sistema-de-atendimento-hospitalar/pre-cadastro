@@ -7,7 +7,7 @@
                     <div id="divContent">
                         <div *ngFor="let telefone of telefones; let i = index">
                             <h2>Telefone {{(i+1)}}</h2>
-                            <form-telefone [telefone]="telefone"></form-telefone>
+                            <form-telefone [telefone]="telefone" [showDeleteOption]="true" [telefones]="telefones" [indice]="i"></form-telefone>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 plusDiv">
