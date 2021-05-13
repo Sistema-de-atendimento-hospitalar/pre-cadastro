@@ -1,7 +1,5 @@
-<app-header></app-header>
 <div class="container">
     <div class="content">
-        <h1>Confirmação de dados</h1>
         <mat-accordion class="example-headers-align">
             <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
                 <mat-expansion-panel-header>
@@ -103,7 +101,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <mat-form-field>
+                <div>
                     <div>
                         <mat-label>Convênio:</mat-label> {{paciente.cartaoSaude.convenio}}
                     </div>
@@ -120,7 +118,7 @@
                         <mat-label>Validade:</mat-label> {{paciente.cartaoSaude.validade}}
                     </div>
 
-                </mat-form-field>
+                </div>
 
                 <mat-action-row>
                     <button mat-button color="warn" (click)="prevStep()">Voltar</button>

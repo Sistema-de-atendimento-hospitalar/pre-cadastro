@@ -23,7 +23,6 @@ export class EnderecoComponent implements OnInit {
   constructor(private cepService: CepService, private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    console.log(this.showDeleteOption)
     this.enderecoCorreios = new EnderecoCorreios();
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
   }

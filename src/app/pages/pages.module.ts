@@ -2,9 +2,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
@@ -33,7 +33,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 
 import { FooterComponent } from '../shared/footer/footer.component';
-import { HeaderComponent } from '../shared/header/header.component';
 import { SquareComponent } from '../shared/square/square.component';
 import { SquarePreCadastroComponent } from '../shared/square/square-pre-cadastro/square-pre-cadastro.component'
 import { InputEstadoComponent } from '../shared/forms/input/input-estado/input-estado.component';
@@ -42,6 +41,7 @@ import { EnderecoComponent } from '../shared/forms/input/endereco/endereco.compo
 import { TelefoneComponent } from '../shared/forms/input/telefone/telefone.component';
 import { ModalTelefoneComponent } from '../shared/modal/modal-telefone/modal-telefone.component';
 import { ButtonComponent } from '../shared/button/button.component';
+import { StepComponent } from './step/step.component'
 
 import { IndexComponent } from "./index/index.component";
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
@@ -49,14 +49,13 @@ import { DadosEnderecoComponent } from './dados-endereco/dados-endereco.componen
 import { DadosTelefoneComponent } from './dados-telefone/dados-telefone.component';
 import { DadosConvenioComponent } from './dados-convenio/dados-convenio.component';
 import { DadosConfirmacaoComponent } from './dados-confirmacao/dados-confirmacao.component';
-import { ModalEnderecoComponent } from "../shared/modal/modal-endereco/modal-endereco.component";
-
-import { ErrorIntercept } from '../error.interceptor';
+import { ModalEnderecoComponent } from "../shared/modal/modal-endereco/modal-endereco.component"
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   imports: [
-    //angular modules
+    FormsModule, 
+    ReactiveFormsModule,    //angular modules
     MatInputModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -92,7 +91,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   declarations: [
     IndexComponent,
     FooterComponent,
-    HeaderComponent,
     SquareComponent,
     SquarePreCadastroComponent,
     InputEstadoComponent,
@@ -107,17 +105,13 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     DadosConvenioComponent,
     DadosConfirmacaoComponent,
     ButtonComponent,
+    StepComponent
   ],
   exports: [
     IndexComponent,
     ScrollingModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorIntercept,
-      multi: true
-    }
   ],
   entryComponents: [ModalEnderecoComponent]
 })

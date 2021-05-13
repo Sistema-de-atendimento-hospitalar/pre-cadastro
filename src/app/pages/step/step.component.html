@@ -1,0 +1,43 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup" [editable]="true">
+        <ng-template matStepLabel>Dados Pessoais</ng-template>
+        <app-dados-pessoais></app-dados-pessoais>
+        <div>
+            <app-button mat-button matStepperNext></app-button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="true">
+        <form>
+            <ng-template matStepLabel>Endereço</ng-template>
+            <app-dados-endereco></app-dados-endereco>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="true">
+        <form>
+            <ng-template matStepLabel>Telefone</ng-template>
+            <app-dados-telefone></app-dados-telefone>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="true">
+        <form>
+            <ng-template matStepLabel>Pagamento</ng-template>
+            <app-dados-convenio></app-dados-convenio>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Confirmação de dados</ng-template>
+        <app-dados-confirmacao></app-dados-confirmacao>
+    </mat-step>
+</mat-horizontal-stepper>

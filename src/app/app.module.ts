@@ -17,11 +17,14 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { PagesModule } from "./pages/pages.module";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { HttpRequestInterceptor } from "./http-request-interceptor"
+import { HttpRequestInterceptor } from "./http-request-interceptor";
+import { HeaderComponent } from './shared/header/header.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserAnimationsModule,

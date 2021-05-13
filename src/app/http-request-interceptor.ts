@@ -3,25 +3,37 @@ import {
     HttpRequest,
     HttpHandler,
     HttpEvent,
-    HttpInterceptor, HttpResponse
+    HttpInterceptor, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators'
 import { LoadingService } from './service/loading/loading.service';
+import { throwError } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 
     constructor(
-        private _loading: LoadingService
+        private _loading: LoadingService,
+        private _snackBar: MatSnackBar
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this._loading.setLoading(true, request.url);
         return next.handle(request)
-            .pipe(catchError((err) => {
+            .pipe(catchError((error: HttpErrorResponse) => {
                 this._loading.setLoading(false, request.url);
-                return err;
+                let errorMessage = '';
+                if (error.error instanceof ErrorEvent) {
+                    errorMessage = `Error: ${error.error.message}`;
+                } else if (error.error instanceof ProgressEvent) {
+                    errorMessage = `Verifique sua conexão com a internet e tente novamente!`
+                } else {
+                    errorMessage = `Message: ${error.error.detail}`;
+                }
+                this._snackBar.open(errorMessage, "Error");
+                return throwError(errorMessage);
             }))
             .pipe(map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
                 if (evt instanceof HttpResponse) {

@@ -67,13 +67,14 @@ export class IndexComponent implements OnInit, OnDestroy {
           localStorage.setItem("paciente", JSON.stringify(this.paciente));
           this.paciente = result;
           if (result) {
+            alert("DEV: Exibir modal informando que encontrou os dados de " + this.paciente.nome)
             localStorage.setItem("paciente", JSON.stringify(this.paciente));
           }
 
           this._loading.setLoading(true, window.location.href);
           setTimeout(() => {
             this._loading.setLoading(false, window.location.href);
-            this.router.navigate(['/passo1']);
+            this.router.navigate(['/step']);
           }, 1000);
         });
     } else {
