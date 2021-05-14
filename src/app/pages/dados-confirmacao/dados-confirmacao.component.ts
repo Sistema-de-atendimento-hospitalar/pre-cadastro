@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Paciente } from 'src/models/paciente.model';
 import { PacienteService } from 'src/app/service/paciente/paciente.service'
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dados-confirmacao',
@@ -11,6 +12,7 @@ import { PacienteService } from 'src/app/service/paciente/paciente.service'
 export class DadosConfirmacaoComponent implements OnInit {
 
   private paciente: Paciente;
+  form: FormGroup;
 
   constructor(private pacienteService: PacienteService) { }
 

@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -17,6 +18,7 @@ export class DadosTelefoneComponent implements OnInit {
 
   telefones: Telefone[] = [];
   private paciente: Paciente;
+  form: FormGroup;
 
   constructor(
     private router: Router,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { CartaoSaude } from 'src/models/CartaoSaude.model';
@@ -21,6 +22,7 @@ export class DadosConvenioComponent implements OnInit {
   modoAcesso: boolean = null;
   codigoCartaoCovenio: number = null;
   codigoValidado: boolean = false;
+  form: FormGroup;
 
   constructor(private router: Router, private pacienteService: PacienteService) { }
 
