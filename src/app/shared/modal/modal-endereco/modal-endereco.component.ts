@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DadosEnderecoComponent } from 'src/app/pages/dados-endereco/dados-endereco.component';
 import { Endereco } from 'src/models/endereco.model';
@@ -8,7 +9,6 @@ import { Endereco } from 'src/models/endereco.model';
   styleUrls: ['./modal-endereco.component.scss']
 })
 export class ModalEnderecoComponent implements OnInit {
-
   endereco: Endereco;
 
   constructor(public dialogRef: MatDialogRef<DadosEnderecoComponent>,

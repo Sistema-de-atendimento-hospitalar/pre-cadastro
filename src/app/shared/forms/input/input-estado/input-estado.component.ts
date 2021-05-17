@@ -44,11 +44,16 @@ export class InputEstadoComponent implements OnInit {
   ]
 
   @Input() estado: string;
-  @Input() form:FormGroup;
+  @Input() form: FormGroup;
+  @Input() indice: number;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  converteToControlName(field, indice) {
+    return `${field}-${indice}`;
   }
 
 }

@@ -1,6 +1,6 @@
 <div [formGroup]="form">
     <label for="estado" class="col-sm-12 col-form-label">Estado</label>
-    <mat-select class="form-control" name="estado" required formControlName="estado">
+    <mat-select class="form-control" name="estado" required [formControlName]="converteToControlName('estado', indice)">
         <mat-option *ngFor="let estado of estados" [value]="estado.value">
             {{estado.viewValue}}
         </mat-option>

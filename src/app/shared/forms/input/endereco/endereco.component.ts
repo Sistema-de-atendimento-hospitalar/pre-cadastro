@@ -33,8 +33,8 @@ export class EnderecoComponent implements OnInit {
     console.log(this.endereco)
   }
 
-  converteToControlName(cep, indice) {
-    return `${cep}-${indice}`;
+  converteToControlName(field, indice) {
+    return `${field}-${indice}`;
   }
 
   convetion() {

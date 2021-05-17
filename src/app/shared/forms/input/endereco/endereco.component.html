@@ -7,11 +7,11 @@
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
-                <input-estado [estado]="endereco.estado" [formControlName]="converteToControlName('estado', indice)" [form]="form" [ngClass]="{'is-invalid': showError('estado')}"></input-estado>
+                <input-estado [estado]="endereco.estado" [indice]="indice" [form]="form" [ngClass]="{'is-invalid': showError('estado')}"></input-estado>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
-                <input-cidade [cidade]="endereco.cidade" [formControlName]="converteToControlName('cidade', indice)" [form]="form" [ngClass]="{'is-invalid': showError('cidade')}"></input-cidade>
+                <input-cidade [cidade]="endereco.cidade" [indice]="indice" [form]="form" [ngClass]="{'is-invalid': showError('cidade')}"></input-cidade>
             </div>
         </div>
 
