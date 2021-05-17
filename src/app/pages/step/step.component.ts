@@ -19,7 +19,7 @@ export class StepComponent implements OnInit, AfterViewInit {
   @ViewChild(DadosConvenioComponent) dadosConvenioComponent: DadosConvenioComponent;
   @ViewChild(DadosConfirmacaoComponent) dadosConfirmacaoComponent: DadosConfirmacaoComponent;
 
-   // Only required when not passing the id in methods
+
    @ViewChild('stepper') private myStepper: MatStepper;
    totalStepsCount: number;
 
@@ -29,7 +29,7 @@ export class StepComponent implements OnInit, AfterViewInit {
     
   }
 
-  // Event fired after view is initialized
+
   ngAfterViewInit() {
     this.totalStepsCount = this.myStepper._steps.length;
   }

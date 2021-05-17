@@ -1,2 +1,4 @@
-<label for="cidade" class="col-sm-12 col-form-label">Cidade</label>
-<input class="form-control" type="text" name="cidade" placeholder="Cidade" [(ngModel)]="cidade">
+<div [formGroup]="form">
+    <label for="cidade" class="col-sm-12 col-form-label">Cidade</label>
+    <input class="form-control" type="text" name="cidade" placeholder="Cidade" formControlName="cidade">
+</div>

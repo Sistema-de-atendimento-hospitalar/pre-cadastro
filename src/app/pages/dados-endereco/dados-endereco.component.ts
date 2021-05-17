@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { Paciente } from 'src/models/paciente.model';
   styleUrls: ['./dados-endereco.component.scss'],
 })
 export class DadosEnderecoComponent implements OnInit {
+  [x: string]: any;
 
   enderecos: Endereco[] = [];
   private paciente: Paciente;
@@ -23,15 +24,58 @@ export class DadosEnderecoComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private pacienteService: PacienteService) { }
+    private pacienteService: PacienteService,
+    private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
     if (!!this.paciente.enderecos && this.paciente.enderecos.length > 0){
       this.paciente.enderecos.map(endereco => this.enderecos.push(endereco));
-    } else{
+    } else {
       this.enderecos.push(new Endereco());
     }
+
+    this.gg(this.enderecos);
+
+    // this.form.addControl('');
+
+  }
+
+  gg(enderecos: Endereco[]) {
+
+    if (enderecos.length == 1) {
+      this.form = this._formBuilder.group({
+        cep: [this.enderecos[0].cep, Validators.required],
+        estado: [this.enderecos[0].estado, Validators.required],
+        cidade: [this.enderecos[0].cidade,Validators.required],
+        logradouro: [this.enderecos[0].logradouro, Validators.required],
+        bairro: [this.enderecos[0].bairro, Validators.required],
+        numero: [this.enderecos[0].numImovel, Validators.required],
+        complemento: [this.enderecos[0].dsComplemento, Validators.required]
+      });
+    } else {
+      this.form = this._formBuilder.group({
+        cep: [this.enderecos[0].cep, Validators.required],
+        estado: [this.enderecos[0].estado, Validators.required],
+        cidade: [this.enderecos[0].cidade,Validators.required],
+        logradouro: [this.enderecos[0].logradouro, Validators.required],
+        bairro: [this.enderecos[0].bairro, Validators.required],
+        numero: [this.enderecos[0].numImovel, Validators.required],
+        complemento: [this.enderecos[0].dsComplemento, Validators.required]
+      });
+
+      enderecos.forEach((endereco, indice) => {
+        this.form.addControl(`cep-${indice}`, new FormControl(endereco.cep, Validators.required))
+        this.form.addControl(`estado-${indice}`, new FormControl(endereco.estado, Validators.required))
+        this.form.addControl(`cidade-${indice}`, new FormControl(endereco.cidade, Validators.required))
+        this.form.addControl(`logradouro-${indice}`, new FormControl(endereco.logradouro, Validators.required))
+        this.form.addControl(`bairro-${indice}`, new FormControl(endereco.bairro, Validators.required))
+        this.form.addControl(`numero-${indice}`, new FormControl(endereco.numImovel, Validators.required))
+        this.form.addControl(`complemento-${indice}`, new FormControl(endereco.dsComplemento, Validators.required))
+      })
+    }
+
+    
   }
 
   nextPage() {
@@ -79,5 +123,6 @@ export class DadosEnderecoComponent implements OnInit {
       }
     });
   }
+
 
 }

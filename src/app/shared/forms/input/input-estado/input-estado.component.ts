@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 interface Estado {
   value: string;
@@ -43,6 +44,7 @@ export class InputEstadoComponent implements OnInit {
   ]
 
   @Input() estado: string;
+  @Input() form:FormGroup;
 
   constructor() { }
 

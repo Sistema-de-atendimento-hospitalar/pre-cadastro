@@ -11,6 +11,9 @@ export class Endereco {
 	public estado: string;
 	public tipoLogradouro: TipoLogradouro;
 
+	//
+	public orderForm: number;
+
 	constructor() {
 	}
 }
