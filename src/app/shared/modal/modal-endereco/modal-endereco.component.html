@@ -1,8 +1,10 @@
-<h2 mat-dialog-title>Endereço</h2>
-<mat-dialog-content>
-    <form-endereco [endereco]="endereco" [showDeleteOption]="false"></form-endereco>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Fechar</button>
-    <button mat-button [mat-dialog-close]="endereco" cdkFocusInitial>Salvar</button>
-</mat-dialog-actions>
+<div [formGroup]="form">
+    <h2 mat-dialog-title>Endereço</h2>
+    <mat-dialog-content>
+        <form-endereco [endereco]="endereco" [showDeleteOption]="false" [indice]="indice" [form]="form"></form-endereco>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Fechar</button>
+        <button mat-button (click)="save()" cdkFocusInitial [disabled]="form.invalid">Salvar</button>
+    </mat-dialog-actions>
+</div>

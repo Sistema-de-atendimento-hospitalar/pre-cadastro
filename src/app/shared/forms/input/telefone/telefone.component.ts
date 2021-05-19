@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { TipoTelefoneService } from 'src/app/service/generico/tipo-telefone.service';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { Paciente } from 'src/models/paciente.model';
@@ -16,6 +17,7 @@ export class TelefoneComponent implements OnInit {
   @Input() telefones: Telefone[];
   @Input() indice: number;
   @Input() showDeleteOption: boolean;
+  @Input() form: FormGroup;
   private paciente: Paciente;
   tiposTelefone: TipoTelefone[];
 
@@ -26,6 +28,13 @@ export class TelefoneComponent implements OnInit {
       this.tiposTelefone = result
     });
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
+  }
+
+  converteToControlName(field, indice) {
+    if (indice === 0) {
+      return field;
+    }
+    return `${field}-${indice}`;
   }
 
   deleteTelefone(telefone: Telefone) {
@@ -41,6 +50,13 @@ export class TelefoneComponent implements OnInit {
     }
 
     this.telefones.splice(this.indice, 1);
+  }
+
+  showError(field: string, indice) {
+    if (indice != null) {
+      field = this.converteToControlName(field, indice)
+    }
+    return this.form.get(field).invalid && !this.form.get(field).untouched;
   }
 
 }

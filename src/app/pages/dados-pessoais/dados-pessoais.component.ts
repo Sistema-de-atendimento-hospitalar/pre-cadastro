@@ -54,10 +54,8 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
 
   nextPage() {
 
-    console.log(this.stepper);
+    console.log(this.form);
     this.goForward(this.stepper);
-
-    console.log('next page stepper')
 
     return ;
 
@@ -81,7 +79,6 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
         }
       }, (errorResponse: HttpErrorResponse) => {
         this._snackBar.open(errorResponse.error.message, "Error");
-        console.log(errorResponse);
       });
     }
   }

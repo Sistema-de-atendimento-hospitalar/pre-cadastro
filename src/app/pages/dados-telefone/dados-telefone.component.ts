@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -24,7 +24,8 @@ export class DadosTelefoneComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private pacienteService: PacienteService) { }
+    private pacienteService: PacienteService,
+    private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
@@ -33,10 +34,45 @@ export class DadosTelefoneComponent implements OnInit {
     } else {
       this.telefones.push(new Telefone());
     }
+    this.loadTelefones(this.telefones);
   }
 
+  loadTelefones(telefones: Telefone[]) {
+    if (telefones.length == 1) {
+      this.buildForm();
+    } else {
+      this.buildForm();
+
+      telefones.forEach((telefone, indice) => {
+        if (indice === 0) {
+          return false;
+        }
+        this.form.addControl(`numDdd-${indice}`, new FormControl(telefone.numDdd, Validators.required))
+        this.form.addControl(`numTelefone-${indice}`, new FormControl(telefone.numTelefone, Validators.required))
+        this.form.addControl(`tipoTelefone-${indice}`, new FormControl(telefone.tipoTelefone, Validators.required))
+      })
+    }
+  }
+
+  private buildForm() {
+    this.form = this._formBuilder.group({
+      numDdd: [this.telefones[0].numDdd, Validators.required],
+      numTelefone: [this.telefones[0].numTelefone, Validators.required],
+      tipoTelefone: [this.telefones[0].tipoTelefone, Validators.required]
+    });
+  }
+
+
   nextPage() {
-    console.log(this.telefones);
+    let valid = this.telefones.every(telefone => {
+      return !!telefone.numTelefone
+    });
+
+    if (!valid) {
+      this._snackBar.open("Preencha todos os telefones corretamente", "Alerta");
+      return false;
+    }
+
 
     if (this.paciente.pacienteId) {
       this.paciente.telefones = this.telefones;
@@ -58,8 +94,17 @@ export class DadosTelefoneComponent implements OnInit {
     }
   }
 
-  openDialog() {
+  openDialog(form: FormGroup) {
     let config = new MatDialogConfig()
+    config.data = {
+      form: form,
+      indice: this.telefones.length
+    }
+
+    this.form.addControl(`numDdd-${config.data.indice}`, new FormControl(null, Validators.required))
+    this.form.addControl(`numTelefone-${config.data.indice}`, new FormControl(null, Validators.required))
+    this.form.addControl(`tipoTelefone-${config.data.indice}`, new FormControl(null, Validators.required))
+    
     const dialogRef = this.dialog.open(ModalTelefoneComponent, config);
 
     dialogRef.afterClosed().subscribe((result: Telefone) => {

@@ -18,10 +18,16 @@ export class InputCidadeComponent implements OnInit {
   }
 
   converteToControlName(field, indice) {
+    if (indice === 0) {
+      return field;
+    }
     return `${field}-${indice}`;
   }
 
-  showError(field: string) {
+  showError(field: string, indice) {
+    if (indice != null) {
+      field = this.converteToControlName(field, indice)
+    }
     return this.form.get(field).invalid && !this.form.get(field).untouched;
   }
 

@@ -29,29 +29,35 @@ export class EnderecoComponent implements OnInit {
   ngOnInit(): void {
     this.enderecoCorreios = new EnderecoCorreios();
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
-
-    console.log(this.endereco)
   }
 
   converteToControlName(field, indice) {
+    if (indice === 0) {
+      return field;
+    }
     return `${field}-${indice}`;
   }
 
-  convetion() {
-    this.form.get('cep').setValue(this.enderecoCorreios.cep);
-    this.form.get('estado').setValue(this.enderecoCorreios.uf);
-    this.form.get('cidade').setValue(this.enderecoCorreios.localidade);
-    this.form.get('logradouro').setValue(this.enderecoCorreios.logradouro);
-    this.form.get('bairro').setValue(this.enderecoCorreios.bairro);
+  convetion(indice: number) {
+    this.form.get(this.converteToControlName('cep', indice)).setValue(this.enderecoCorreios.cep);
+    this.form.get(this.converteToControlName('estado', indice)).setValue(this.enderecoCorreios.uf);
+    this.form.get(this.converteToControlName('cidade', indice)).setValue(this.enderecoCorreios.localidade);
+    this.form.get(this.converteToControlName('logradouro', indice)).setValue(this.enderecoCorreios.logradouro);
+    this.form.get(this.converteToControlName('bairro', indice)).setValue(this.enderecoCorreios.bairro);
   }
 
-  verifyCep() {
-    let cepRequest = this.form.get('cep').value
+  buscarCep(indice: number) {
+    let cepRequest = this.form.get(this.converteToControlName('cep', indice)).value
     let cepLength: number = 8;
     if (cepRequest != null && cepRequest.length == cepLength) {
       this.cepService.searchCep(cepRequest).subscribe(result => {
+
+        if (result && !result.cep) {
+          alert('Cep não encontrado!')
+        }
+
         this.enderecoCorreios = result
-        this.convetion()
+        this.convetion(indice)
       });
     }
   }
@@ -71,7 +77,10 @@ export class EnderecoComponent implements OnInit {
     this.enderecos.splice(this.indice, 1);
   }
 
-  showError(field: string) {
+  showError(field: string, indice) {
+    if (indice != null) {
+      field = this.converteToControlName(field, indice)
+    }
     return this.form.get(field).invalid && !this.form.get(field).untouched;
   }
 
