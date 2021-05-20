@@ -1,48 +1,54 @@
 <div class="container">
     <div class="content">
         <mat-accordion class="example-headers-align">
-            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel [expanded]="step === 0" hideToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Dados Pessoais
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-
-                <div>
-                    <mat-label>Nome:</mat-label> {{paciente.nome}}
+                <div class="row">
+                    <div class="col-md-7">
+                        <mat-label>Nome:</mat-label> {{paciente.nome}}
+                    </div>
+                    <div class="col-md-5">
+                        <mat-label>CPF:</mat-label> {{paciente.cpf}}
+                    </div>
                 </div>
-                <div>
-                    <mat-label>CPF:</mat-label> {{paciente.cpf}}
+                <div class="row">
+                    <div class="col-md-7">
+                        <mat-label>Data de Nascimento:</mat-label> {{paciente.dtNascimento | date:'dd/MM/yyyy'}}
+                    </div>
+                    <div class="col-md-5">
+                        <mat-label>Email:</mat-label> {{paciente.email}}
+                    </div>
                 </div>
-
-                <div>
-                    <mat-label>Data de Nascimento:</mat-label> {{paciente.dtNascimento}}
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-label>Rg:</mat-label> {{paciente.rg}}
+                    </div>
+                    <div class="col-md-3">
+                        <mat-label>Orgão Expedidor:</mat-label> {{paciente.orgExpedidorRg}}
+                    </div>
+                    <div class="col-md-5">
+                        <mat-label>Data de Emissão:</mat-label> {{paciente.emissaoRg | date:'dd/MM/yyyy'}}
+                    </div>
                 </div>
-                <div>
-                    <mat-label>Email:</mat-label> {{paciente.email}}
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-label>Sexo:</mat-label> {{paciente.sexo}}
+                    </div>
+                    <div class="col-md-6">
+                        <mat-label *ngIf="paciente.deficiencia">Deficiência:</mat-label> {{paciente.deficiencia}}
+                    </div>
                 </div>
-                <div>
-                    <mat-label>Sexo:</mat-label> {{paciente.sexo}}
-                </div>
-                <div>
-                    <mat-label>Rg:</mat-label> {{paciente.rg}}
-                </div>
-                <div>
-                    <mat-label>Orgão Expedidor:</mat-label> {{paciente.orgExpedidorRg}}
-                </div>
-                <div>
-                    <mat-label>Data de Emissão:</mat-label> {{paciente.emissaoRg}}
-                </div>
-                <div>
-                    <mat-label *ngIf="paciente.deficiencia">Deficiência:</mat-label> {{paciente.deficiencia}}
-                </div>
-
                 <mat-action-row>
+                    <button mat-fab (click)="showModal(0)"><mat-icon>edite</mat-icon></button>
                     <button mat-button (click)="nextStep()">Próximo</button>
                 </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+            <mat-expansion-panel [expanded]="step === 1" hideToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Endereço
@@ -50,35 +56,43 @@
                 </mat-expansion-panel-header>
 
                 <div *ngFor="let endereco of paciente.enderecos; let i = index">
-                    <div>
-                        <mat-label>Cep:</mat-label> {{endereco.cep}}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-label>Cep:</mat-label> {{endereco.cep}}
+                        </div>
+                        <div class="col-md-5">
+                            <mat-label>Logradouro:</mat-label> {{endereco.logradouro}}
+                        </div>
+                        <div class="col-md-3">
+                            <mat-label>Num° Imovel:</mat-label> {{endereco.numImovel}}
+                        </div>
                     </div>
-                    <mat-label>Logradouro:</mat-label> {{endereco.logradouro}}
-                    <div>
-                        <mat-label>Num° Imovel:</mat-label> {{endereco.numImovel}}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-label>Bairro:</mat-label> {{endereco.bairro}}
+                        </div>
+                        <div class="col-md-4">
+                            <mat-label>Estado:</mat-label> {{endereco.estado}}
+                        </div>
+                        <div class="col-md-4">
+                            <mat-label>Cidade:</mat-label> {{endereco.cidade}}
+                        </div>
                     </div>
-                    <div>
-                        <mat-label>Complemento:</mat-label> {{endereco.dsComplemento}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-label>Complemento:</mat-label> {{endereco.dsComplemento}}
+                        </div>
                     </div>
-                    <div>
-                        <mat-label>Bairro:</mat-label> {{endereco.bairro}}
-                    </div>
-                    <div>
-                        <mat-label>Estado:</mat-label> {{paciente.estado}}
-                    </div>
-                    <div>
-                        <mat-label>Cidade:</mat-label> {{endereco.cidade}}
-                    </div>
-                    <br><br>
+
                 </div>
 
                 <mat-action-row>
-                    <button mat-button (click)="prevStep()">Voltar</button>
+                    <button mat-fab (click)="showModal(1)"><mat-icon>edite</mat-icon></button>
                     <button mat-button (click)="nextStep()">Próximo</button>
                 </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+            <mat-expansion-panel [expanded]="step === 2" hideToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Telefone
@@ -89,12 +103,12 @@
                     <mat-label>Telefone:</mat-label> ({{telefone.numDdd}}) {{telefone.numTelefone}} {{telefone.tipoTelefone}}
                 </div>
                 <mat-action-row>
-                    <button mat-button (click)="prevStep()">Voltar</button>
+                    <button mat-fab (click)="showModal(2)"><mat-icon>edite</mat-icon></button>
                     <button mat-button (click)="nextStep()">Próximo</button>
                 </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+            <mat-expansion-panel [expanded]="step === 3" hideToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Cartão Saude
@@ -102,27 +116,30 @@
                 </mat-expansion-panel-header>
 
                 <div>
-                    <div>
-                        <mat-label>Convênio:</mat-label> {{paciente.cartaoSaude.convenio}}
+                    <div class="row">
+                        <div class="col-md-5">
+                            <mat-label>Convênio:</mat-label> {{paciente.cartaoSaude.convenio}}
+                        </div>
+                        <div class="col-md-7">
+                            <mat-label>Tipo de Contrato:</mat-label> {{paciente.cartaoSaude.tipoContrato}}
+                        </div>
                     </div>
-                    <div>
-                        <mat-label>Tipo de Contrato:</mat-label> {{paciente.cartaoSaude.tipoContrato}}
+                    <div class="row">
+                        <div class="col-md-5">
+                            <mat-label>Rede:</mat-label> {{paciente.cartaoSaude.rede}}
+                        </div>
+                        <div class="col-md-4">
+                            <mat-label>Numero da Carteira:</mat-label> {{paciente.cartaoSaude.numeroCarteira}}
+                        </div>
+                        <div class="col-md-3">
+                            <mat-label>Validade:</mat-label> {{paciente.cartaoSaude.validade | date:'dd/MM/yyyy'}}
+                        </div>
                     </div>
-                    <div>
-                        <mat-label>Rede:</mat-label> {{paciente.cartaoSaude.rede}}
-                    </div>
-                    <div>
-                        <mat-label>Numero da Carteira:</mat-label> {{paciente.cartaoSaude.numeroCarteira}}
-                    </div>
-                    <div>
-                        <mat-label>Validade:</mat-label> {{paciente.cartaoSaude.validade}}
-                    </div>
-
                 </div>
 
                 <mat-action-row>
-                    <button mat-button color="warn" (click)="prevStep()">Voltar</button>
-                    <button mat-button color="primary" (click)="nextStep()">Confirmar e Finalizar</button>
+                    <button mat-fab (click)="showModal(3)"><mat-icon>edite</mat-icon></button>
+                    <button mat-button (click)="nextStep()">Finalizar e concluir</button>
                 </mat-action-row>
             </mat-expansion-panel>
 

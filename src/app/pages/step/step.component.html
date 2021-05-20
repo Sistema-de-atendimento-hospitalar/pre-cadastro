@@ -2,36 +2,23 @@
     <mat-step [stepControl]="formGroupOne" [editable]="true">
         <ng-template matStepLabel>Dados Pessoais</ng-template>
         <app-dados-pessoais [stepper]='stepper'></app-dados-pessoais>
-        <button mat-button (click)="goForward(stepper)">Next</button>
     </mat-step>
     <mat-step [stepControl]="formGroupTwo" [editable]="true">
         <form>
             <ng-template matStepLabel>Endereço</ng-template>
-            <app-dados-endereco></app-dados-endereco>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
+            <app-dados-endereco [stepper]='stepper'></app-dados-endereco>
         </form>
     </mat-step>
     <mat-step [stepControl]="formGroupThree" [editable]="true">
         <form>
             <ng-template matStepLabel>Telefone</ng-template>
-            <app-dados-telefone></app-dados-telefone>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
+            <app-dados-telefone [stepper]='stepper'></app-dados-telefone>
         </form>
     </mat-step>
     <mat-step [stepControl]="formGroupFour" [editable]="true">
         <form>
             <ng-template matStepLabel>Pagamento</ng-template>
-            <app-dados-convenio></app-dados-convenio>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
+            <app-dados-convenio [stepper]='stepper'></app-dados-convenio>
         </form>
     </mat-step>
     <!-- <mat-step>

@@ -12,31 +12,35 @@
     margin-left: 8px;
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-top: 3%;
-    color: rgb(3, 152, 158);
-    justify-content: center;
-}
-
 mat-panel-title {
-    font-size: 1.5em;
+    font-size: 1.70em;
     color: rgb(109, 214, 218);
 }
 
 div {
     color: rgb(97, 100, 107);
+    font-size: 21px;
+    margin-top: 1%;
+    font-weight: 300;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 mat-expansion-panel {
     background-color: transparent;
 }
 
-.mat-button {
+.mat-button,
+.mat-fab {
     background-color: rgb(109, 214, 218);
     color: #fff;
 }
 
+mat-action-row {
+    display: flex;
+    justify-content: center;
+}
+
 mat-label {
-    font-weight: bold;
+    font-weight: 500;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }

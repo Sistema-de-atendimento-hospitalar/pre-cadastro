@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { CartaoSaude } from 'src/models/CartaoSaude.model';
@@ -24,7 +24,9 @@ export class DadosConvenioComponent implements OnInit {
   codigoValidado: boolean = false;
   form: FormGroup;
 
-  constructor(private router: Router, private pacienteService: PacienteService) { }
+  constructor(private router: Router,
+     private pacienteService: PacienteService,
+     private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
@@ -36,7 +38,16 @@ export class DadosConvenioComponent implements OnInit {
     }
 
     this.convenio = !!this.paciente.cartaoSaude
+
+    this.form = this._formBuilder.group({
+      convenio: [this.cartaoSaude.convenio, Validators.required],
+      rede: [this.cartaoSaude.rede, Validators.required],
+      validade: [this.cartaoSaude.validade, Validators.required],
+      tipoContrato: [this.cartaoSaude.tipoContrato, Validators.required],
+      numeroCarteira: [this.cartaoSaude.numeroCarteira, Validators.required]
+    });
   }
+
 
   nextPage() {
     this.paciente.cartaoSaude = this.cartaoSaude
@@ -44,6 +55,7 @@ export class DadosConvenioComponent implements OnInit {
     this.pacienteService.updateCartaoSaude(this.cartaoSaude,this.paciente).subscribe(result => {
       this.router.navigate(['/confirmacao-dados']);
     });
+
 
     // this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
       
@@ -55,6 +67,10 @@ export class DadosConvenioComponent implements OnInit {
       this.cartaoSaude = result;
       this.codigoValidado = true;
     })
+  }
+
+  showError(field: string) {
+    return this.form.get(field).invalid && !this.form.get(field).untouched;
   }
 
 }

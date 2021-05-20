@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <form #myForm="ngForm" ngNativeValidate (ngSubmit)="nextPage()">
+                <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="nextPage()">
                     <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="(modoAcesso != null && !modoAcesso && convenio) || hasConvenio">
                         <h1>Cadastro cartão</h1>
 
@@ -62,30 +62,30 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label for="convenio" class="col-sm-12 col-form-label">Convênio</label>
-                                    <input [(ngModel)]="cartaoSaude.convenio" type="text" class="form-control" id="convenio" name="convenio" required placeholder="Convênio" />
+                                    <input formControlName="convenio" type="text" [ngClass]="{'is-invalid': showError('convenio')}" class="form-control is-invalid" id="convenio" name="convenio" required placeholder="Convênio" />
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label for="rede" class="col-sm-12 col-form-label">Rede</label>
-                                    <input [(ngModel)]="cartaoSaude.rede" type="text" class="form-control" id="rede" name="rede" required placeholder="Rede" />
+                                    <input formControlName="rede" type="text" [ngClass]="{'is-invalid': showError('rede')}" class="form-control is-invalid" id="rede" name="rede" required placeholder="Rede" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <label for="validade" class="col-sm-12 col-form-label">Validade</label>
-                                    <input [(ngModel)]="cartaoSaude.validade" type="date" class="form-control" id="validade" name="validade" required placeholder="Validade" />
+                                    <input formControlName="validade" type="date" [ngClass]="{'is-invalid': showError('validade')}" class="form-control is-invalid" id="validade" name="validade" required placeholder="Validade" />
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-6">
                                     <label for="tipoContrato" class="col-sm-12 col-form-label">Tipo de Contrato</label>
-                                    <input [(ngModel)]="cartaoSaude.tipoContrato" type="text" class="form-control" id="tpContrato" name="tpContrato" required placeholder="Tipo contrato" />
+                                    <input formControlName="tipoContrato" type="text" [ngClass]="{'is-invalid': showError('tipoContrato')}" class="form-control is-invalid" id="tpContrato" name="tpContrato" required placeholder="Tipo contrato" />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                     <label for="numeroCarteira" class="col-sm-12 col-form-label">Número de
                                         carteira</label>
-                                    <input [(ngModel)]="cartaoSaude.numeroCarteira" type="number" mask="0000000000" class="form-control" id="nrCarteira" name="nrCarteira" required placeholder="N° da carteira" />
+                                    <input formControlName="numeroCarteira" type="number" mask="0000000000" [ngClass]="{'is-invalid': showError('numeroCarteira')}" class="form-control is-invalid" id="nrCarteira" name="nrCarteira" required placeholder="N° da carteira" />
                                 </div>
                             </div>
                         </div>
-                        <app-button></app-button>
+                        <app-button class="btn btn-prosseguir" [disabled]="form.invalid"></app-button>
                     </div>
                 </form>
 

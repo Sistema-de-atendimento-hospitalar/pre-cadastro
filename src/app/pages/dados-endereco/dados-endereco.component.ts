@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { ModalEnderecoComponent } from 'src/app/shared/modal/modal-endereco/modal-endereco.component';
@@ -14,11 +15,11 @@ import { Paciente } from 'src/models/paciente.model';
   styleUrls: ['./dados-endereco.component.scss'],
 })
 export class DadosEnderecoComponent implements OnInit {
-  [x: string]: any;
 
   enderecos: Endereco[] = [];
   private paciente: Paciente;
   form: FormGroup;
+  @Input() stepper: MatStepper;
 
   constructor(
     private router: Router,
@@ -86,17 +87,15 @@ export class DadosEnderecoComponent implements OnInit {
       this.paciente.enderecos = this.enderecos;
       this.pacienteService.updateEndereco(this.enderecos, this.paciente).subscribe(result => {
         localStorage.setItem("paciente", JSON.stringify(this.paciente));
-        this.router.navigate(['/passo3']);
+        this.goForward(this.stepper);
       });
     } else {
       this.pacienteService.saveEndereco(this.enderecos, this.paciente).subscribe(
         result => {
           if (result) {
-            this.router.navigate(['/passo3']);
+            localStorage.setItem("paciente", JSON.stringify(this.paciente));
+            this.goForward(this.stepper);
           }
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this._snackBar.open(errorResponse.error.message, "Error");
         }
       );
     }
@@ -131,5 +130,8 @@ export class DadosEnderecoComponent implements OnInit {
     });
   }
 
+  goForward(stepper: MatStepper) {
+    stepper.next();
+  }
 
 }

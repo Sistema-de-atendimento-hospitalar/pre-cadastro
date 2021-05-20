@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Paciente } from 'src/models/paciente.model';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 @Component({
@@ -23,13 +22,10 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
   @Input() stepper: MatStepper;
-//  @ViewChild('stepper') private myStepper: MatStepper;
   totalStepsCount: number;
 
   constructor(
-    private router: Router,
     private pacienteService: PacienteService,
-    private _snackBar: MatSnackBar,
     private _formBuilder: FormBuilder
   ) { }
 
@@ -53,12 +49,6 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
   }
 
   nextPage() {
-
-    console.log(this.form);
-    this.goForward(this.stepper);
-
-    return ;
-
     this.hasError = !this.validarCampos(this.paciente);
     let emailPaciente = this.paciente.email;
     if (!emailPaciente.includes("@")) {
@@ -68,17 +58,15 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
     if (this.paciente.pacienteId) {
       this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
         localStorage.setItem("paciente", JSON.stringify(this.paciente));
-        //this.router.navigate(['/passo2']);
+        this.goForward(this.stepper);
       });
     } else {
       this.pacienteService.savePaciente(this.paciente).subscribe(result => {
         this.paciente = result;
         localStorage.setItem("paciente", JSON.stringify(this.paciente));
         if (result) {
-          //this.router.navigate(['/passo2']);
+          this.goForward(this.stepper);
         }
-      }, (errorResponse: HttpErrorResponse) => {
-        this._snackBar.open(errorResponse.error.message, "Error");
       });
     }
   }
@@ -112,9 +100,6 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
     this.totalStepsCount = this.stepper._steps.length;
   }
 
-  goBack() {
-    this.stepper.previous();
-  }
   goForward(stepper: MatStepper) {
     stepper.next();
   }

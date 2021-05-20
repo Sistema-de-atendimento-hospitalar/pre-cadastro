@@ -1,9 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { MatStepper } from '@angular/material/stepper';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { ModalTelefoneComponent } from 'src/app/shared/modal/modal-telefone/modal-telefone.component';
 import { Paciente } from 'src/models/paciente.model';
@@ -19,9 +18,9 @@ export class DadosTelefoneComponent implements OnInit {
   telefones: Telefone[] = [];
   private paciente: Paciente;
   form: FormGroup;
+  @Input() stepper: MatStepper;
 
   constructor(
-    private router: Router,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private pacienteService: PacienteService,
@@ -73,22 +72,18 @@ export class DadosTelefoneComponent implements OnInit {
       return false;
     }
 
-
     if (this.paciente.pacienteId) {
       this.paciente.telefones = this.telefones;
       this.pacienteService.updateTelefone(this.telefones, this.paciente).subscribe(result => {
         localStorage.setItem("paciente", JSON.stringify(this.paciente));
-        this.router.navigate(['/passo4']);
+        this.goForward(this.stepper);
       });
     } else{
       this.pacienteService.saveTelefone(this.telefones, this.paciente).subscribe(
         result => {
           if (result) {
-            this.router.navigate(['/passo4']);
+            this.goForward(this.stepper);
           }
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this._snackBar.open(errorResponse.error.message, "Error");
         }
       );
     }
@@ -115,6 +110,10 @@ export class DadosTelefoneComponent implements OnInit {
         this.telefones.push(result)
       }
     });
+  }
+
+  goForward(stepper: MatStepper) {
+    stepper.next();
   }
 
 }
