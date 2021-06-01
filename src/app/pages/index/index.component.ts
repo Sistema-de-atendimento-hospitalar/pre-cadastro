@@ -14,10 +14,14 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   public hasError: Boolean = false;
   public showAnimation: Boolean = true;
-
+  private cpf: string;
   private paciente: Paciente;
 
-  constructor(private router: Router, private pacienteService: PacienteService, private _loading: LoadingService) { }
+  constructor(
+    private router: Router,
+    private pacienteService: PacienteService,
+    private _loading: LoadingService
+  ) { }
 
   ngOnInit() {
     this.paciente = new Paciente()
@@ -60,6 +64,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   nextPage() {
     this.showAnimation = false;
+    this.paciente.cpf = this.cpf;
 
     if (this.validarCpf(this.paciente.cpf)) {
       this.pacienteService.verifyPacienteFromCpf(this.paciente.cpf)
@@ -67,10 +72,10 @@ export class IndexComponent implements OnInit, OnDestroy {
           localStorage.setItem("paciente", JSON.stringify(this.paciente));
           this.paciente = result;
           if (result) {
-            alert("DEV: Exibir modal informando que encontrou os dados de " + this.paciente.nome)
             localStorage.setItem("paciente", JSON.stringify(this.paciente));
           }
 
+          localStorage.removeItem("selectedIndex")
           this._loading.setLoading(true, window.location.href);
           setTimeout(() => {
             this._loading.setLoading(false, window.location.href);

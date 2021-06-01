@@ -81,12 +81,16 @@ export class PacienteService {
   validateCodigoConvenio(codigoConvenio: number): Observable<CartaoSaude> {
     let cartaoSaude = new CartaoSaude();
     cartaoSaude.convenio = "Bradesco"
-    cartaoSaude.numeroCarteira = 123456
+    cartaoSaude.numeroCarteira = this.getRndInteger(1000, 100000); 
     cartaoSaude.rede = "Nacional"
     cartaoSaude.tipoContrato = "Empresarial"
     cartaoSaude.validade = new Date();
 
     return of(cartaoSaude);
+  }
+
+  getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
   }
 
 }

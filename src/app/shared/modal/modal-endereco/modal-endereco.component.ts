@@ -28,8 +28,8 @@ export class ModalEnderecoComponent implements OnInit {
     this.endereco.cidade = this.form.get(this.converteToControlName('cidade', this.indice)).value
     this.endereco.logradouro = this.form.get(this.converteToControlName('logradouro', this.indice)).value
     this.endereco.bairro = this.form.get(this.converteToControlName('bairro', this.indice)).value
-    this.endereco.numImovel = this.form.get(this.converteToControlName('numero', this.indice)).value
-    this.endereco.dsComplemento = this.form.get(this.converteToControlName('complemento', this.indice)).value
+    this.endereco.numImovel = this.form.get(this.converteToControlName('numImovel', this.indice)).value
+    this.endereco.dsComplemento = this.form.get(this.converteToControlName('dsComplemento', this.indice)).value
 
     this.dialogRef.close(this.endereco);
   }

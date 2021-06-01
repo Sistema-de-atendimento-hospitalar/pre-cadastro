@@ -1,13 +1,14 @@
 <div class="container">
     <div class="content">
-        <mat-accordion class="example-headers-align">
-            <mat-expansion-panel [expanded]="step === 0" hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Dados Pessoais
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="row">
+        <div class="row col-md-12 text">
+            Confira seus dados e verifique se estão corretos.
+        </div>
+        <div class="row square">
+            <div class="row col-md-12 header">
+                Dados Pessoais
+            </div>
+            <div class="row col-md-12 body">
+                <div class="row col-md-12">
                     <div class="col-md-7">
                         <mat-label>Nome:</mat-label> {{paciente.nome}}
                     </div>
@@ -15,7 +16,7 @@
                         <mat-label>CPF:</mat-label> {{paciente.cpf}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row col-md-12">
                     <div class="col-md-7">
                         <mat-label>Data de Nascimento:</mat-label> {{paciente.dtNascimento | date:'dd/MM/yyyy'}}
                     </div>
@@ -23,7 +24,7 @@
                         <mat-label>Email:</mat-label> {{paciente.email}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row col-md-12">
                     <div class="col-md-4">
                         <mat-label>Rg:</mat-label> {{paciente.rg}}
                     </div>
@@ -34,7 +35,7 @@
                         <mat-label>Data de Emissão:</mat-label> {{paciente.emissaoRg | date:'dd/MM/yyyy'}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row col-md-12">
                     <div class="col-md-6">
                         <mat-label>Sexo:</mat-label> {{paciente.sexo}}
                     </div>
@@ -42,21 +43,22 @@
                         <mat-label *ngIf="paciente.deficiencia">Deficiência:</mat-label> {{paciente.deficiencia}}
                     </div>
                 </div>
-                <mat-action-row>
-                    <button mat-fab (click)="showModal(0)"><mat-icon>edite</mat-icon></button>
-                    <button mat-button (click)="nextStep()">Próximo</button>
-                </mat-action-row>
-            </mat-expansion-panel>
+            </div>
 
-            <mat-expansion-panel [expanded]="step === 1" hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Endereço
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+            <div class="footer row col-md-12">
+                <button mat-fab (click)="selectedStep(0)">
+                <mat-icon>edite</mat-icon>
+                </button>
+            </div>
 
+        </div>
+        <div class="row square">
+            <div class=" row col-md-12 header">
+                Endereço
+            </div>
+            <div class="row col-md-12 body">
                 <div *ngFor="let endereco of paciente.enderecos; let i = index">
-                    <div class="row">
+                    <div class="row col-md-12">
                         <div class="col-md-4">
                             <mat-label>Cep:</mat-label> {{endereco.cep}}
                         </div>
@@ -67,7 +69,7 @@
                             <mat-label>Num° Imovel:</mat-label> {{endereco.numImovel}}
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row col-md-12">
                         <div class="col-md-4">
                             <mat-label>Bairro:</mat-label> {{endereco.bairro}}
                         </div>
@@ -78,45 +80,42 @@
                             <mat-label>Cidade:</mat-label> {{endereco.cidade}}
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row col-md-12">
                         <div class="col-md-12">
                             <mat-label>Complemento:</mat-label> {{endereco.dsComplemento}}
                         </div>
                     </div>
 
                 </div>
-
-                <mat-action-row>
-                    <button mat-fab (click)="showModal(1)"><mat-icon>edite</mat-icon></button>
-                    <button mat-button (click)="nextStep()">Próximo</button>
-                </mat-action-row>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel [expanded]="step === 2" hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Telefone
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
+            </div>
+            <div class="row col-md-12 footer">
+                <button mat-fab (click)="selectedStep(1)">
+                        <mat-icon>edite</mat-icon>
+                    </button>
+            </div>
+        </div>
+        <div class="row square">
+            <div class="row col-md-12 header">
+                Telefone
+            </div>
+            <div class="row col-md-12 body">
                 <div *ngFor="let telefone of paciente.telefones; let i = index">
-                    <mat-label>Telefone:</mat-label> ({{telefone.numDdd}}) {{telefone.numTelefone}} {{telefone.tipoTelefone}}
+                    <mat-label>Telefone {{telefone.tipoTelefone}}:</mat-label> ({{telefone.numDdd}}) {{telefone.numTelefone}}<br>
                 </div>
-                <mat-action-row>
-                    <button mat-fab (click)="showModal(2)"><mat-icon>edite</mat-icon></button>
-                    <button mat-button (click)="nextStep()">Próximo</button>
-                </mat-action-row>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel [expanded]="step === 3" hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Cartão Saude
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
+            </div>
+            <div class="row col-md-12 footer">
+                <button mat-fab (click)="selectedStep(2)">
+                        <mat-icon>edite</mat-icon>
+                    </button>
+            </div>
+        </div>
+        <div class="row square">
+            <div class="row col-md-12 header">
+                Cartão Saude
+            </div>
+            <div class="row col-md-12 body">
                 <div>
-                    <div class="row">
+                    <div class="row col-md-12">
                         <div class="col-md-5">
                             <mat-label>Convênio:</mat-label> {{paciente.cartaoSaude.convenio}}
                         </div>
@@ -124,7 +123,7 @@
                             <mat-label>Tipo de Contrato:</mat-label> {{paciente.cartaoSaude.tipoContrato}}
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row col-md-12">
                         <div class="col-md-5">
                             <mat-label>Rede:</mat-label> {{paciente.cartaoSaude.rede}}
                         </div>
@@ -136,13 +135,17 @@
                         </div>
                     </div>
                 </div>
-
-                <mat-action-row>
-                    <button mat-fab (click)="showModal(3)"><mat-icon>edite</mat-icon></button>
-                    <button mat-button (click)="nextStep()">Finalizar e concluir</button>
-                </mat-action-row>
-            </mat-expansion-panel>
-
-        </mat-accordion>
+            </div>
+            <div class="row col-md-12 footer">
+                <button mat-fab (click)="selectedStep(3)">
+                        <mat-icon>edite</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="row button">
+            <button class="btn btn-prosseguir" [disabled]="disabled">
+                Finalizar cadastro
+            </button>
+        </div>
     </div>
 </div>

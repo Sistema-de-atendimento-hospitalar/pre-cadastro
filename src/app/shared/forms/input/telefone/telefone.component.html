@@ -12,7 +12,7 @@
     <div class="col-lg-4 col-md-4 col-sm-4">
         <label for="tpTelefone" class="col-sm-12 col-form-label">Tipo de Telefone</label>
         <mat-select class="form-control" [formControlName]="converteToControlName('tipoTelefone', indice)" [ngClass]="{'is-invalid': showError('tipoTelefone', indice)}">
-            <mat-option *ngFor="let tipoTelefone of tiposTelefone" [value]="tipoTelefone.tpTelefoneId">
+            <mat-option *ngFor="let tipoTelefone of tiposTelefone" [value]="tipoTelefone.descTipoTelefone">
                 {{tipoTelefone.descTipoTelefone}}
             </mat-option>
         </mat-select>

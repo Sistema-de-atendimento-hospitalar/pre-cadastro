@@ -1,20 +1,25 @@
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-    flex-basis: 0;
+.square {
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, .12);
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 2%;
 }
 
-.example-headers-align .mat-expansion-panel-header-description {
-    justify-content: space-between;
+.square {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-}
-
-.example-headers-align .mat-form-field+.mat-form-field {
-    margin-left: 8px;
-}
-
-mat-panel-title {
+    padding: 0 24px;
+    border-radius: inherit;
     font-size: 1.70em;
     color: rgb(109, 214, 218);
+    margin-bottom: 2%;
 }
 
 div {
@@ -25,8 +30,10 @@ div {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-mat-expansion-panel {
-    background-color: transparent;
+.body {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
 }
 
 .mat-button,
@@ -35,12 +42,25 @@ mat-expansion-panel {
     color: #fff;
 }
 
-mat-action-row {
+.footer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    border-top-style: solid;
+    border-top-width: 1px;
+    flex-direction: row;
+    padding: 16px 8px 16px 24px;
+    box-sizing: border-box;
+    border-top-color: rgba(0, 0, 0, .12);
 }
 
 mat-label {
     font-weight: 500;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text {
+    font-size: 2em;
+    color: rgb(3, 152, 158);
+    padding: 4%;
+    text-align: center;
 }

@@ -21,7 +21,8 @@ export class TelefoneComponent implements OnInit {
   private paciente: Paciente;
   tiposTelefone: TipoTelefone[];
 
-  constructor(private tipoTelefoneService: TipoTelefoneService, private pacienteService: PacienteService) { }
+  constructor(private tipoTelefoneService: TipoTelefoneService,
+              private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
     this.tipoTelefoneService.getTipoTelefone().subscribe(result => {

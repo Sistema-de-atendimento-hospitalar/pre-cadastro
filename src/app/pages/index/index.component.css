@@ -2,6 +2,8 @@ h1 {
     font-size: 2.5em;
     margin-top: 20%;
     color: rgb(3, 152, 158);
+    font-weight: 300;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .vertical-center {
@@ -10,8 +12,35 @@ h1 {
     justify-content: center;
 }
 
+img {
+    width: 80%;
+    height: 80%;
+}
+
+.img,
+.tela {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100vh;
+}
+
+.linha {
+    margin: 0px !important;
+}
+
+.container {
+    margin-top: 10%;
+}
+
+.img {
+    align-items: center;
+    background-color: #6DD6DA;
+}
+
 input {
-    width: 40vw;
+    width: 35vw;
     background-color: transparent;
     color: rgb(97, 100, 107);
 }

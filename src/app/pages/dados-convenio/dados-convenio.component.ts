@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { CartaoSaude } from 'src/models/CartaoSaude.model';
@@ -16,13 +17,14 @@ export class DadosConvenioComponent implements OnInit {
   private cartaoSaude: CartaoSaude;
   private convenio: boolean = null;
   formaPagamento: string;
-  pagamento: string[] = ['Cartão de crédito', 'Pix', 'Dinheiro'];
+  // pagamento: string[] = ['Cartão de crédito', 'Pix', 'Dinheiro'];
   hasConvenio: boolean = false
-  hasPagamentoParticular: boolean = false
+  // hasPagamentoParticular: boolean = false
   modoAcesso: boolean = null;
   codigoCartaoCovenio: number = null;
   codigoValidado: boolean = false;
   form: FormGroup;
+  @Input() stepper: MatStepper;
 
   constructor(private router: Router,
      private pacienteService: PacienteService,
@@ -48,18 +50,51 @@ export class DadosConvenioComponent implements OnInit {
     });
   }
 
+  converterToModel(form: FormGroup, model: CartaoSaude) {
+    let namesForm = Object.keys(form.controls);
+    let namesPaciente = Object.keys(model);
+
+    namesPaciente.forEach(nameModel => {
+      namesForm.forEach(nameForm => {
+        if (nameForm === nameModel) {
+          model[nameForm] = form.get(nameForm).value
+        }
+      });
+    });
+  
+    return model;
+  }
 
   nextPage() {
-    this.paciente.cartaoSaude = this.cartaoSaude
-    localStorage.setItem("paciente", JSON.stringify(this.paciente));
-    this.pacienteService.updateCartaoSaude(this.cartaoSaude,this.paciente).subscribe(result => {
-      this.router.navigate(['/confirmacao-dados']);
-    });
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
+    this.cartaoSaude = this.converterToModel(this.form, this.cartaoSaude);
+    if (this.paciente.pacienteId) {
+      this.paciente.cartaoSaude = this.cartaoSaude;
+      this.pacienteService.updateCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        this.goForward(this.stepper);
+      });
+    } else{
+      this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(
+        result => {
+          if (result) {
+            this.goForward(this.stepper);
+          }
+        }
+      );
+    }
+  
 
 
-    // this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
-      
+
+    // localStorage.setItem("paciente", JSON.stringify(this.paciente));
+    // this.pacienteService.updateCartaoSaude(this.cartaoSaude,this.paciente).subscribe(result => {
+    //   this.router.navigate(['/confirmacao-dados']);
     // });
+  }
+
+  goForward(stepper: MatStepper) {
+    stepper.next();
   }
 
   validarCodigoAcesso(codigoConvenio: number) {

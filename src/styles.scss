@@ -2,14 +2,14 @@
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 .btn-prosseguir {
-    position: fixed;
-    height: 50px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px;
-    width: 100vw;
-    border-radius: 0px !important;
+    // position: fixed;
+    // height: 50px;
+    // bottom: 0px;
+    // left: 0px;
+    // right: 0px;
+    // margin-bottom: 0px;
+    // width: 100vw;
+    // border-radius: 0px !important;
 }
 
 // body {
@@ -20,7 +20,8 @@
 // }
 html,
 body {
-    height: 100%;
+    height: 100vh;
+    width: 100vw !important;
     background-color: rgb(238, 246, 248)!important;
 }
 
@@ -29,18 +30,30 @@ body {
     background-color: transparent;
 }
 
-.content-center {
-    height: 100vh;
-}
-
 label {
     font-size: 0.900;
     color: rgb(97, 100, 107);
 }
 
-.btn {
+.btn.btn-prosseguir {
     background-color: rgb(3, 152, 158);
     color: #ffff;
-    text-align: left;
+    text-align: center;
     font-size: 1.5em;
+}
+
+.btn.btn-prosseguir:hover {
+    background-color: rgb(109, 214, 218);
+    color: #ffff;
+}
+
+.button {
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-option,
+span.ng-tns-c153-1 {
+    color: rgb(97, 100, 107);
 }

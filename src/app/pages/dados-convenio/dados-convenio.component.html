@@ -2,7 +2,6 @@
     <div class="page-header header-filter">
         <div class="container">
             <div class="content-center">
-
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h1>Possui Convênio?</h1>
 
@@ -12,18 +11,17 @@
                     </mat-radio-group>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="convenio != null && !convenio">
-                    <h1 name="convenio">Pagamento Particular</h1>
+                    <!-- <h1 name="convenio">Pagamento Particular</h1>
                     <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="formaPagamento">
                         <mat-radio-button class="example-radio-button" *ngFor="let pagamento of pagamento" [value]="pagamento">
                             {{pagamento}}
                         </mat-radio-button>
                     </mat-radio-group>
                     <div class="texto" *ngIf="formaPagamento">Sua preferência para de forma de pagamento é {{formaPagamento}}!
-                    </div>
+                    </div> -->
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <app-button></app-button>
                     </div>
-
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="convenio == true && !hasConvenio">
@@ -50,7 +48,7 @@
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="codigoValidado == true">
-                        <app-button></app-button>
+                        <app-button [disabled]="form.invalid"></app-button>
                     </div>
                 </div>
 
@@ -76,16 +74,18 @@
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-6">
                                     <label for="tipoContrato" class="col-sm-12 col-form-label">Tipo de Contrato</label>
-                                    <input formControlName="tipoContrato" type="text" [ngClass]="{'is-invalid': showError('tipoContrato')}" class="form-control is-invalid" id="tpContrato" name="tpContrato" required placeholder="Tipo contrato" />
+                                    <input formControlName="tipoContrato" type="text" [ngClass]="{'is-invalid': showError('tipoContrato')}" class="form-control is-invalid" id="tipoContrato" name="tipoContrato" required placeholder="Tipo contrato" />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                     <label for="numeroCarteira" class="col-sm-12 col-form-label">Número de
                                         carteira</label>
-                                    <input formControlName="numeroCarteira" type="number" mask="0000000000" [ngClass]="{'is-invalid': showError('numeroCarteira')}" class="form-control is-invalid" id="nrCarteira" name="nrCarteira" required placeholder="N° da carteira" />
+                                    <input formControlName="numeroCarteira" type="number" mask="0000000000" [ngClass]="{'is-invalid': showError('numeroCarteira')}" class="form-control is-invalid" id="numeroCarteira" name="numeroCarteira" required placeholder="N° da carteira" />
                                 </div>
                             </div>
                         </div>
-                        <app-button class="btn btn-prosseguir" [disabled]="form.invalid"></app-button>
+                        <div class="row col-md-12 button">
+                            <app-button [disabled]="form.invalid"></app-button>
+                        </div>
                     </div>
                 </form>
 

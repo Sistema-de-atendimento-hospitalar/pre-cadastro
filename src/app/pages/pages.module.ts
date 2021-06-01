@@ -4,7 +4,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
@@ -30,6 +30,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatListModule } from '@angular/material/list';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 
 import { FooterComponent } from '../shared/footer/footer.component';
@@ -54,7 +56,8 @@ import { ModalEnderecoComponent } from "../shared/modal/modal-endereco/modal-end
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   imports: [
-    FormsModule, 
+    MatListModule,
+    FormsModule,
     ReactiveFormsModule,    //angular modules
     MatInputModule,
     MatDialogModule,
@@ -72,7 +75,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatRadioModule,
     MatChipsModule,
     MatStepperModule,
-
+    CdkStepperModule,
 
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),

@@ -1,10 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
-import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { ModalEnderecoComponent } from 'src/app/shared/modal/modal-endereco/modal-endereco.component';
 import { Endereco } from 'src/models/endereco.model';
@@ -22,7 +20,6 @@ export class DadosEnderecoComponent implements OnInit {
   @Input() stepper: MatStepper;
 
   constructor(
-    private router: Router,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private pacienteService: PacienteService,
@@ -55,8 +52,8 @@ export class DadosEnderecoComponent implements OnInit {
         this.form.addControl(`cidade-${indice}`, new FormControl(endereco.cidade, Validators.required))
         this.form.addControl(`logradouro-${indice}`, new FormControl(endereco.logradouro, Validators.required))
         this.form.addControl(`bairro-${indice}`, new FormControl(endereco.bairro, Validators.required))
-        this.form.addControl(`numero-${indice}`, new FormControl(endereco.numImovel, Validators.required))
-        this.form.addControl(`complemento-${indice}`, new FormControl(endereco.dsComplemento, Validators.required))
+        this.form.addControl(`numImovel-${indice}`, new FormControl(endereco.numImovel, Validators.required))
+        this.form.addControl(`dsComplemento-${indice}`, new FormControl(endereco.dsComplemento, Validators.nullValidator))
       })
     }
   }
@@ -68,20 +65,14 @@ export class DadosEnderecoComponent implements OnInit {
       cidade: [this.enderecos[0].cidade, Validators.required],
       logradouro: [this.enderecos[0].logradouro, Validators.required],
       bairro: [this.enderecos[0].bairro, Validators.required],
-      numero: [this.enderecos[0].numImovel, Validators.required],
-      complemento: [this.enderecos[0].dsComplemento, Validators.nullValidator]
+      numImovel: [this.enderecos[0].numImovel, Validators.required],
+      dsComplemento: [this.enderecos[0].dsComplemento, Validators.nullValidator]
     });
   }
 
   nextPage() {
-    let valid = this.enderecos.every(endereco => {
-      return !!endereco.cep
-    });
-
-    if (!valid) {
-      this._snackBar.open("Preencha todos os endereços corretamente", "Alerta");
-      return false;
-    }
+    this.enderecos = this.converterToModel(this.form, this.enderecos);
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
 
     if (this.paciente.pacienteId) {
       this.paciente.enderecos = this.enderecos;
@@ -101,6 +92,44 @@ export class DadosEnderecoComponent implements OnInit {
     }
   }
 
+  converterToModel(form: FormGroup, model) {
+    let namesForm = Object.keys(form.controls);
+    let namesModel = [];
+
+    if (model instanceof Array) {
+      namesModel = model.map(m => { return Object.keys(m) })
+    } else {
+      namesModel = Object.keys(model);
+    }
+
+    namesModel.forEach((nameModel, index) => {
+      if (nameModel instanceof Array) {
+        nameModel.forEach(input => {
+          namesForm.forEach(nameForm => {
+            if (input === nameForm) {
+              model[index][input] = form.get(this.converteToControlName(input, index)).value
+            }
+          });
+        });
+      } else {
+        namesForm.forEach(nameForm => {
+          if (nameForm === nameModel) {
+            model[nameForm] = form.get(nameForm).value
+          }
+        });
+      }
+    });
+  
+    return model;
+  }
+
+  converteToControlName(field, indice) {
+    if (indice === 0) {
+      return field;
+    }
+    return `${field}-${indice}`;
+  }
+
   openDialog(form: FormGroup) {
 
     let config = new MatDialogConfig()
@@ -114,8 +143,8 @@ export class DadosEnderecoComponent implements OnInit {
     this.form.addControl(`cidade-${config.data.indice}`, new FormControl(null, Validators.required))
     this.form.addControl(`logradouro-${config.data.indice}`, new FormControl(null, Validators.required))
     this.form.addControl(`bairro-${config.data.indice}`, new FormControl(null, Validators.required))
-    this.form.addControl(`numero-${config.data.indice}`, new FormControl(null, Validators.required))
-    this.form.addControl(`complemento-${config.data.indice}`, new FormControl(null, Validators.nullValidator))
+    this.form.addControl(`numImovel-${config.data.indice}`, new FormControl(null, Validators.required))
+    this.form.addControl(`dsComplemento-${config.data.indice}`, new FormControl(null, Validators.nullValidator))
 
     const dialogRef = this.dialog.open(ModalEnderecoComponent, config);
 

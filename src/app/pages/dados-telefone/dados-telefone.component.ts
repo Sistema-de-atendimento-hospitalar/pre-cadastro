@@ -61,16 +61,9 @@ export class DadosTelefoneComponent implements OnInit {
     });
   }
 
-
   nextPage() {
-    let valid = this.telefones.every(telefone => {
-      return !!telefone.numTelefone
-    });
-
-    if (!valid) {
-      this._snackBar.open("Preencha todos os telefones corretamente", "Alerta");
-      return false;
-    }
+    this.telefones = this.converterToModel(this.form, this.telefones);
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
 
     if (this.paciente.pacienteId) {
       this.paciente.telefones = this.telefones;
@@ -87,6 +80,44 @@ export class DadosTelefoneComponent implements OnInit {
         }
       );
     }
+  }
+
+  converterToModel(form: FormGroup, model) {
+    let namesForm = Object.keys(form.controls);
+    let namesModel = [];
+
+    if (model instanceof Array) {
+      namesModel = model.map(m => { return Object.keys(m) })
+    } else {
+      namesModel = Object.keys(model);
+    }
+
+    namesModel.forEach((nameModel, index) => {
+      if (nameModel instanceof Array) {
+        nameModel.forEach(input => {
+          namesForm.forEach(nameForm => {
+            if (input === nameForm) {
+              model[index][input] = form.get(this.converteToControlName(input, index)).value
+            }
+          });
+        });
+      } else {
+        namesForm.forEach(nameForm => {
+          if (nameForm === nameModel) {
+            model[nameForm] = form.get(nameForm).value
+          }
+        });
+      }
+    });
+  
+    return model;
+  }
+
+  converteToControlName(field, indice) {
+    if (indice === 0) {
+      return field;
+    }
+    return `${field}-${indice}`;
   }
 
   openDialog(form: FormGroup) {

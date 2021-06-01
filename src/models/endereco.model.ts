@@ -1,15 +1,15 @@
 import { TipoLogradouro } from "./tipoLogradouro.model";
 
 export class Endereco {
-	public enderecoId: number;
-	public cep: string;
-	public logradouro: string;
-	public numImovel: string;
-	public dsComplemento: string;
-	public bairro: string;
-	public cidade: string;
-	public estado: string;
-	public tipoLogradouro: TipoLogradouro;
+	public enderecoId: number = null;
+	public cep: string = null;
+	public logradouro: string = null;
+	public numImovel: string = null;
+	public dsComplemento: string = null;
+	public bairro: string = null;
+	public cidade: string = null;
+	public estado: string = null;
+	public tipoLogradouro: TipoLogradouro = null;
 
 	//
 	public orderForm: number;

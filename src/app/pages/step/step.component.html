@@ -1,28 +1,28 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="formGroupOne" [editable]="true">
+    <mat-step [editable]="true">
         <ng-template matStepLabel>Dados Pessoais</ng-template>
-        <app-dados-pessoais [stepper]='stepper'></app-dados-pessoais>
+        <app-dados-pessoais [stepper]='stepper' *ngIf="stepper.selectedIndex == 0"></app-dados-pessoais>
     </mat-step>
-    <mat-step [stepControl]="formGroupTwo" [editable]="true">
+    <mat-step [editable]="true">
         <form>
             <ng-template matStepLabel>Endereço</ng-template>
-            <app-dados-endereco [stepper]='stepper'></app-dados-endereco>
+            <app-dados-endereco [stepper]='stepper' *ngIf="stepper.selectedIndex == 1"></app-dados-endereco>
         </form>
     </mat-step>
-    <mat-step [stepControl]="formGroupThree" [editable]="true">
+    <mat-step [editable]="true">
         <form>
             <ng-template matStepLabel>Telefone</ng-template>
-            <app-dados-telefone [stepper]='stepper'></app-dados-telefone>
+            <app-dados-telefone [stepper]='stepper' *ngIf="stepper.selectedIndex == 2"></app-dados-telefone>
         </form>
     </mat-step>
-    <mat-step [stepControl]="formGroupFour" [editable]="true">
+    <mat-step [editable]="true">
         <form>
             <ng-template matStepLabel>Pagamento</ng-template>
-            <app-dados-convenio [stepper]='stepper'></app-dados-convenio>
+            <app-dados-convenio [stepper]='stepper' *ngIf="stepper.selectedIndex == 3"></app-dados-convenio>
         </form>
     </mat-step>
-    <!-- <mat-step>
+    <mat-step>
         <ng-template matStepLabel>Confirmação de dados</ng-template>
-        <app-dados-confirmacao></app-dados-confirmacao>
-    </mat-step> -->
+        <app-dados-confirmacao [stepper]='stepper' *ngIf="stepper.selectedIndex == 4"></app-dados-confirmacao>
+    </mat-step>
 </mat-horizontal-stepper>

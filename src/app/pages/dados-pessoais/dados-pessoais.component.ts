@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { Paciente } from 'src/models/paciente.model';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 @Component({
@@ -10,12 +8,10 @@ import { MatStepper } from '@angular/material/stepper';
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.scss']
 })
-export class DadosPessoaisComponent implements OnInit, AfterViewInit {
+export class DadosPessoaisComponent implements OnInit {
 
   private paciente: Paciente;
   private dominio: string = null;
-  private disableDominio: boolean = false;
-  public hasError: boolean = false;
   private temDeficiencia: boolean = false;
   private dominios: string[] = ['gmail.com', 'hotmail.com', 'outlook.com'];
 
@@ -41,29 +37,40 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
       ])],
       sexo: [this.paciente.sexo, Validators.required],
       rg: [this.paciente.rg, Validators.required],
-      orgaoExpedidor: [this.paciente.orgExpedidorRg, Validators.required],
-      dtEmissao: [this.paciente.emissaoRg, Validators.required],
+      orgExpedidorRg: [this.paciente.orgExpedidorRg, Validators.required],
+      emissaoRg: [this.paciente.emissaoRg, Validators.required],
       temDeficiencia: [!!this.paciente.deficiencia, Validators.nullValidator],
       deficiencia: [this.paciente.deficiencia, Validators.nullValidator]
     });
   }
 
-  nextPage() {
-    this.hasError = !this.validarCampos(this.paciente);
-    let emailPaciente = this.paciente.email;
-    if (!emailPaciente.includes("@")) {
-      this.paciente.email = `${this.paciente.email}${this.dominio}`;
-    }
+  converterToModel(form: FormGroup, model: Paciente) {
+    let namesForm = Object.keys(form.controls);
+    let namesPaciente = Object.keys(model);
 
+    namesPaciente.forEach(nameModel => {
+      namesForm.forEach(nameForm => {
+        if (nameForm === nameModel) {
+          model[nameForm] = form.get(nameForm).value
+        }
+      });
+    });
+  
+    return model;
+  }
+
+  nextPage() {
+    this.paciente = this.converterToModel(this.form, this.paciente);
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
+  
     if (this.paciente.pacienteId) {
       this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        localStorage.setItem("paciente", JSON.stringify(result));
         this.goForward(this.stepper);
       });
     } else {
       this.pacienteService.savePaciente(this.paciente).subscribe(result => {
-        this.paciente = result;
-        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        localStorage.setItem("paciente", JSON.stringify(result));
         if (result) {
           this.goForward(this.stepper);
         }
@@ -79,25 +86,6 @@ export class DadosPessoaisComponent implements OnInit, AfterViewInit {
 
   showError(field: string) {
     return this.form.get(field).invalid && !this.form.get(field).untouched;
-  }
-
-  validateEmail() {
-    if (this.form.get('email').value.includes("@")) {
-      this.disableDominio = true;
-    } else {
-      this.disableDominio = false;
-    }
-  }
-
-  validarCampos(paciente: Paciente): boolean {
-    if (this.paciente.nome == null) {
-      return false
-    }
-    return true;
-  }
-
-  ngAfterViewInit() {
-    this.totalStepsCount = this.stepper._steps.length;
   }
 
   goForward(stepper: MatStepper) {

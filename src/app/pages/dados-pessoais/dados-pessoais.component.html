@@ -20,8 +20,8 @@
                             <div class="form-row">
                                 <div class="col-lg-9 col-md-9 col-sm-9">
                                     <label for="email" class="col-sm-12 col-form-label">Email</label>
-                                    <input type="text" class="form-control is-invalid" formControlName="email" [ngClass]="{ 'is-invalid': showError('email') }" id="email" name="email" required minlength="7" placeholder="Email" (change)="validateEmail()" />
-                                    <mat-chip-list aria-label="Dominio">
+                                    <input type="text" class="form-control is-invalid" formControlName="email" [ngClass]="{ 'is-invalid': showError('email') }" id="email" name="email" required minlength="7" placeholder="Email" />
+                                    <mat-chip-list>
                                         <mat-chip color="accent" *ngFor="let dominio of dominios; let i = index" (click)="concatDominio(dominio)">{{dominio}}</mat-chip>
                                     </mat-chip-list>
                                 </div>
@@ -43,12 +43,12 @@
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <label for="orgExpedidor" class="col-sm-12 col-form-label">Orgão
                                         Expedidor</label>
-                                    <input type="text" class="form-control is-invalid" formControlName="orgaoExpedidor" [ngClass]="{ 'is-invalid': showError('orgaoExpedidor') }" id="orgaoExpedidor" name="orgaoExpedidor" required minlength="3" placeholder="SSP" />
+                                    <input type="text" class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required minlength="3" placeholder="SSP" />
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <label for="dtEmissaoFor" class="col-sm-12 col-form-label">Data de
                                         Emissão</label>
-                                    <input type="date" class="form-control is-invalid" formControlName="dtEmissao" [ngClass]="{ 'is-invalid': showError('dtEmissao') }" id="dtEmissao" name="dtEmissao" required minlength="10" placeholder="26/06/1994" />
+                                    <input type="date" class="form-control is-invalid" formControlName="emissaoRg" [ngClass]="{ 'is-invalid': showError('emissaoRg') }" id="emissaoRg" name="emissaoRg" required minlength="10" placeholder="26/06/1994" />
                                 </div>
                             </div>
                             <div class="form-row">
@@ -68,8 +68,8 @@
                         <!-- <div *ngIf="form.invalid">
                             Preencha os campos obrigatórios!
                         </div> -->
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <app-button class="btn btn-prosseguir" [disabled]="form.invalid"></app-button>
+                        <div class="row col-md-12 button">
+                            <app-button [disabled]="form.invalid"></app-button>
                         </div>
                     </div>
                 </form>
