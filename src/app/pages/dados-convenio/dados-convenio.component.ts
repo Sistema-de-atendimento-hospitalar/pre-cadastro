@@ -17,9 +17,9 @@ export class DadosConvenioComponent implements OnInit {
   private cartaoSaude: CartaoSaude;
   private convenio: boolean = null;
   formaPagamento: string;
-  // pagamento: string[] = ['Cartão de crédito', 'Pix', 'Dinheiro'];
+  pagamento: string[] = ['Cartão de crédito', 'Pix', 'Dinheiro'];
   hasConvenio: boolean = false
-  // hasPagamentoParticular: boolean = false
+  hasPagamentoParticular: boolean = false
   modoAcesso: boolean = null;
   codigoCartaoCovenio: number = null;
   codigoValidado: boolean = false;
@@ -83,14 +83,13 @@ export class DadosConvenioComponent implements OnInit {
         }
       );
     }
-  
+  }
 
-
-
-    // localStorage.setItem("paciente", JSON.stringify(this.paciente));
-    // this.pacienteService.updateCartaoSaude(this.cartaoSaude,this.paciente).subscribe(result => {
-    //   this.router.navigate(['/confirmacao-dados']);
-    // });
+  clearConvenio() {
+    this.cartaoSaude = null;
+    this.paciente.cartaoSaude = null;
+    this.hasConvenio = false;
+    this.convenio = null;
   }
 
   goForward(stepper: MatStepper) {

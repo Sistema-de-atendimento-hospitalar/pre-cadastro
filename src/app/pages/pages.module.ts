@@ -52,6 +52,8 @@ import { DadosTelefoneComponent } from './dados-telefone/dados-telefone.componen
 import { DadosConvenioComponent } from './dados-convenio/dados-convenio.component';
 import { DadosConfirmacaoComponent } from './dados-confirmacao/dados-confirmacao.component';
 import { ModalEnderecoComponent } from "../shared/modal/modal-endereco/modal-endereco.component"
+import { PagamentoParticularComponent } from './../shared/pagamento-particular/pagamento-particular.component';
+import { CodigoCartaoComponent } from './../shared/codigo-cartao/codigo-cartao.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
@@ -108,7 +110,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     DadosConvenioComponent,
     DadosConfirmacaoComponent,
     ButtonComponent,
-    StepComponent
+    StepComponent,
+    PagamentoParticularComponent,
+    CodigoCartaoComponent
   ],
   exports: [
     IndexComponent,

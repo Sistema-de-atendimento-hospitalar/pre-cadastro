@@ -8,8 +8,6 @@ export class LoadingService {
   loadingSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loadingMap: Map<string, boolean> = new Map<string, boolean>();
 
-  constructor() { }
-
   setLoading(loading: boolean, url: string): void {
     if (!url) {
       throw new Error('The request URL must be provided to the LoadingService.setLoading function');
