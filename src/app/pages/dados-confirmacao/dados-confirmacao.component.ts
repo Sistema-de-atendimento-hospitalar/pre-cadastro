@@ -11,7 +11,7 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class DadosConfirmacaoComponent implements OnInit {
 
-  private paciente: Paciente;
+  public paciente: Paciente;
   @Input() stepper: MatStepper;
 
   constructor(

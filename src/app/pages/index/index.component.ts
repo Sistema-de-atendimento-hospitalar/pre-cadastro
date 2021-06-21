@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   public hasError: Boolean = false;
   public showAnimation: Boolean = true;
-  private cpf: string;
+  public cpf: string;
   private paciente: Paciente;
 
   constructor(

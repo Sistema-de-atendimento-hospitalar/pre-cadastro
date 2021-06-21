@@ -6,16 +6,17 @@ import { Endereco } from 'src/models/endereco.model';
 import { Telefone } from 'src/models/telefone.model';
 import { CartaoSaude } from 'src/models/CartaoSaude.model';
 import { of } from 'rxjs';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacienteService {
-  private API_URL: string = "http://localhost:8080/v1/paciente";
-  private API_URL_V2: string = "http://localhost:8080/v2/paciente"
+  private API_URL: string;
 
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.API_URL = `${environment.apiUrl}/v1/paciente`;
+  }
 
   verifyPacienteFromCpf(cpf: string): Observable<Paciente> {
     return this.http.get<Paciente>(`${this.API_URL}/cpf/${cpf}`);

@@ -13,7 +13,7 @@ export class DadosPessoaisComponent implements OnInit {
   private paciente: Paciente;
   private dominio: string = null;
   private temDeficiencia: boolean = false;
-  private dominios: string[] = ['gmail.com', 'hotmail.com', 'outlook.com'];
+  public dominios: string[] = ['gmail.com', 'hotmail.com', 'outlook.com'];
 
   form: FormGroup;
 

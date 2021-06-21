@@ -15,7 +15,7 @@ export class DadosConvenioComponent implements OnInit {
 
   private paciente: Paciente;
   private cartaoSaude: CartaoSaude;
-  private convenio: boolean = null;
+  public convenio: boolean = null;
   formaPagamento: string;
   pagamento: string[] = ['Cartão de crédito', 'Pix', 'Dinheiro'];
   hasConvenio: boolean = false
