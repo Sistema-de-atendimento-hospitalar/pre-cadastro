@@ -12,8 +12,8 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   dataText = ["Olá, seja bem vindo!", "Informe seu CPF", "Obrigada!"];
 
-  public hasError: Boolean = false;
-  public showAnimation: Boolean = true;
+  public hasError = false;
+  public showAnimation = true;
   public cpf: string;
   private paciente: Paciente;
 
@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit, OnDestroy {
       }, 90);
     }
 
-    else if (typeof fnCallback == 'function') {
+    else if (typeof fnCallback === 'function') {
       setTimeout(fnCallback, 700);
     }
   }
@@ -45,7 +45,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     if (!this.showAnimation) {
       return false;
     }
-    if (typeof this.dataText[i] == 'undefined') {
+    if (typeof this.dataText[i] === 'undefined') {
       setTimeout(() => {
         this.startTextAnimation(0);
       }, 2000);
@@ -87,7 +87,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     }
   }
 
-  validarCpf(strCPF: String): Boolean {
+  validarCpf(strCPF: string): boolean {
     let soma: number = 0;
     let resto: number;
     let i: number;
@@ -101,15 +101,15 @@ export class IndexComponent implements OnInit, OnDestroy {
     for (i = 1; i <= 9; i++) soma = soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
     resto = (soma * 10) % 11;
 
-    if ((resto == 10) || (resto == 11)) resto = 0;
-    if (resto != parseInt(strCPF.substring(9, 10))) return false;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(strCPF.substring(9, 10))) return false;
 
     soma = 0;
     for (i = 1; i <= 10; i++) soma = soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
     resto = (soma * 10) % 11;
 
-    if ((resto == 10) || (resto == 11)) resto = 0;
-    if (resto != parseInt(strCPF.substring(10, 11))) return false;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(strCPF.substring(10, 11))) return false;
     return true;
   }
 

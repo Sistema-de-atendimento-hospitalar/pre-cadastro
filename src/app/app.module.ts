@@ -20,7 +20,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpRequestInterceptor } from './http-request-interceptor';
 import { HeaderComponent } from './shared/header/header.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

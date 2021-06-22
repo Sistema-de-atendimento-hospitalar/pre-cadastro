@@ -37,7 +37,7 @@ export class DadosTelefoneComponent implements OnInit {
   }
 
   loadTelefones(telefones: Telefone[]) {
-    if (telefones.length == 1) {
+    if (telefones.length === 1) {
       this.buildForm();
     } else {
       this.buildForm();
@@ -121,7 +121,7 @@ export class DadosTelefoneComponent implements OnInit {
   }
 
   openDialog(form: FormGroup) {
-    let config = new MatDialogConfig()
+    const config = new MatDialogConfig()
     config.data = {
       form: form,
       indice: this.telefones.length
@@ -137,7 +137,6 @@ export class DadosTelefoneComponent implements OnInit {
       if (!result.numDdd) {
         this._snackBar.open("Preencha os dados corretamente", "Alerta");
       } else {
-        console.log(result)
         this.telefones.push(result)
       }
     });

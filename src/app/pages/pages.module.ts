@@ -33,7 +33,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatListModule } from '@angular/material/list';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 
-
 import { FooterComponent } from '../shared/footer/footer.component';
 import { SquareComponent } from '../shared/square/square.component';
 import { SquarePreCadastroComponent } from '../shared/square/square-pre-cadastro/square-pre-cadastro.component'
@@ -60,7 +59,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   imports: [
     MatListModule,
     FormsModule,
-    ReactiveFormsModule,    //angular modules
+    ReactiveFormsModule, 
     MatInputModule,
     MatDialogModule,
     MatFormFieldModule,

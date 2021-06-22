@@ -5,6 +5,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
+        "build:prod": "ng build --configuration=production",
         "description": "SSM projeto de automação no processimento de atendimento médico",
         "test": "ng test",
         "lint": "ng lint",

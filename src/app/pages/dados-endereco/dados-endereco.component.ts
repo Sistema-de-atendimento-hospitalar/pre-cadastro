@@ -38,7 +38,7 @@ export class DadosEnderecoComponent implements OnInit {
   }
 
   loadEnderecos(enderecos: Endereco[]) {
-    if (enderecos.length == 1) {
+    if (enderecos.length === 1) {
       this.buildForm();
     } else {
       this.buildForm();
@@ -132,7 +132,7 @@ export class DadosEnderecoComponent implements OnInit {
 
   openDialog(form: FormGroup) {
 
-    let config = new MatDialogConfig()
+    const config = new MatDialogConfig()
     config.data = {
       form: form,
       indice: this.enderecos.length

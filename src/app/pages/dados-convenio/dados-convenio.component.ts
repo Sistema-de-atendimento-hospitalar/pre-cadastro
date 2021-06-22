@@ -18,11 +18,11 @@ export class DadosConvenioComponent implements OnInit {
   public convenio: boolean = null;
   formaPagamento: string;
   pagamento: string[] = ['Cartão de crédito', 'Pix', 'Dinheiro'];
-  hasConvenio: boolean = false
-  hasPagamentoParticular: boolean = false
+  hasConvenio = false
+  hasPagamentoParticular = false
   modoAcesso: boolean = null;
   codigoCartaoCovenio: number = null;
-  codigoValidado: boolean = false;
+  codigoValidado = false;
   form: FormGroup;
   @Input() stepper: MatStepper;
 
@@ -33,7 +33,7 @@ export class DadosConvenioComponent implements OnInit {
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
     if (this.paciente.cartaoSaude) {
-      this.cartaoSaude = this.paciente.cartaoSaude 
+      this.cartaoSaude = this.paciente.cartaoSaude;
       this.hasConvenio = true;
     } else {
       this.cartaoSaude = new CartaoSaude();
