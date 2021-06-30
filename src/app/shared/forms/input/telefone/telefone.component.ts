@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { TipoTelefoneService } from 'src/app/service/generico/tipo-telefone.service';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { ModalGenericComponent } from 'src/app/shared/modal/modal-generic/modal-generic.component';
 import { Paciente } from 'src/models/paciente.model';
 import { Telefone } from 'src/models/telefone.model';
 import { TipoTelefone } from 'src/models/tipoTelefone.model';
@@ -20,6 +22,7 @@ export class TelefoneComponent implements OnInit {
   @Input() form: FormGroup;
   private paciente: Paciente;
   tiposTelefone: TipoTelefone[];
+  dialog: any;
 
   constructor(private tipoTelefoneService: TipoTelefoneService,
               private pacienteService: PacienteService) { }
@@ -38,15 +41,23 @@ export class TelefoneComponent implements OnInit {
     return `${field}-${indice}`;
   }
 
+  openDialog(titledialogo:string, dialogo:string) {
+    const config = new MatDialogConfig()
+    config.data = {title:titledialogo, content:dialogo}
+    config.height = '20%'
+    config.width = '30%'
+    this.dialog.open(ModalGenericComponent, config);
+  }
+
   deleteTelefone(telefone: Telefone) {
     if (this.telefones.length == 1) {
-      alert('Não pode remover o único contato\nSe preferir pode alterar os dados!')
+      this.openDialog('Erro', 'Não pode remover o único contato, se preferir pode alterar os dados!')
       return false;
     }
 
     if(telefone.telefoneId) {
       this.pacienteService.deleteTelefone(telefone, this.paciente).subscribe(result => {
-        alert('Exclusão efetuada com sucesso!')
+        this.openDialog('Sucesso', 'Exclusão efetuada com sucesso!')
       });
     }
 

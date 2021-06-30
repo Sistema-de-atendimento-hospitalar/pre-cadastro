@@ -36,15 +36,24 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
                                     <label for="rg" class="col-sm-12 col-form-label">Rg</label>
                                     <input type="text" class="form-control is-invalid" formControlName="rg" [ngClass]="{ 'is-invalid': showError('rg') }" id="rg" name="rg" required placeholder="00.000.000-00" mask="00.000.000-00" />
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="col-lg-2 col-md-2 col-sm-2">
                                     <label for="orgExpedidor" class="col-sm-12 col-form-label">Orgão
                                         Expedidor</label>
-                                    <input type="text" class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required minlength="3" placeholder="SSP" />
+                                        <mat-select class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required>
+                                            <mat-option value="SSP">SSP</mat-option>
+                                            <mat-option value="CC">Cartório Civil</mat-option>
+                                            <mat-option value="DPF">Polícia Federal - DPF</mat-option> 
+                                        </mat-select>
+                                    <!-- <input type="text" class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required minlength="3" placeholder="SSP" /> -->
                                 </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                     <input-estado [estado]="estado" [indice]="0" [form]="form"></input-estado>
+                                </div>
+
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <label for="dtEmissaoFor" class="col-sm-12 col-form-label">Data de
                                         Emissão</label>

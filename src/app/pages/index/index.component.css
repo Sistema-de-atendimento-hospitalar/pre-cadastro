@@ -6,6 +6,7 @@ h1 {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+
 .vertical-center {
     display: flex;
     align-items: center;
@@ -17,6 +18,29 @@ img {
     height: 80%;
 }
 
+@media only screen and (max-width: 420px) and (min-width:300px) {
+
+    .img{
+        height: 30vh !important;
+    }
+
+    input {
+        margin: 15px;
+        width: 90vw  !important;
+    }
+
+}
+
+/* @media only screen and (max-width: 800px) and (min-width:600px) {
+    .img{
+        height: 30vh !important;
+    }
+
+    input {
+        margin: 15px;
+        width: 90vw  !important;
+    }} */
+    
 .img,
 .tela {
     display: flex;

@@ -5,6 +5,8 @@ import { Endereco } from 'src/models/endereco.model';
 import { PacienteService } from 'src/app/service/paciente/paciente.service';
 import { Paciente } from 'src/models/paciente.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalGenericComponent } from 'src/app/shared/modal/modal-generic/modal-generic.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'form-endereco',
@@ -24,7 +26,8 @@ export class EnderecoComponent implements OnInit {
 
   constructor(
     private cepService: CepService,
-    private pacienteService: PacienteService) { }
+    private pacienteService: PacienteService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.enderecoCorreios = new EnderecoCorreios();
@@ -53,7 +56,7 @@ export class EnderecoComponent implements OnInit {
       this.cepService.searchCep(cepRequest).subscribe(result => {
 
         if (result && !result.cep) {
-          alert('Cep não encontrado!')
+          this.openDialog('Erro', 'Cep não encontrado!')
         }
 
         this.enderecoCorreios = result
@@ -62,15 +65,23 @@ export class EnderecoComponent implements OnInit {
     }
   }
 
+  openDialog(titledialogo:string, dialogo:string) {
+    const config = new MatDialogConfig()
+    config.data = {title:titledialogo, content:dialogo}
+    config.height = '20%'
+    config.width = '30%'
+    this.dialog.open(ModalGenericComponent, config);
+  }
+
   deleteEndereco(endereco: Endereco) {
     if (this.enderecos.length == 1) {
-      alert('Não pode remover o único endereço\nSe preferir pode alterar os dados!')
+      this.openDialog('Erro', 'Não pode remover o único endereço, se preferir pode alterar os dados!')
       return false;
     }
 
     if (endereco.enderecoId) {
       this.pacienteService.deleteEndereco(endereco, this.paciente).subscribe(result => {
-        alert('Exclusão efetuada com sucesso!')
+        this.openDialog('Sucesso', 'Exclusão efetuada com sucesso!')
       });
     }
 

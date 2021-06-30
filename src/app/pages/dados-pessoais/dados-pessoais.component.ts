@@ -14,6 +14,7 @@ export class DadosPessoaisComponent implements OnInit {
   private dominio: string = null;
   private temDeficiencia: boolean = false;
   public dominios: string[] = ['gmail.com', 'hotmail.com', 'outlook.com'];
+  public estado: string = null;
 
   form: FormGroup;
 
@@ -38,10 +39,13 @@ export class DadosPessoaisComponent implements OnInit {
       sexo: [this.paciente.sexo, Validators.required],
       rg: [this.paciente.rg, Validators.required],
       orgExpedidorRg: [this.paciente.orgExpedidorRg, Validators.required],
+      estado:[this.paciente.estadoExpedidor,Validators.required],
       emissaoRg: [this.paciente.emissaoRg, Validators.required],
       temDeficiencia: [!!this.paciente.deficiencia, Validators.nullValidator],
       deficiencia: [this.paciente.deficiencia, Validators.nullValidator]
     });
+
+    this.estado = this.paciente.estadoExpedidor;
   }
 
   converterToModel(form: FormGroup, model: Paciente) {

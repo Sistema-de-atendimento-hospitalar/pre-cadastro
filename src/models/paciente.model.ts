@@ -9,6 +9,7 @@ export class Paciente {
     public email: string = null;
     public rg: string = null;
     public orgExpedidorRg: string = null;
+    public estadoExpedidor: string = null;
     public emissaoRg: Date = null;
     public dtNascimento: Date = null;
     public sexo: string = null;

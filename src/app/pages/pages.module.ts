@@ -33,6 +33,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatListModule } from '@angular/material/list';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 
+
 import { FooterComponent } from '../shared/footer/footer.component';
 import { SquareComponent } from '../shared/square/square.component';
 import { SquarePreCadastroComponent } from '../shared/square/square-pre-cadastro/square-pre-cadastro.component'
@@ -53,6 +54,8 @@ import { DadosConfirmacaoComponent } from './dados-confirmacao/dados-confirmacao
 import { ModalEnderecoComponent } from "../shared/modal/modal-endereco/modal-endereco.component"
 import { PagamentoParticularComponent } from './../shared/pagamento-particular/pagamento-particular.component';
 import { CodigoCartaoComponent } from './../shared/codigo-cartao/codigo-cartao.component';
+import { ModalGenericComponent } from './../shared/modal/modal-generic/modal-generic.component';
+
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
@@ -111,7 +114,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     ButtonComponent,
     StepComponent,
     PagamentoParticularComponent,
-    CodigoCartaoComponent
+    CodigoCartaoComponent,
+    ModalGenericComponent
   ],
   exports: [
     IndexComponent,
