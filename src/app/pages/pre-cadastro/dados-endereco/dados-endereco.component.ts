@@ -3,10 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
-import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
 import { ModalEnderecoComponent } from 'src/app/shared/modal/modal-endereco/modal-endereco.component';
-import { Endereco } from 'src/models/endereco.model';
-import { Paciente } from 'src/models/paciente.model';
+import { Endereco } from 'src/models/pre-cadastro/endereco.model';
+import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 @Component({
   selector: 'app-dados-endereco',
   templateUrl: './dados-endereco.component.html',

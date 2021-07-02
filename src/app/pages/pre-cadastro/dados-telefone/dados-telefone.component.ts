@@ -3,10 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
-import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
 import { ModalTelefoneComponent } from 'src/app/shared/modal/modal-telefone/modal-telefone.component';
-import { Paciente } from 'src/models/paciente.model';
-import { Telefone } from 'src/models/telefone.model';
+import { Paciente } from 'src/models/pre-cadastro/paciente.model';
+import { Telefone } from 'src/models/pre-cadastro/telefone.model';
 
 @Component({
   selector: 'app-dados-telefone',

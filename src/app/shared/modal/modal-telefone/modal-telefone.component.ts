@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DadosTelefoneComponent } from 'src/app/pages/dados-telefone/dados-telefone.component';
-import { Telefone } from 'src/models/telefone.model';
+import { DadosTelefoneComponent } from 'src/app/pages/pre-cadastro/dados-telefone/dados-telefone.component';
+import { Telefone } from 'src/models/pre-cadastro/telefone.model';
 
 @Component({
   selector: 'app-modal-telefone',

@@ -15,7 +15,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { PagesModule } from './pages/pages.module';
+import { PagesModule } from './pages/pre-cadastro/pre-cadastro.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpRequestInterceptor } from './http-request-interceptor';
 import { HeaderComponent } from './shared/header/header.component';

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { TipoTelefone } from 'src/models/tipoTelefone.model';
+import { TipoTelefone } from 'src/models/pre-cadastro/tipoTelefone.model';
 import { environment } from './../../../environments/environment';
 
 @Injectable({

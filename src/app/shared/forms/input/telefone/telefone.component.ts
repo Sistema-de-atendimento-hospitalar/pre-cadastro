@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { TipoTelefoneService } from 'src/app/service/generico/tipo-telefone.service';
-import { PacienteService } from 'src/app/service/paciente/paciente.service';
+import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
 import { ModalGenericComponent } from 'src/app/shared/modal/modal-generic/modal-generic.component';
-import { Paciente } from 'src/models/paciente.model';
-import { Telefone } from 'src/models/telefone.model';
-import { TipoTelefone } from 'src/models/tipoTelefone.model';
+import { Paciente } from 'src/models/pre-cadastro/paciente.model';
+import { Telefone } from 'src/models/pre-cadastro/telefone.model';
+import { TipoTelefone } from 'src/models/pre-cadastro/tipoTelefone.model';
 
 @Component({
   selector: 'form-telefone',

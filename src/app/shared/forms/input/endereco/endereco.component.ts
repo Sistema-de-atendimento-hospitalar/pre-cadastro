@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CepService } from '../../../../service/cep/cep.service';
 import { EnderecoCorreios } from '../../../../../models/enderecoCorreios.model';
-import { Endereco } from 'src/models/endereco.model';
-import { PacienteService } from 'src/app/service/paciente/paciente.service';
-import { Paciente } from 'src/models/paciente.model';
+import { Endereco } from 'src/models/pre-cadastro/endereco.model';
+import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
+import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalGenericComponent } from 'src/app/shared/modal/modal-generic/modal-generic.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';

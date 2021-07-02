@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
-import { PacienteService } from 'src/app/service/paciente/paciente.service';
-import { CartaoSaude } from 'src/models/CartaoSaude.model';
-import { Paciente } from 'src/models/paciente.model';
+import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
+import { CartaoSaude } from 'src/models/pre-cadastro/CartaoSaude.model';
+import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 
 @Component({
   selector: 'app-dados-convenio',

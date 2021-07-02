@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Paciente } from '../../../models/paciente.model'
-import { Endereco } from 'src/models/endereco.model';
-import { Telefone } from 'src/models/telefone.model';
-import { CartaoSaude } from 'src/models/CartaoSaude.model';
+import { Paciente } from '../../../../models/pre-cadastro/paciente.model'
+import { Endereco } from 'src/models/pre-cadastro/endereco.model';
+import { Telefone } from 'src/models/pre-cadastro/telefone.model';
+import { CartaoSaude } from 'src/models/pre-cadastro/CartaoSaude.model';
 import { of } from 'rxjs';
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

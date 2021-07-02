@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from '@angular/router';
-import { PacienteService } from '../../service/paciente/paciente.service';
-import { Paciente } from "src/models/paciente.model";
+import { PacienteService } from '../../../service/pre-cadastro/paciente/paciente.service';
+import { Paciente } from "src/models/pre-cadastro/paciente.model";
 import { LoadingService } from "src/app/service/loading/loading.service";
 @Component({
   selector: "app-index",

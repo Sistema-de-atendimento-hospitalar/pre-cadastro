@@ -3,13 +3,13 @@ import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
-import { IndexComponent } from "./pages/index/index.component";
-import { DadosPessoaisComponent } from "./pages/dados-pessoais/dados-pessoais.component";
-import { DadosEnderecoComponent } from "./pages/dados-endereco/dados-endereco.component";
-import { DadosConvenioComponent } from "./pages/dados-convenio/dados-convenio.component";
-import { DadosTelefoneComponent } from "./pages/dados-telefone/dados-telefone.component";
-import { DadosConfirmacaoComponent } from "./pages/dados-confirmacao/dados-confirmacao.component";
-import { StepComponent } from "./pages/step/step.component";
+import { IndexComponent } from "./pages/pre-cadastro/index/index.component";
+import { DadosPessoaisComponent } from "./pages/pre-cadastro/dados-pessoais/dados-pessoais.component";
+import { DadosEnderecoComponent } from "./pages/pre-cadastro/dados-endereco/dados-endereco.component";
+import { DadosConvenioComponent } from "./pages/pre-cadastro/dados-convenio/dados-convenio.component";
+import { DadosTelefoneComponent } from "./pages/pre-cadastro/dados-telefone/dados-telefone.component";
+import { DadosConfirmacaoComponent } from "./pages/pre-cadastro/dados-confirmacao/dados-confirmacao.component";
+import { StepComponent } from "./pages/pre-cadastro/step/step.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },

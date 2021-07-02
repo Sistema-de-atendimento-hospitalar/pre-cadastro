@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Paciente } from 'src/models/paciente.model';
-import { PacienteService } from 'src/app/service/paciente/paciente.service'
+import { Paciente } from 'src/models/pre-cadastro/paciente.model';
+import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service'
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 
