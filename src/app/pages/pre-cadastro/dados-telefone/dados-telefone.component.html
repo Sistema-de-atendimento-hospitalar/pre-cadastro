@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div class="page-header header-filter">
+        <div class="container">
+            <div class="content-center">
+                <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="nextPage()">
+                    <div id="divContent">
+                        <div *ngFor="let telefone of telefones; let i = index">
+                            <h2>Telefone {{(i+1)}}</h2>
+                            <form-telefone [telefone]="telefone" [showDeleteOption]="true" [telefones]="telefones" [indice]="i" [form]="form"></form-telefone>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 plusDiv">
+                            <button mat-mini-fab color="primary" aria-label="Botão Adicionar" class="plus" type="button">
+                                <mat-icon (click)="openDialog(form)">add</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 button">
+                        <app-button [disabled]="form.invalid"></app-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

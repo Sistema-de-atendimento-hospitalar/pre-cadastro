@@ -1,0 +1,66 @@
+.square {
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, .12);
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 2%;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px;
+    border-radius: inherit;
+    font-size: 1.70em;
+    color: rgb(109, 214, 218);
+    margin-bottom: 2%;
+}
+
+div {
+    color: rgb(97, 100, 107);
+    font-size: 21px;
+    margin-top: 1%;
+    font-weight: 300;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+}
+
+.mat-button,
+.mat-fab {
+    background-color: rgb(109, 214, 218);
+    color: #fff;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top-style: solid;
+    border-top-width: 1px;
+    flex-direction: row;
+    padding: 16px 8px 16px 24px;
+    box-sizing: border-box;
+    border-top-color: rgba(0, 0, 0, .12);
+}
+
+mat-label {
+    font-weight: 500;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text {
+    font-size: 2em;
+    color: rgb(3, 152, 158);
+    padding: 4%;
+    text-align: center;
+}

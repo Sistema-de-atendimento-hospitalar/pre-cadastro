@@ -1,18 +1,28 @@
-<div class="form-row">
-    <div class="col-lg-2 col-md-2 col-sm-2">
+<div class="form-row" [formGroup]="form">
+    <div class="col-lg-1 col-md-1 col-sm-1">
         <label for="ddd" class="col-sm-12 col-form-label">DDD</label>
-        <input type="text" [(ngModel)]="telefone.numDdd" class="form-control" id="ddd" name="ddd" mask="00" required minlength="2" placeholder="DDD" />
+        <input type="text" class="form-control" id="ddd" mask="00" [formControlName]="converteToControlName('numDdd', indice)" name="{{converteToControlName('numDdd', indice)}}" [ngClass]="{'is-invalid': showError('numDdd', indice)}" required minlength="2" placeholder="DDD"
+        />
+        <mat-error *ngIf="hasError('numDdd', indice)">{{getError('numDdd', indice)}}</mat-error>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6">
         <label for="telefone" class="col-sm-12 col-form-label">Telefone</label>
-        <input type="text" [(ngModel)]="telefone.numTelefone" class="form-control" id="telefone" name="telefone" mask="0000-00009" required minlength="8" placeholder="Telefone" />
+        <input type="text" class="form-control" id="telefone" [formControlName]="converteToControlName('numTelefone', indice)" name="{{converteToControlName('numTelefone', indice)}}" [ngClass]="{'is-invalid': showError('numTelefone', indice)}" mask="0000-00009"
+            required minlength="8" placeholder="Telefone" />
+            <mat-error *ngIf="hasError('numTelefone', indice)">{{getError('numTelefone', indice)}}</mat-error>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4">
         <label for="tpTelefone" class="col-sm-12 col-form-label">Tipo de Telefone</label>
-        <mat-select class="form-control" [(ngModel)]="telefone.tipoTelefone">
-            <mat-option *ngFor="let tipoTelefone of tiposTelefone" [value]="tipoTelefone">
+        <mat-select class="form-control" [formControlName]="converteToControlName('tipoTelefone', indice)" [ngClass]="{'is-invalid': showError('tipoTelefone', indice)}">
+            <mat-option *ngFor="let tipoTelefone of tiposTelefone" [value]="tipoTelefone.descTipoTelefone">
                 {{tipoTelefone.descTipoTelefone}}
             </mat-option>
         </mat-select>
+        <mat-error *ngIf="hasError('tipoTelefone', indice)">{{getError('tipoTelefone', indice)}}</mat-error>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1" *ngIf="showDeleteOption">
+        <button mat-mini-fab aria-label="Botão Deletar" type="button" (click)="deleteTelefone(telefone)">
+            <mat-icon>delete</mat-icon>
+        </button>
     </div>
 </div>

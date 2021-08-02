@@ -1,0 +1,32 @@
+<div class="row linha">
+    <div class="col-lg-12 col-md-12 col-sm-12 tela">
+        <div class="container">
+            <div class="content">
+                <h2 class="row vertical-center">Valide que esta é a sua conta</h2>
+                <span>Selecione uma opção abaixo:</span><br>
+                <div class="button-email">
+                    <button mat-button color="primary" (click)="createToken(emailHash)">{{emailHash}}</button>
+                </div>
+                
+
+                <form [formGroup]="form" class="vertical-center" (ngSubmit)="validToken()">
+                    <div class="form-row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 token-align">
+                            <label for="sexo" class="col-sm-12 col-form-label">Token</label>
+                            <input type="text" matInput class="form-control" [ngClass]="{'is-invalid': showError('token')}"
+                                id="token" name="token" formControlName="token" mask="000000" required minlength="6"
+                                maxlength="6" placeholder="000000"/>
+                        </div>
+                        <mat-error *ngIf="hasError('token')">{{getError('token')}}</mat-error>
+
+                        <div class="row col-lg-12 col-md-12 col-sm-12 button">
+                            <app-button></app-button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

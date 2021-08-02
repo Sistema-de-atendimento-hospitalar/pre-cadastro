@@ -31,9 +31,10 @@
                 ]
             }
         ],
-        "no-consecutive-blank-lines": false,
+        "no-consecutive-blank-lines": true,
         "no-console": [
             true,
+            "log",
             "debug",
             "info",
             "time",
@@ -49,7 +50,7 @@
         "no-redundant-jsdoc": true,
         "no-switch-case-fall-through": true,
         "no-use-before-declare": true,
-        "no-var-requires": false,
+        "no-var-requires": true,
         "object-literal-key-quotes": [
             true,
             "as-needed"
@@ -57,10 +58,10 @@
         "object-literal-sort-keys": false,
         "ordered-imports": false,
         "quotemark": [
-            true,
+            false,
             "single"
         ],
-        "trailing-comma": false,
+        "trailing-comma": true,
         "no-output-on-prefix": true,
         "use-input-property-decorator": true,
         "use-output-property-decorator": true,

@@ -22,4 +22,13 @@ describe('InputEstadoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should create name to field form default', () => {
+  //   expect(component.converteToControlName('cep', 0)).toEqual("cep");
+  // });
+
+  // it('should create name to field form', () => {
+  //   expect(component.converteToControlName('cep', 1)).toEqual("cep-1");
+  // });
+
 });

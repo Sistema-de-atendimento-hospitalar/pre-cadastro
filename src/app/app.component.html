@@ -1,1 +1,6 @@
+<div *ngIf="loading" class="loading-container flex-content-center">
+    <mat-progress-spinner color="accent" mode="indeterminate">
+    </mat-progress-spinner>
+</div>
+<app-header></app-header>
 <router-outlet></router-outlet>

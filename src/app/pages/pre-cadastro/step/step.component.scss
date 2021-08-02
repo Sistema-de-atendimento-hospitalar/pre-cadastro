@@ -1,0 +1,27 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+    background-color: rgb(238, 246, 248)
+}
+
+.mat-form-field {
+    margin-top: 16px;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: rgb(109, 214, 218);
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: rgb(109, 214, 218);
+}
+
+@media only screen and (max-width: 420px) and (min-width:300px) {
+    mat-step-text-label .ng-star-inserted{
+
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+
+
+}

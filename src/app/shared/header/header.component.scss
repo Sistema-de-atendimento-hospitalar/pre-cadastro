@@ -5,10 +5,10 @@ nav {
 }
 
 .navbar-brand {
-    color: #fff;
+    color: #fff !important;
 }
 
-.navbar-brand:focus {
+.navbar-brand:hover {
     color: rgb(109, 214, 218) !important;
 }
 

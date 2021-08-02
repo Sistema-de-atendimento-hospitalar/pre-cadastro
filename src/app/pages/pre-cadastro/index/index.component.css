@@ -1,0 +1,82 @@
+h1 {
+    font-size: 2.5em;
+    margin-top: 20%;
+    color: rgb(3, 152, 158);
+    font-weight: 300;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 80%;
+    height: 80%;
+}
+
+@media only screen and (max-width: 420px) and (min-width:300px) {
+
+    .img{
+        height: 30vh !important;
+    }
+
+    input {
+        margin: 15px;
+        width: 90vw  !important;
+    }
+
+}
+
+/* @media only screen and (max-width: 800px) and (min-width:600px) {
+    .img{
+        height: 30vh !important;
+    }
+
+    input {
+        margin: 15px;
+        width: 90vw  !important;
+    }} */
+    
+.img,
+.tela {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100vh;
+}
+
+.linha {
+    margin: 0px !important;
+}
+
+.container {
+    margin-top: 10%;
+}
+
+.img {
+    align-items: center;
+    background-color: #6DD6DA;
+}
+
+input {
+    width: 35vw;
+    background-color: transparent;
+    color: rgb(97, 100, 107);
+}
+
+.alert-error {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 1em;
+    color: #dc3545;
+}
+
+@media screen and (min-width: 300px) and (max-width: 700px) {
+    .content-center {
+        padding: 0 0 !important;
+    }
+}

@@ -1,8 +1,10 @@
-<h2 mat-dialog-title>Telefone</h2>
-<mat-dialog-content>
-    <form-telefone [telefone]="telefone"></form-telefone>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Fechar</button>
-    <button mat-button [mat-dialog-close]="telefone" cdkFocusInitial>Salvar</button>
-</mat-dialog-actions>
+<div [formGroup]="form">
+    <h2 mat-dialog-title>Telefone</h2>
+    <mat-dialog-content>
+        <form-telefone [telefone]="telefone" [showDeleteOption]="false" [indice]="indice" [form]="form"></form-telefone>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Fechar</button>
+        <button mat-button (click)="save()" cdkFocusInitial [disabled]="form.invalid">Salvar</button>
+    </mat-dialog-actions>
+</div>
