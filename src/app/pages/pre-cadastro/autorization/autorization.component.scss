@@ -11,12 +11,27 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-img {
-    width: 80%;
-    height: 80%;
 }
 
+.button-email{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+button{
+    background-color:  rgb(109, 214, 218);
+    color: #ffff !important;
+    font-weight: 300;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 @media only screen and (max-width: 420px) and (min-width:300px) {
 
     .img{

@@ -51,6 +51,8 @@ import { DadosEnderecoComponent } from './dados-endereco/dados-endereco.componen
 import { DadosTelefoneComponent } from './dados-telefone/dados-telefone.component';
 import { DadosConvenioComponent } from './dados-convenio/dados-convenio.component';
 import { DadosConfirmacaoComponent } from './dados-confirmacao/dados-confirmacao.component';
+import { AutorizationComponent } from './autorization/autorization.component';
+
 import { ModalEnderecoComponent } from "../../shared/modal/modal-endereco/modal-endereco.component"
 import { CodigoCartaoComponent } from '../../shared/codigo-cartao/codigo-cartao.component';
 import { ModalGenericComponent } from '../../shared/modal/modal-generic/modal-generic.component';
@@ -113,7 +115,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     ButtonComponent,
     StepComponent,
     CodigoCartaoComponent,
-    ModalGenericComponent
+    ModalGenericComponent,
+    AutorizationComponent
   ],
   exports: [
     IndexComponent,

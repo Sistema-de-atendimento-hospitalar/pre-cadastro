@@ -61,25 +61,30 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label for="convenio" class="col-sm-12 col-form-label">Convênio</label>
                                     <input formControlName="convenio" type="text" [ngClass]="{'is-invalid': showError('convenio')}" class="form-control is-invalid" id="convenio" name="convenio" required placeholder="Convênio" />
+                                    <mat-error *ngIf="hasError('convenio')">{{getError('convenio')}}</mat-error>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label for="rede" class="col-sm-12 col-form-label">Rede</label>
                                     <input formControlName="rede" type="text" [ngClass]="{'is-invalid': showError('rede')}" class="form-control is-invalid" id="rede" name="rede" required placeholder="Rede" />
+                                    <mat-error *ngIf="hasError('rede')">{{getError('rede')}}</mat-error>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                     <label for="validade" class="col-sm-12 col-form-label">Validade</label>
-                                    <input formControlName="validade" type="date" [ngClass]="{'is-invalid': showError('validade')}" class="form-control is-invalid" id="validade" name="validade" required placeholder="Validade" />
+                                    <input formControlName="dtValidade" type="date" [ngClass]="{'is-invalid': showError('dtValidade')}" class="form-control is-invalid" id="dtValidade" name="dtValidade" required placeholder="Validade" />
+                                    <mat-error *ngIf="hasError('dtValidade')">{{getError('dtValidade')}}</mat-error>
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-6">
                                     <label for="tipoContrato" class="col-sm-12 col-form-label">Tipo de Contrato</label>
                                     <input formControlName="tipoContrato" type="text" [ngClass]="{'is-invalid': showError('tipoContrato')}" class="form-control is-invalid" id="tipoContrato" name="tipoContrato" required placeholder="Tipo contrato" />
+                                    <mat-error *ngIf="hasError('tipoContrato')">{{getError('tipoContrato')}}</mat-error>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                     <label for="numeroCarteira" class="col-sm-12 col-form-label">Número de
                                         carteira</label>
                                     <input formControlName="numeroCarteira" type="number" mask="0000000000" [ngClass]="{'is-invalid': showError('numeroCarteira')}" class="form-control is-invalid" id="numeroCarteira" name="numeroCarteira" required placeholder="N° da carteira" />
+                                    <mat-error *ngIf="hasError('numeroCarteira')">{{getError('numeroCarteira')}}</mat-error>
                                 </div>
                             </div>
                         </div>

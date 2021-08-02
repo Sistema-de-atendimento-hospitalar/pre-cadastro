@@ -17,9 +17,12 @@ export class PacienteService {
   constructor(private http: HttpClient) { 
     this.API_URL = `${environment.apiUrl}/v1/paciente`;
   }
-
-  verifyPacienteFromCpf(cpf: string): Observable<Paciente> {
+  getPacienteFromCpf(cpf: string): Observable<Paciente> {
     return this.http.get<Paciente>(`${this.API_URL}/cpf/${cpf}`);
+  }
+
+  verifyPacienteFromCpf(cpf: string): Observable<any> {
+    return this.http.get<Paciente>(`${this.API_URL}/cpf/${cpf}/verify`);
   }
 
   getPacienteFromLocalStore(): Paciente {
@@ -85,7 +88,7 @@ export class PacienteService {
     cartaoSaude.numeroCarteira = this.getRndInteger(1000, 100000); 
     cartaoSaude.rede = "Nacional"
     cartaoSaude.tipoContrato = "Empresarial"
-    cartaoSaude.validade = new Date();
+    cartaoSaude.dtValidade = new Date();
 
     return of(cartaoSaude);
   }

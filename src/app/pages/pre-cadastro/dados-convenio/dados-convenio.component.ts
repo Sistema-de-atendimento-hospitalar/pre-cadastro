@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
+import { GenericComponent } from 'src/app/shared/generic.component';
 import { CartaoSaude } from 'src/models/pre-cadastro/CartaoSaude.model';
 import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 
@@ -11,7 +12,7 @@ import { Paciente } from 'src/models/pre-cadastro/paciente.model';
   templateUrl: './dados-convenio.component.html',
   styleUrls: ['./dados-convenio.component.scss']
 })
-export class DadosConvenioComponent implements OnInit {
+export class DadosConvenioComponent extends GenericComponent implements OnInit {
 
   private paciente: Paciente;
   private cartaoSaude: CartaoSaude;
@@ -23,12 +24,13 @@ export class DadosConvenioComponent implements OnInit {
   modoAcesso: boolean = null;
   codigoCartaoCovenio: number = null;
   codigoValidado = false;
-  form: FormGroup;
   @Input() stepper: MatStepper;
 
   constructor(private router: Router,
-     private pacienteService: PacienteService,
-     private _formBuilder: FormBuilder) { }
+    private pacienteService: PacienteService,
+    private _formBuilder: FormBuilder) {
+    super()
+  }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
@@ -44,7 +46,9 @@ export class DadosConvenioComponent implements OnInit {
     this.form = this._formBuilder.group({
       convenio: [this.cartaoSaude.convenio, Validators.required],
       rede: [this.cartaoSaude.rede, Validators.required],
-      validade: [this.cartaoSaude.validade, Validators.required],
+      dtValidade: [this.cartaoSaude.dtValidade, Validators.compose([
+        Validators.required, Validators.pattern(/^([1-2]{1})([0-9]{3})\-([0-9]{2})\-([0-9]{2})/)
+      ])],
       tipoContrato: [this.cartaoSaude.tipoContrato, Validators.required],
       numeroCarteira: [this.cartaoSaude.numeroCarteira, Validators.required]
     });
@@ -61,7 +65,7 @@ export class DadosConvenioComponent implements OnInit {
         }
       });
     });
-  
+
     return model;
   }
 
@@ -74,7 +78,7 @@ export class DadosConvenioComponent implements OnInit {
         localStorage.setItem("paciente", JSON.stringify(this.paciente));
         this.goForward(this.stepper);
       });
-    } else{
+    } else {
       this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(
         result => {
           if (result) {
@@ -92,19 +96,11 @@ export class DadosConvenioComponent implements OnInit {
     this.convenio = null;
   }
 
-  goForward(stepper: MatStepper) {
-    stepper.next();
-  }
-
   validarCodigoAcesso(codigoConvenio: number) {
     this.pacienteService.validateCodigoConvenio(codigoConvenio).subscribe(result => {
       this.cartaoSaude = result;
       this.codigoValidado = true;
     })
-  }
-
-  showError(field: string) {
-    return this.form.get(field).invalid && !this.form.get(field).untouched;
   }
 
 }

@@ -69,7 +69,15 @@ export class IndexComponent implements OnInit, OnDestroy {
     if (this.validarCpf(this.paciente.cpf)) {
       this.pacienteService.verifyPacienteFromCpf(this.paciente.cpf)
         .subscribe(result => {
+
           localStorage.setItem("paciente", JSON.stringify(this.paciente));
+          
+          if (result) {
+            localStorage.setItem("verifyEmailToken", result.email);
+            this.router.navigate(['/verify']);
+            return false;
+          }
+
           this.paciente = result;
           if (result) {
             localStorage.setItem("paciente", JSON.stringify(this.paciente));

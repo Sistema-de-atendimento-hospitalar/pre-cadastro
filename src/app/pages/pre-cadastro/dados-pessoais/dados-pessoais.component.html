@@ -9,18 +9,21 @@
                             <div class="form-row">
                                 <div class="col-lg-9 col-md-9 col-sm-9">
                                     <label for="nome" class="col-sm-12 col-form-label">Nome</label>
-                                    <input type="text" matInput class="form-control is-invalid" formControlName="nome" [ngClass]="{'is-invalid': showError('nome')}" id="nome" name="nome" required minlength="3" placeholder="Nome" />
+                                    <input type="text" matInput class="form-control is-invalid" formControlName="nome" [ngClass]="{'is-invalid': showError('nome')}" id="nome" name="nome" required minlength="3" maxlength="50" placeholder="Nome" />
+                                    <mat-error *ngIf="hasError('nome')">{{getError('nome')}}</mat-error>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <label for="dtNascimento" class="col-sm-12 col-form-label">Data de
                                         Nascimento</label>
                                     <input type="date" matInput class="form-control is-invalid" formControlName="dtNascimento" [ngClass]="{ 'is-invalid': showError('dtNascimento') }" id="dtNascimento" name="dtNascimento" required minlength="10" placeholder="26/06/1994" />
+                                    <mat-error *ngIf="hasError('dtNascimento')">{{getError('dtNascimento')}}</mat-error>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-lg-9 col-md-9 col-sm-9">
                                     <label for="email" class="col-sm-12 col-form-label">Email</label>
                                     <input type="text" class="form-control is-invalid" formControlName="email" [ngClass]="{ 'is-invalid': showError('email') }" id="email" name="email" required minlength="7" placeholder="Email" />
+                                    <mat-error *ngIf="hasError('email')">{{getError('email')}}</mat-error>
                                     <mat-chip-list>
                                         <mat-chip color="accent" *ngFor="let dominio of dominios; let i = index" (click)="concatDominio(dominio)">{{dominio}}</mat-chip>
                                     </mat-chip-list>
@@ -32,6 +35,7 @@
                                         <mat-option value="M">Masculino</mat-option>
                                         <mat-option value="F">Feminino</mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="hasError('sexo')">{{getError('sexo')}}</mat-error>
                                 </div>
                             </div>
 
@@ -39,6 +43,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <label for="rg" class="col-sm-12 col-form-label">Rg</label>
                                     <input type="text" class="form-control is-invalid" formControlName="rg" [ngClass]="{ 'is-invalid': showError('rg') }" id="rg" name="rg" required placeholder="00.000.000-00" mask="00.000.000-00" />
+                                    <mat-error *ngIf="hasError('rg')">{{getError('rg')}}</mat-error>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2">
                                     <label for="orgExpedidor" class="col-sm-12 col-form-label">Orgão
@@ -48,16 +53,19 @@
                                             <mat-option value="CC">Cartório Civil</mat-option>
                                             <mat-option value="DPF">Polícia Federal - DPF</mat-option> 
                                         </mat-select>
+                                        <mat-error *ngIf="hasError('orgExpedidorRg')">{{getError('orgExpedidorRg')}}</mat-error>
                                     <!-- <input type="text" class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required minlength="3" placeholder="SSP" /> -->
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3">
-                                     <input-estado [estado]="estado" [indice]="0" [form]="form"></input-estado>
+                                     <input-estado [estado]="estado" [indice]="0" [form]="form" [estadoFormName]="'estadoExpedidor'" [disabled]="false"></input-estado>
+                                     <mat-error *ngIf="hasError('estadoExpedidor')">{{getError('estadoExpedidor')}}</mat-error>
                                 </div>
 
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <label for="dtEmissaoFor" class="col-sm-12 col-form-label">Data de
                                         Emissão</label>
-                                    <input type="date" class="form-control is-invalid" formControlName="emissaoRg" [ngClass]="{ 'is-invalid': showError('emissaoRg') }" id="emissaoRg" name="emissaoRg" required minlength="10" placeholder="26/06/1994" />
+                                    <input type="date" class="form-control is-invalid" formControlName="dtEmissaoRg" [ngClass]="{ 'is-invalid': showError('dtEmissaoRg') }" id="dtEmissaoRg" name="dtEmissaoRg" required minlength="10" placeholder="26/06/1994" />
+                                    <mat-error *ngIf="hasError('dtEmissaoRg')">{{getError('dtEmissaoRg')}}</mat-error>
                                 </div>
                             </div>
                             <div class="form-row">

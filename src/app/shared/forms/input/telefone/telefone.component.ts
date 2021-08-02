@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { TipoTelefoneService } from 'src/app/service/generico/tipo-telefone.service';
 import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
+import { GenericComponent } from 'src/app/shared/generic.component';
 import { ModalGenericComponent } from 'src/app/shared/modal/modal-generic/modal-generic.component';
 import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 import { Telefone } from 'src/models/pre-cadastro/telefone.model';
@@ -13,7 +14,7 @@ import { TipoTelefone } from 'src/models/pre-cadastro/tipoTelefone.model';
   templateUrl: './telefone.component.html',
   styleUrls: ['./telefone.component.scss']
 })
-export class TelefoneComponent implements OnInit {
+export class TelefoneComponent extends GenericComponent implements OnInit {
 
   @Input() telefone: Telefone;
   @Input() telefones: Telefone[];
@@ -24,8 +25,11 @@ export class TelefoneComponent implements OnInit {
   tiposTelefone: TipoTelefone[];
   dialog: any;
 
-  constructor(private tipoTelefoneService: TipoTelefoneService,
-              private pacienteService: PacienteService) { }
+  constructor(
+    private tipoTelefoneService: TipoTelefoneService,
+    private pacienteService: PacienteService) {
+    super()
+  }
 
   ngOnInit(): void {
     this.tipoTelefoneService.getTipoTelefone().subscribe(result => {
@@ -34,41 +38,19 @@ export class TelefoneComponent implements OnInit {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
   }
 
-  converteToControlName(field, indice) {
-    if (indice === 0) {
-      return field;
-    }
-    return `${field}-${indice}`;
-  }
-
-  openDialog(titledialogo:string, dialogo:string) {
-    const config = new MatDialogConfig()
-    config.data = {title:titledialogo, content:dialogo}
-    config.height = '20%'
-    config.width = '30%'
-    this.dialog.open(ModalGenericComponent, config);
-  }
-
   deleteTelefone(telefone: Telefone) {
     if (this.telefones.length == 1) {
-      this.openDialog('Erro', 'Não pode remover o único contato, se preferir pode alterar os dados!')
+      this.openGenericDialog('Erro', 'Não pode remover o único contato, se preferir pode alterar os dados!')
       return false;
     }
 
-    if(telefone.telefoneId) {
+    if (telefone.telefoneId) {
       this.pacienteService.deleteTelefone(telefone, this.paciente).subscribe(result => {
-        this.openDialog('Sucesso', 'Exclusão efetuada com sucesso!')
+        this.openGenericDialog('Sucesso', 'Exclusão efetuada com sucesso!')
       });
     }
 
     this.telefones.splice(this.indice, 1);
-  }
-
-  showError(field: string, indice) {
-    if (indice != null) {
-      field = this.converteToControlName(field, indice)
-    }
-    return this.form.get(field).invalid && !this.form.get(field).untouched;
   }
 
 }

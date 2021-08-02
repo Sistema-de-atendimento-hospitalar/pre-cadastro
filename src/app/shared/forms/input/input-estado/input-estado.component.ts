@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { GenericComponent } from 'src/app/shared/generic.component';
 
 interface Estado {
   value: string;
@@ -11,7 +12,7 @@ interface Estado {
   templateUrl: './input-estado.component.html',
   styleUrls: ['./input-estado.component.scss']
 })
-export class InputEstadoComponent implements OnInit {
+export class InputEstadoComponent extends GenericComponent implements OnInit {
 
   estados: Estado[] = [
     { value: "AC", viewValue: "Acre" },
@@ -45,25 +46,16 @@ export class InputEstadoComponent implements OnInit {
 
   @Input() estado: string;
   @Input() form: FormGroup;
+  @Input() estadoFormName: string;
+  @Input() disabled: boolean;
   @Input() indice: number;
 
-  constructor() { }
+  constructor() {
+    super()
+   }
 
   ngOnInit(): void {
-  }
-
-  converteToControlName(field, indice) {
-    if (indice === 0) {
-      return field;
-    }
-    return `${field}-${indice}`;
-  }
-
-  showError(field: string, indice) {
-    if (indice != null) {
-      field = this.converteToControlName(field, indice)
-    }
-    return this.form.get(field).invalid && !this.form.get(field).untouched;
+    console.log(this.disabled);
   }
 
 }

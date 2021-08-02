@@ -10,16 +10,18 @@ import { DadosConvenioComponent } from "./pages/pre-cadastro/dados-convenio/dado
 import { DadosTelefoneComponent } from "./pages/pre-cadastro/dados-telefone/dados-telefone.component";
 import { DadosConfirmacaoComponent } from "./pages/pre-cadastro/dados-confirmacao/dados-confirmacao.component";
 import { StepComponent } from "./pages/pre-cadastro/step/step.component";
+import { AutorizationComponent } from "./pages/pre-cadastro/autorization/autorization.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: IndexComponent },
-  { path: "passo1", component: DadosPessoaisComponent },
-  { path: "passo2", component: DadosEnderecoComponent },
-  { path: "passo3", component: DadosTelefoneComponent },
-  { path: "passo4", component: DadosConvenioComponent },
+  //{ path: "passo1", component: DadosPessoaisComponent },
+  //{ path: "passo2", component: DadosEnderecoComponent },
+  //{ path: "passo3", component: DadosTelefoneComponent },
+  //{ path: "passo4", component: DadosConvenioComponent },
   { path: "confirmacao-dados", component: DadosConfirmacaoComponent },
-  { path: "step", component: StepComponent }
+  { path: "step", component: StepComponent },
+  { path: "verify", component: AutorizationComponent }
 ];
 
 @NgModule({

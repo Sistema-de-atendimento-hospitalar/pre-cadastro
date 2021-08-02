@@ -24,16 +24,18 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         return next.handle(request)
             .pipe(catchError((error: HttpErrorResponse) => {
                 this._loading.setLoading(false, request.url);
-                let errorMessage = '';
+                let errorMessage;
                 if (error.error instanceof ErrorEvent) {
                     errorMessage = `Error: ${error.error.message}`;
                 } else if (error.error instanceof ProgressEvent) {
                     errorMessage = `Verifique sua conexão com a internet e tente novamente!`
-                } else {
-                    errorMessage = `Message: ${error.error.detail}`;
                 }
-                this._snackBar.open(errorMessage, "Error");
-                return throwError(errorMessage);
+
+                if (errorMessage) {
+                    this._snackBar.open(errorMessage, "Error");
+                }
+
+                return throwError(error);
             }))
             .pipe(map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
                 if (evt instanceof HttpResponse) {

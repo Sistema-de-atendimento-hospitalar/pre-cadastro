@@ -4,7 +4,7 @@ export class CartaoSaude {
 	public tipoContrato: string = null;
 	public rede: string = null;
 	public numeroCarteira: number = null;
-	public validade: Date = null;
+	public dtValidade: Date = null;
 
 	constructor() {
 	}

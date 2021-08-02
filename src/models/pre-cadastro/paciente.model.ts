@@ -10,7 +10,7 @@ export class Paciente {
     public rg: string = null;
     public orgExpedidorRg: string = null;
     public estadoExpedidor: string = null;
-    public emissaoRg: Date = null;
+    public dtEmissaoRg: Date = null;
     public dtNascimento: Date = null;
     public sexo: string = null;
     public deficiencia:string = null;

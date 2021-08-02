@@ -3,20 +3,20 @@ import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { HttpErrorResponse } from '@angular/common/http';
+import { GenericComponent } from 'src/app/shared/generic.component';
 @Component({
   selector: 'app-dados-pessoais',
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.scss']
 })
-export class DadosPessoaisComponent implements OnInit {
+export class DadosPessoaisComponent extends GenericComponent implements OnInit {
 
   private paciente: Paciente;
   private dominio: string = null;
   private temDeficiencia: boolean = false;
   public dominios: string[] = ['gmail.com', 'hotmail.com', 'outlook.com'];
-  public estado: string = null;
-
-  form: FormGroup;
+  public estado = null;
 
   @Input() stepper: MatStepper;
   totalStepsCount: number;
@@ -24,7 +24,9 @@ export class DadosPessoaisComponent implements OnInit {
   constructor(
     private pacienteService: PacienteService,
     private _formBuilder: FormBuilder
-  ) { }
+  ) {
+    super()
+  }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
@@ -32,20 +34,22 @@ export class DadosPessoaisComponent implements OnInit {
 
     this.form = this._formBuilder.group({
       nome: [this.paciente.nome, Validators.required],
-      dtNascimento: [this.paciente.dtNascimento, Validators.required],
+      dtNascimento: [this.paciente.dtNascimento, Validators.compose([
+        Validators.required, Validators.pattern(/^([1-2]{1})([0-9]{3})\-([0-9]{2})\-([0-9]{2})/)
+      ])],
       email: [this.paciente.email, Validators.compose([
         Validators.required, Validators.email
       ])],
       sexo: [this.paciente.sexo, Validators.required],
       rg: [this.paciente.rg, Validators.required],
       orgExpedidorRg: [this.paciente.orgExpedidorRg, Validators.required],
-      estado:[this.paciente.estadoExpedidor,Validators.required],
-      emissaoRg: [this.paciente.emissaoRg, Validators.required],
+      estadoExpedidor: [this.paciente.estadoExpedidor, Validators.required],
+      dtEmissaoRg: [this.paciente.dtEmissaoRg, Validators.required],
       temDeficiencia: [!!this.paciente.deficiencia, Validators.nullValidator],
       deficiencia: [this.paciente.deficiencia, Validators.nullValidator]
     });
 
-    this.estado = this.paciente.estadoExpedidor;
+    this.estado = { value: this.paciente.estadoExpedidor };
   }
 
   converterToModel(form: FormGroup, model: Paciente) {
@@ -59,24 +63,30 @@ export class DadosPessoaisComponent implements OnInit {
         }
       });
     });
-  
+
     return model;
   }
 
   nextPage() {
     this.paciente = this.converterToModel(this.form, this.paciente);
     localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
-  
+    this.erros = null;
+    localStorage.setItem("paciente", JSON.stringify(this.paciente));
+
     if (this.paciente.pacienteId) {
       this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(result));
         this.goForward(this.stepper);
+      }, (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error.errors) {
+          this.erros = errorResponse.error.errors
+        }
       });
     } else {
       this.pacienteService.savePaciente(this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(result));
-        if (result) {
-          this.goForward(this.stepper);
+        this.goForward(this.stepper);
+      }, (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error.errors) {
+          this.erros = errorResponse.error.errors
         }
       });
     }
@@ -86,14 +96,6 @@ export class DadosPessoaisComponent implements OnInit {
     if (!this.form.get('email').value.includes("@")) {
       this.form.get('email').setValue(`${this.form.get('email').value}@${dominio}`)
     }
-  }
-
-  showError(field: string) {
-    return this.form.get(field).invalid && !this.form.get(field).untouched;
-  }
-
-  goForward(stepper: MatStepper) {
-    stepper.next();
   }
 
 }

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
+import { GenericComponent } from 'src/app/shared/generic.component';
 import { ModalEnderecoComponent } from 'src/app/shared/modal/modal-endereco/modal-endereco.component';
 import { Endereco } from 'src/models/pre-cadastro/endereco.model';
 import { Paciente } from 'src/models/pre-cadastro/paciente.model';
@@ -12,18 +13,19 @@ import { Paciente } from 'src/models/pre-cadastro/paciente.model';
   templateUrl: './dados-endereco.component.html',
   styleUrls: ['./dados-endereco.component.scss'],
 })
-export class DadosEnderecoComponent implements OnInit {
+export class DadosEnderecoComponent extends GenericComponent implements OnInit {
 
   enderecos: Endereco[] = [];
   private paciente: Paciente;
-  form: FormGroup;
   @Input() stepper: MatStepper;
 
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private pacienteService: PacienteService,
-    private _formBuilder: FormBuilder) { }
+    private _formBuilder: FormBuilder) { 
+      super()
+    }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
@@ -123,13 +125,6 @@ export class DadosEnderecoComponent implements OnInit {
     return model;
   }
 
-  converteToControlName(field, indice) {
-    if (indice === 0) {
-      return field;
-    }
-    return `${field}-${indice}`;
-  }
-
   openDialog(form: FormGroup) {
 
     const config = new MatDialogConfig()
@@ -157,10 +152,6 @@ export class DadosEnderecoComponent implements OnInit {
         }
       }
     });
-  }
-
-  goForward(stepper: MatStepper) {
-    stepper.next();
   }
 
 }

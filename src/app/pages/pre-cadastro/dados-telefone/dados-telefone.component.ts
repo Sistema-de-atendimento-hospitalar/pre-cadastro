@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
+import { GenericComponent } from 'src/app/shared/generic.component';
 import { ModalTelefoneComponent } from 'src/app/shared/modal/modal-telefone/modal-telefone.component';
 import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 import { Telefone } from 'src/models/pre-cadastro/telefone.model';
@@ -13,7 +14,7 @@ import { Telefone } from 'src/models/pre-cadastro/telefone.model';
   templateUrl: './dados-telefone.component.html',
   styleUrls: ['./dados-telefone.component.scss']
 })
-export class DadosTelefoneComponent implements OnInit {
+export class DadosTelefoneComponent extends GenericComponent implements OnInit {
 
   telefones: Telefone[] = [];
   private paciente: Paciente;
@@ -24,7 +25,9 @@ export class DadosTelefoneComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private pacienteService: PacienteService,
-    private _formBuilder: FormBuilder) { }
+    private _formBuilder: FormBuilder) { 
+      super()
+    }
 
   ngOnInit(): void {
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
@@ -113,13 +116,6 @@ export class DadosTelefoneComponent implements OnInit {
     return model;
   }
 
-  converteToControlName(field, indice) {
-    if (indice === 0) {
-      return field;
-    }
-    return `${field}-${indice}`;
-  }
-
   openDialog(form: FormGroup) {
     const config = new MatDialogConfig()
     config.data = {
@@ -140,10 +136,6 @@ export class DadosTelefoneComponent implements OnInit {
         this.telefones.push(result)
       }
     });
-  }
-
-  goForward(stepper: MatStepper) {
-    stepper.next();
   }
 
 }
