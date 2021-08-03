@@ -77,17 +77,13 @@ export class DadosPessoaisComponent extends GenericComponent implements OnInit {
       this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
         this.goForward(this.stepper);
       }, (errorResponse: HttpErrorResponse) => {
-        if (errorResponse.error.errors) {
-          this.erros = errorResponse.error.errors
-        }
+        this.catchError(errorResponse);
       });
     } else {
       this.pacienteService.savePaciente(this.paciente).subscribe(result => {
         this.goForward(this.stepper);
       }, (errorResponse: HttpErrorResponse) => {
-        if (errorResponse.error.errors) {
-          this.erros = errorResponse.error.errors
-        }
+        this.catchError(errorResponse);
       });
     }
   }

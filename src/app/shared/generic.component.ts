@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup } from "@angular/forms";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { MatStepper } from "@angular/material/stepper";
@@ -11,6 +12,7 @@ enum TYPE_MODAL {
 
 export class GenericComponent {
     protected erros: any;
+    protected detailErrorResponse: string;
     protected form: FormGroup;
 
     constructor(
@@ -84,6 +86,14 @@ export class GenericComponent {
         }
 
         this.dialog.open(ModalGenericComponent, config);
+    }
+
+    catchError(errorResponse: HttpErrorResponse) {
+        if (errorResponse.error.errors) {
+            this.erros = errorResponse.error.errors
+        } else {
+            this.detailErrorResponse = errorResponse.error.detail;
+        }
     }
 
 }

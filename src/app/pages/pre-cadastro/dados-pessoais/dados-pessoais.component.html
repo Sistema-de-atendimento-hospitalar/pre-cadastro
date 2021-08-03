@@ -82,9 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div *ngIf="form.invalid">
-                            Preencha os campos obrigatórios!
-                        </div> -->
+                        <mat-error *ngIf="detailErrorResponse">{{detailErrorResponse}}</mat-error>
                         <div class="row col-md-12 button">
                             <app-button [disabled]="form.invalid"></app-button>
                         </div>
