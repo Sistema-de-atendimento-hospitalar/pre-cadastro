@@ -114,7 +114,7 @@
                 Cartão Saude
             </div>
             <div class="row col-md-12 body">
-                <div>
+                <div *ngIf="paciente.cartaoSaude">
                     <div class="row col-md-12">
                         <div class="col-md-5">
                             <mat-label>Convênio:</mat-label> {{paciente.cartaoSaude.convenio}}

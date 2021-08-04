@@ -26,6 +26,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.paciente = new Paciente()
     this.startTextAnimation(0);
+    localStorage.removeItem("paciente")
   }
 
   typeWriter(text, i, fnCallback) {

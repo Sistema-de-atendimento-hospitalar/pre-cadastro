@@ -55,7 +55,7 @@ export class InputEstadoComponent extends GenericComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.disabled);
+    console.log(this.estado);
   }
 
 }

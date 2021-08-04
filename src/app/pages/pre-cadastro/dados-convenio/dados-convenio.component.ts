@@ -70,6 +70,11 @@ export class DadosConvenioComponent extends GenericComponent implements OnInit {
   }
 
   nextPage() {
+
+    if (!this.convenio) {
+      this.goForward(this.stepper);
+    }
+
     localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
     this.cartaoSaude = this.converterToModel(this.form, this.cartaoSaude);
     if (this.paciente.pacienteId) {
