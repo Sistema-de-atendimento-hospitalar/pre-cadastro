@@ -72,7 +72,10 @@ export class DadosConvenioComponent extends GenericComponent implements OnInit {
   nextPage() {
 
     if (!this.convenio) {
-      this.goForward(this.stepper);
+      this.pacienteService.deleteCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        this.goForward(this.stepper);
+      });
     }
 
     localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
@@ -95,7 +98,7 @@ export class DadosConvenioComponent extends GenericComponent implements OnInit {
   }
 
   clearConvenio() {
-    this.cartaoSaude = null;
+    //this.cartaoSaude = null;
     this.paciente.cartaoSaude = null;
     this.hasConvenio = false;
     this.convenio = null;

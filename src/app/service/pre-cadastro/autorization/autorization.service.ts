@@ -11,7 +11,7 @@ export class AutorizationService {
   private API_URL: string;
 
   constructor(private http: HttpClient) { 
-    this.API_URL = `${environment.apiUrl}/v1/autorization`;
+    this.API_URL = `${environment.apiUrlNotification}/v1/autorization`;
   }
 
   createToken(tokenRequest: TokenRequest) {
