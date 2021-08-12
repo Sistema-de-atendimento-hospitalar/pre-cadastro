@@ -76,21 +76,25 @@ export class DadosEnderecoComponent extends GenericComponent implements OnInit {
     this.enderecos = this.converterToModel(this.form, this.enderecos);
     localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
 
-    if (this.paciente.pacienteId) {
-      this.paciente.enderecos = this.enderecos;
-      this.pacienteService.updateEndereco(this.enderecos, this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(this.paciente));
-        this.goForward(this.stepper);
-      });
-    } else {
-      this.pacienteService.saveEndereco(this.enderecos, this.paciente).subscribe(
-        result => {
-          if (result) {
-            localStorage.setItem("paciente", JSON.stringify(this.paciente));
-            this.goForward(this.stepper);
+    if (this.form.touched) {
+      if (this.paciente.pacienteId) {
+        this.paciente.enderecos = this.enderecos;
+        this.pacienteService.updateEndereco(this.enderecos, this.paciente).subscribe(result => {
+          localStorage.setItem("paciente", JSON.stringify(this.paciente));
+          this.goForward(this.stepper);
+        });
+      } else {
+        this.pacienteService.saveEndereco(this.enderecos, this.paciente).subscribe(
+          result => {
+            if (result) {
+              localStorage.setItem("paciente", JSON.stringify(this.paciente));
+              this.goForward(this.stepper);
+            }
           }
-        }
-      );
+        );
+      }
+    } else {
+      this.goForward(this.stepper);
     }
   }
 

@@ -68,21 +68,26 @@ export class DadosTelefoneComponent extends GenericComponent implements OnInit {
     this.telefones = this.converterToModel(this.form, this.telefones);
     localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
 
-    if (this.paciente.pacienteId) {
-      this.paciente.telefones = this.telefones;
-      this.pacienteService.updateTelefone(this.telefones, this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(this.paciente));
-        this.goForward(this.stepper);
-      });
-    } else{
-      this.pacienteService.saveTelefone(this.telefones, this.paciente).subscribe(
-        result => {
-          if (result) {
-            this.goForward(this.stepper);
+    if (this.form.touched) {
+      if (this.paciente.pacienteId) {
+        this.paciente.telefones = this.telefones;
+        this.pacienteService.updateTelefone(this.telefones, this.paciente).subscribe(result => {
+          localStorage.setItem("paciente", JSON.stringify(this.paciente));
+          this.goForward(this.stepper);
+        });
+      } else{
+        this.pacienteService.saveTelefone(this.telefones, this.paciente).subscribe(
+          result => {
+            if (result) {
+              this.goForward(this.stepper);
+            }
           }
-        }
-      );
+        );
+      }
+    } else {
+      this.goForward(this.stepper);
     }
+    
   }
 
   converterToModel(form: FormGroup, model) {

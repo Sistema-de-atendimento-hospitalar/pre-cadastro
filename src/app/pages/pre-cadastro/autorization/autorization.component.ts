@@ -8,6 +8,7 @@ import { GenericComponent } from 'src/app/shared/generic.component';
 import { Paciente } from 'src/models/pre-cadastro/paciente.model';
 import { TokenRequest } from 'src/models/pre-cadastro/TokenRequest.model';
 import { ValidarTokenRequest } from 'src/models/pre-cadastro/ValidarTokenRequest.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-autorization',
@@ -21,6 +22,7 @@ export class AutorizationComponent extends GenericComponent implements OnInit {
   public selectedOption: boolean;
   private tokenRequest: TokenRequest;
   private validarTokenRequest: ValidarTokenRequest;
+  private isDev = environment.production
 
   constructor(
     private autorizationService: AutorizationService,
@@ -59,22 +61,25 @@ export class AutorizationComponent extends GenericComponent implements OnInit {
     this.validarTokenRequest.token = this.form.get('token').value;
 
     this.autorizationService.validToken(this.validarTokenRequest).subscribe(result => {
-      this.pacienteService.getPacienteFromCpf(this.tokenRequest.cpf).subscribe(result => {
-        this.paciente = result;
-
-        if (result) {
-          localStorage.setItem("paciente", JSON.stringify(this.paciente));
-        }
-
-        this.router.navigate(['/step']);
-      });
+      this.loadPaciente()
     }, (errorResponse: HttpErrorResponse) => {
-      console.log(errorResponse.error);
       if (errorResponse.error) {
         this.erros = {
           "token": errorResponse.error.detail
         }
       }
+    });
+  }
+
+  loadPaciente() {
+    this.pacienteService.getPacienteFromCpf(this.tokenRequest.cpf).subscribe(result => {
+      this.paciente = result;
+
+      if (result) {
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+      }
+
+      this.router.navigate(['/step']);
     });
   }
 

@@ -12,8 +12,8 @@ enum TYPE_MODAL {
 
 export class GenericComponent {
     protected erros: any;
-    protected detailErrorResponse: string;
-    protected form: FormGroup;
+    public detailErrorResponse: string;
+    public form: FormGroup;
 
     constructor(
         public dialog?: MatDialog) {
@@ -70,7 +70,7 @@ export class GenericComponent {
         return `${field}-${indice}`;
     }
 
-    openGenericDialog(titleDialogo: string, content: string, typeModal?: TYPE_MODAL) {
+    openGenericDialog(titleDialogo: string, content: string, typeModal?: TYPE_MODAL, callback?: any) {
         const config = new MatDialogConfig()
         config.height = '30%'
         config.width = '50%'
@@ -86,6 +86,7 @@ export class GenericComponent {
         }
 
         this.dialog.open(ModalGenericComponent, config);
+        callback();
     }
 
     catchError(errorResponse: HttpErrorResponse) {

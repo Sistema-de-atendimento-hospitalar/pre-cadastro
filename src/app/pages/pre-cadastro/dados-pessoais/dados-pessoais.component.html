@@ -42,23 +42,23 @@
                             <div class="form-row">
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <label for="rg" class="col-sm-12 col-form-label">Rg</label>
-                                    <input type="text" class="form-control is-invalid" formControlName="rg" [ngClass]="{ 'is-invalid': showError('rg') }" id="rg" name="rg" required placeholder="00.000.000-00" mask="00.000.000-00" />
+                                    <input type="text" class="form-control is-invalid" formControlName="rg" [ngClass]="{ 'is-invalid': showError('rg') }" id="rg" name="rg" required placeholder="00.000.000-00" min="6" max="10" />
                                     <mat-error *ngIf="hasError('rg')">{{getError('rg')}}</mat-error>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2">
                                     <label for="orgExpedidor" class="col-sm-12 col-form-label">Orgão
                                         Expedidor</label>
-                                        <mat-select class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required>
-                                            <mat-option value="SSP">SSP</mat-option>
-                                            <mat-option value="CC">Cartório Civil</mat-option>
-                                            <mat-option value="DPF">Polícia Federal - DPF</mat-option> 
-                                        </mat-select>
-                                        <mat-error *ngIf="hasError('orgExpedidorRg')">{{getError('orgExpedidorRg')}}</mat-error>
+                                    <mat-select class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required>
+                                        <mat-option value="SSP">SSP</mat-option>
+                                        <mat-option value="CC">Cartório Civil</mat-option>
+                                        <mat-option value="DPF">Polícia Federal - DPF</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="hasError('orgExpedidorRg')">{{getError('orgExpedidorRg')}}</mat-error>
                                     <!-- <input type="text" class="form-control is-invalid" formControlName="orgExpedidorRg" [ngClass]="{ 'is-invalid': showError('orgExpedidorRg') }" id="orgExpedidorRg" name="orgExpedidorRg" required minlength="3" placeholder="SSP" /> -->
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3">
-                                     <input-estado [estado]="estado" [indice]="0" [form]="form" [estadoFormName]="'estadoExpedidor'" [disabled]="false"></input-estado>
-                                     <mat-error *ngIf="hasError('estadoExpedidor')">{{getError('estadoExpedidor')}}</mat-error>
+                                    <input-estado [estado]="estado" [indice]="0" [form]="form" [estadoFormName]="'estadoExpedidor'" [disabled]="false"></input-estado>
+                                    <mat-error *ngIf="hasError('estadoExpedidor')">{{getError('estadoExpedidor')}}</mat-error>
                                 </div>
 
                                 <div class="col-lg-3 col-md-3 col-sm-3">

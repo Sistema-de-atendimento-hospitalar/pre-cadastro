@@ -33,10 +33,6 @@ export class DadosConfirmacaoComponent extends GenericComponent implements OnIni
   }
 
   finalizarCadastro() {
-    this.openGenericDialog("Sucesso", "Cadastro realizado com sucesso!");
-
-    setTimeout(() => {
-      this.router.navigate(['/home']);
-    }, 2000);
+    this.openGenericDialog("Sucesso", "Cadastro realizado com sucesso!", null,  () => this.router.navigate(['/home']));
   }
 }

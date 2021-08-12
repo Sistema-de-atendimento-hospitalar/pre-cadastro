@@ -73,26 +73,33 @@ export class DadosPessoaisComponent extends GenericComponent implements OnInit {
     this.erros = null;
     localStorage.setItem("paciente", JSON.stringify(this.paciente));
 
-    if (this.paciente.pacienteId) {
-      this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(result));
-        this.goForward(this.stepper);
-      }, (errorResponse: HttpErrorResponse) => {
-        this.catchError(errorResponse);
-      });
+    if (this.form.touched) {
+      if (this.paciente.pacienteId) {
+        this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
+          localStorage.setItem("paciente", JSON.stringify(result));
+          this.goForward(this.stepper);
+        }, (errorResponse: HttpErrorResponse) => {
+          this.catchError(errorResponse);
+        });
+      } else {
+        this.pacienteService.savePaciente(this.paciente).subscribe(result => {
+          localStorage.setItem("paciente", JSON.stringify(result));
+          this.goForward(this.stepper);
+        }, (errorResponse: HttpErrorResponse) => {
+          this.catchError(errorResponse);
+        });
+      }
     } else {
-      this.pacienteService.savePaciente(this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(result));
-        this.goForward(this.stepper);
-      }, (errorResponse: HttpErrorResponse) => {
-        this.catchError(errorResponse);
-      });
+      this.goForward(this.stepper);
     }
   }
 
   concatDominio(dominio: string) {
     if (!this.form.get('email').value.includes("@")) {
       this.form.get('email').setValue(`${this.form.get('email').value}@${dominio}`)
+    } else {
+      let email = this.form.get('email').value.split("@")[0];
+      this.form.get('email').setValue(`${email}@${dominio}`)
     }
   }
 

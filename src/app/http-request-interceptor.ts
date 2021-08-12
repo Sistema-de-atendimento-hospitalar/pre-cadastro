@@ -28,11 +28,13 @@ export class HttpRequestInterceptor implements HttpInterceptor {
                 if (error.error instanceof ErrorEvent) {
                     errorMessage = `Error: ${error.error.message}`;
                 } else if (error.error instanceof ProgressEvent) {
-                    errorMessage = `Verifique sua conexão com a internet e tente novamente!`
+                    errorMessage = `Falha na comunicação com o servidor`
                 }
 
                 if (errorMessage) {
-                    this._snackBar.open(errorMessage, "Error");
+                    this._snackBar.open(errorMessage, "Error", {
+                        duration: 2000
+                    });
                 }
 
                 return throwError(error);
