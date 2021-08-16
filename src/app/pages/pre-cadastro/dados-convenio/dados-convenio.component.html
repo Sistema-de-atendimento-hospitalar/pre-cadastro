@@ -1,0 +1,64 @@
+<div class="wrapper">
+    <div class="page-header header-filter">
+        <div class="container">
+            <div class="content-center">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h1>Possui Convênio?</h1>
+
+                    <mat-radio-group aria-label="Selecione a opção" [(ngModel)]="convenio" name="convenio">
+                        <mat-radio-button class="optionConvenio" [value]="true">Sim</mat-radio-button>
+                        <mat-radio-button class="optionConvenio" (click)="clearConvenio()" [value]="false">Não</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="convenio != null && !convenio">
+                    <div class="row col-lg-12 col-md-12 col-sm-12 button" id="opcaoNao">
+                        <app-button (click)="nextPage()"></app-button>
+                    </div>
+                </div>
+
+                <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="nextPage()">
+                    <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="(convenio) || hasConvenio">
+                        <h1>Cadastro cartão</h1>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="convenio" class="col-sm-12 col-form-label">Convênio</label>
+                                    <input formControlName="convenio" type="text" [ngClass]="{'is-invalid': showError('convenio')}" class="form-control is-invalid" id="convenio" name="convenio" required placeholder="Convênio" />
+                                    <mat-error *ngIf="hasError('convenio')">{{getError('convenio')}}</mat-error>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="rede" class="col-sm-12 col-form-label">Rede</label>
+                                    <input formControlName="rede" type="text" [ngClass]="{'is-invalid': showError('rede')}" class="form-control is-invalid" id="rede" name="rede" required placeholder="Rede" />
+                                    <mat-error *ngIf="hasError('rede')">{{getError('rede')}}</mat-error>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <label for="validade" class="col-sm-12 col-form-label">Validade</label>
+                                    <input formControlName="dtValidade" type="date" [ngClass]="{'is-invalid': showError('dtValidade')}" class="form-control is-invalid" id="dtValidade" name="dtValidade" required placeholder="Validade" />
+                                    <mat-error *ngIf="hasError('dtValidade')">{{getError('dtValidade')}}</mat-error>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-6">
+                                    <label for="tipoContrato" class="col-sm-12 col-form-label">Tipo de Contrato</label>
+                                    <input formControlName="tipoContrato" type="text" [ngClass]="{'is-invalid': showError('tipoContrato')}" class="form-control is-invalid" id="tipoContrato" name="tipoContrato" required placeholder="Tipo contrato" />
+                                    <mat-error *ngIf="hasError('tipoContrato')">{{getError('tipoContrato')}}</mat-error>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <label for="numeroCarteira" class="col-sm-12 col-form-label">Número de
+                                        carteira</label>
+                                    <input formControlName="numeroCarteira" type="number" mask="0000000000" [ngClass]="{'is-invalid': showError('numeroCarteira')}" class="form-control is-invalid" id="numeroCarteira" name="numeroCarteira" required placeholder="N° da carteira" />
+                                    <mat-error *ngIf="hasError('numeroCarteira')">{{getError('numeroCarteira')}}</mat-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12 button">
+                            <app-button [disabled]="form.invalid"></app-button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

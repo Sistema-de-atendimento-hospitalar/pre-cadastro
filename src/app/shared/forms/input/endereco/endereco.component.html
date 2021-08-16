@@ -5,14 +5,15 @@
                 <label for="cep" class="col-sm-12 col-form-label">Cep</label>
                 <input type="text" class="form-control" [formControlName]="converteToControlName('cep', indice)" (change)="buscarCep(indice)" name="{{converteToControlName('cep', indice)}}" [ngClass]="{'is-invalid': showError('cep', indice)}" required minlength="8" placeholder="00000-000"
                     mask="00000-000" />
+                    <mat-error *ngIf="hasError('cep', indice)">{{getError('cep', indice)}}</mat-error>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
-                <input-estado [estado]="endereco.estado" [indice]="indice" [form]="form"></input-estado>
+                <input-estado [estado]="endereco.estado" [indice]="indice" [form]="form" [estadoFormName]="'estado'" [disabled]="true"></input-estado>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
-                <input-cidade [cidade]="endereco.cidade" [indice]="indice" [form]="form"></input-cidade>
+                <input-cidade [cidade]="endereco.cidade" [indice]="indice" [form]="form" [disabled]="true"></input-cidade>
             </div>
         </div>
 
@@ -21,11 +22,13 @@
                 <label for="logradouro" class="col-sm-12 col-form-label">Logradouro</label>
                 <input type="text" class="form-control" [formControlName]="converteToControlName('logradouro', indice)" [ngClass]="{'is-invalid': showError('logradouro', indice)}" name="{{converteToControlName('logradouro', indice)}}" required placeholder="Logradouro"
                 />
+                <mat-error *ngIf="hasError('logradouro', indice)">{{getError('logradouro', indice)}}</mat-error>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <label for="bairro" class="col-sm-12 col-form-label">Bairro</label>
                 <input type="text" class="form-control" [formControlName]="converteToControlName('bairro', indice)" [ngClass]="{'is-invalid': showError('bairro', indice)}" name="{{converteToControlName('bairro', indice)}}" required placeholder="Bairro" />
+                <mat-error *ngIf="hasError('bairro', indice)">{{getError('bairro', indice)}}</mat-error>
             </div>
         </div>
 
@@ -34,11 +37,13 @@
                 <label for="numCasa" class="col-sm-12 col-form-label">Nº</label>
                 <input type="text" class="form-control" name="{{converteToControlName('numImovel', indice)}}" [formControlName]="converteToControlName('numImovel', indice)" [ngClass]="{'is-invalid': showError('numImovel', indice)}" required minlength="1" placeholder="Nº"
                 />
+                <mat-error *ngIf="hasError('numImovel', indice)">{{getError('numImovel', indice)}}</mat-error>
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-9">
                 <label for="complemento" class="col-sm-12 col-form-label">Complemento</label>
                 <input type="text" class="form-control col-lg-11 col-md-11 col-sm-11" [formControlName]="converteToControlName('dsComplemento', indice)" name="{{converteToControlName('complemento', indice)}}" placeholder="Complemento" />
+                <mat-error *ngIf="hasError('dsComplemento', indice)">{{getError('dsComplemento', indice)}}</mat-error>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3" *ngIf="showDeleteOption">
                 <button mat-mini-fab aria-label="Botão Deletar" type="button" (click)="deleteEndereco(endereco)">

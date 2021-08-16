@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { CepService } from '../../../../service/cep/cep.service';
 import { EnderecoCorreios } from '../../../../../models/enderecoCorreios.model';
-import { Endereco } from 'src/models/endereco.model';
-import { PacienteService } from 'src/app/service/paciente/paciente.service';
-import { Paciente } from 'src/models/paciente.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalGenericComponent } from 'src/app/shared/modal/modal-generic/modal-generic.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Endereco } from 'src/models/pre-cadastro/endereco.model';
+import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
+import { Paciente } from 'src/models/pre-cadastro/paciente.model';
+import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { GenericComponent } from 'src/app/shared/generic.component';
 
 @Component({
   selector: 'form-endereco',
   templateUrl: './endereco.component.html',
   styleUrls: ['./endereco.component.scss']
 })
-export class EnderecoComponent implements OnInit {
+export class EnderecoComponent extends GenericComponent implements OnInit {
 
   @Input() endereco: Endereco;
   @Input() enderecos: Endereco[];
@@ -27,18 +27,13 @@ export class EnderecoComponent implements OnInit {
   constructor(
     private cepService: CepService,
     private pacienteService: PacienteService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog) {
+    super(dialog)
+  }
 
   ngOnInit(): void {
     this.enderecoCorreios = new EnderecoCorreios();
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
-  }
-
-  converteToControlName(field, indice) {
-    if (indice === 0) {
-      return field;
-    }
-    return `${field}-${indice}`;
   }
 
   convetion(indice: number) {
@@ -56,7 +51,7 @@ export class EnderecoComponent implements OnInit {
       this.cepService.searchCep(cepRequest).subscribe(result => {
 
         if (result && !result.cep) {
-          this.openDialog('Erro', 'Cep não encontrado!')
+          this.openGenericDialog('Erro', 'Cep não encontrado!')
         }
 
         this.enderecoCorreios = result
@@ -65,34 +60,24 @@ export class EnderecoComponent implements OnInit {
     }
   }
 
-  openDialog(titledialogo:string, dialogo:string) {
-    const config = new MatDialogConfig()
-    config.data = {title:titledialogo, content:dialogo}
-    config.height = '20%'
-    config.width = '30%'
-    this.dialog.open(ModalGenericComponent, config);
-  }
-
   deleteEndereco(endereco: Endereco) {
     if (this.enderecos.length == 1) {
-      this.openDialog('Erro', 'Não pode remover o único endereço, se preferir pode alterar os dados!')
+      this.openGenericDialog('Erro', 'Não pode remover o único endereço, se preferir pode alterar os dados!')
       return false;
     }
 
     if (endereco.enderecoId) {
       this.pacienteService.deleteEndereco(endereco, this.paciente).subscribe(result => {
-        this.openDialog('Sucesso', 'Exclusão efetuada com sucesso!')
+        this.enderecos.splice(this.indice, 1);
+        this.paciente.enderecos = this.enderecos;
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        this.openGenericDialog('Sucesso', 'Exclusão efetuada com sucesso!')
       });
+    } else {
+      this.enderecos.splice(this.indice, 1);
+      this.paciente.enderecos = this.enderecos;
+      localStorage.setItem("paciente", JSON.stringify(this.paciente));
     }
-
-    this.enderecos.splice(this.indice, 1);
-  }
-
-  showError(field: string, indice) {
-    if (indice != null) {
-      field = this.converteToControlName(field, indice)
-    }
-    return this.form.get(field).invalid && !this.form.get(field).untouched;
   }
 
 }

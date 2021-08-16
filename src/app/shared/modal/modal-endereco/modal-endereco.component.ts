@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DadosEnderecoComponent } from 'src/app/pages/dados-endereco/dados-endereco.component';
-import { Endereco } from 'src/models/endereco.model';
+import { DadosEnderecoComponent } from 'src/app/pages/pre-cadastro/dados-endereco/dados-endereco.component';
+import { Endereco } from 'src/models/pre-cadastro/endereco.model';
 @Component({
   selector: 'app-modal-endereco',
   templateUrl: './modal-endereco.component.html',
