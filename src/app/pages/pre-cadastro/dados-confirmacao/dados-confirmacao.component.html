@@ -8,52 +8,52 @@
                 Dados Pessoais
             </div>
             <div class="row col-md-12 body">
-                <div class="row col-md-12">
-                    <div class="col-md-7">
-                        <mat-label>Nome:</mat-label> {{paciente.nome}}
+                <div>
+                    <div class="row col-md-12">
+                        <div class="col-md-5">
+                            <mat-label>Nome:</mat-label> {{paciente.nome}}
+                        </div>
+                        <div class="col-md-7">
+                            <mat-label>CPF:</mat-label> {{paciente.cpf}}
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <mat-label>CPF:</mat-label> {{paciente.cpf}}
+                    <div class="row col-md-12">
+                        <div class="col-md-5">
+                            <mat-label>Data de Nascimento:</mat-label> {{paciente.dtNascimento | date:'dd/MM/yyyy'}}
+                        </div>
+                        <div class="col-md-7">
+                            <mat-label>Email:</mat-label> {{paciente.email}}
+                        </div>
                     </div>
-                </div>
-                <div class="row col-md-12">
-                    <div class="col-md-7">
-                        <mat-label>Data de Nascimento:</mat-label> {{paciente.dtNascimento | date:'dd/MM/yyyy'}}
+                    <div class="row col-md-12">
+                        <div class="col-md-4">
+                            <mat-label>Rg:</mat-label> {{paciente.rg}}
+                        </div>
+                        <div class="col-md-3">
+                            <mat-label>Orgão Expedidor:</mat-label> {{paciente.orgExpedidorRg}}
+                        </div>
+                        <div class="col-md-5">
+                            <mat-label>Data de Emissão:</mat-label> {{paciente.dtEmissaoRg | date:'dd/MM/yyyy'}}
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <mat-label>Email:</mat-label> {{paciente.email}}
-                    </div>
-                </div>
-                <div class="row col-md-12">
-                    <div class="col-md-4">
-                        <mat-label>Rg:</mat-label> {{paciente.rg}}
-                    </div>
-                    <div class="col-md-3">
-                        <mat-label>Orgão Expedidor:</mat-label> {{paciente.orgExpedidorRg}}
-                    </div>
-                    <div class="col-md-5">
-                        <mat-label>Data de Emissão:</mat-label> {{paciente.dtEmissaoRg | date:'dd/MM/yyyy'}}
-                    </div>
-                </div>
-                <div class="row col-md-12">
-                    <div class="col-md-6">
-                        <mat-label>Sexo:</mat-label> {{paciente.sexo}}
-                    </div>
-                    <div class="col-md-6">
-                        <mat-label *ngIf="paciente.deficiencia">Deficiência:</mat-label> {{paciente.deficiencia}}
+                    <div class="row col-md-12">
+                        <div class="col-md-5">
+                            <mat-label>Sexo:</mat-label> {{paciente.sexo}}
+                        </div>
+                        <div class="col-md-7">
+                            <mat-label *ngIf="paciente.deficiencia">Deficiência:</mat-label> {{paciente.deficiencia}}
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="footer row col-md-12">
+            <div class="row col-md-12 footer">
                 <button mat-fab (click)="selectedStep(0)">
-                <mat-icon>edite</mat-icon>
+                        <mat-icon>edite</mat-icon>
                 </button>
             </div>
-
         </div>
         <div class="row square">
-            <div class=" row col-md-12 header">
+            <div class="row col-md-12 header">
                 Endereço
             </div>
             <div class="row col-md-12 body">
@@ -100,7 +100,7 @@
             </div>
             <div class="row col-md-12 body">
                 <div *ngFor="let telefone of paciente.telefones; let i = index">
-                    <mat-label>Telefone {{telefone.tipoTelefone}}:</mat-label> ({{telefone.numDdd}}) {{telefone.numTelefone}}<br>
+                    <mat-label>Telefone {{telefone.tipoTelefone.toLowerCase()}}:</mat-label> ({{telefone.numDdd}}) {{telefone.numTelefone}}<br>
                 </div>
             </div>
             <div class="row col-md-12 footer">
@@ -114,7 +114,7 @@
                 Cartão Saude
             </div>
             <div class="row col-md-12 body">
-                <div>
+                <div *ngIf="paciente.cartaoSaude">
                     <div class="row col-md-12">
                         <div class="col-md-5">
                             <mat-label>Convênio:</mat-label> {{paciente.cartaoSaude.convenio}}
@@ -131,7 +131,7 @@
                             <mat-label>Numero da Carteira:</mat-label> {{paciente.cartaoSaude.numeroCarteira}}
                         </div>
                         <div class="col-md-3">
-                            <mat-label>Validade:</mat-label> {{paciente.cartaoSaude.validade | date:'dd/MM/yyyy'}}
+                            <mat-label>Validade:</mat-label> {{paciente.cartaoSaude.dtValidade | date:'dd/MM/yyyy'}}
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
             </div>
         </div>
         <div class="row button">
-            <button class="btn btn-prosseguir">
+            <button class="btn btn-prosseguir" (click)="finalizarCadastro()">
                 Finalizar cadastro
             </button>
         </div>

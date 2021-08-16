@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TipoTelefoneService } from 'src/app/service/generico/tipo-telefone.service';
 import { PacienteService } from 'src/app/service/pre-cadastro/paciente/paciente.service';
 import { GenericComponent } from 'src/app/shared/generic.component';
@@ -23,12 +23,12 @@ export class TelefoneComponent extends GenericComponent implements OnInit {
   @Input() form: FormGroup;
   private paciente: Paciente;
   tiposTelefone: TipoTelefone[];
-  dialog: any;
 
   constructor(
     private tipoTelefoneService: TipoTelefoneService,
-    private pacienteService: PacienteService) {
-    super()
+    private pacienteService: PacienteService,
+    public dialog: MatDialog) {
+    super(dialog)
   }
 
   ngOnInit(): void {
@@ -46,11 +46,16 @@ export class TelefoneComponent extends GenericComponent implements OnInit {
 
     if (telefone.telefoneId) {
       this.pacienteService.deleteTelefone(telefone, this.paciente).subscribe(result => {
+        this.telefones.splice(this.indice, 1);
+        this.paciente.telefones = this.telefones;
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
         this.openGenericDialog('Sucesso', 'Exclusão efetuada com sucesso!')
       });
+    } else {
+      this.telefones.splice(this.indice, 1);
+      this.paciente.telefones = this.telefones;
+      localStorage.setItem("paciente", JSON.stringify(this.paciente));
     }
-
-    this.telefones.splice(this.indice, 1);
   }
 
 }

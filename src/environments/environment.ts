@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  //apiUrl: 'https://xax2jzjto3.execute-api.us-east-2.amazonaws.com/dev',
   apiUrl: 'http://localhost:8081/pre-cadastro',
-  apiUrlNotification: 'http://localhost:8082',
+  apiUrlNotification: 'https://xax2jzjto3.execute-api.us-east-2.amazonaws.com/dev',
   production: false
 };
 

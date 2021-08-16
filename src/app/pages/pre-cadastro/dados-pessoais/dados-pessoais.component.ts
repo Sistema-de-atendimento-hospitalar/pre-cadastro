@@ -50,6 +50,15 @@ export class DadosPessoaisComponent extends GenericComponent implements OnInit {
     });
 
     this.estado = { value: this.paciente.estadoExpedidor };
+    //this.load(this.stepper);
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex).toString());
+  }
+
+  load(stepper: MatStepper) {
+    let selectedIndex = localStorage.getItem("selectedIndex")
+    if (selectedIndex) {
+      stepper.selectedIndex = Number.parseInt(selectedIndex)
+    }
   }
 
   converterToModel(form: FormGroup, model: Paciente) {
@@ -73,28 +82,33 @@ export class DadosPessoaisComponent extends GenericComponent implements OnInit {
     this.erros = null;
     localStorage.setItem("paciente", JSON.stringify(this.paciente));
 
-    if (this.paciente.pacienteId) {
-      this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
-        this.goForward(this.stepper);
-      }, (errorResponse: HttpErrorResponse) => {
-        if (errorResponse.error.errors) {
-          this.erros = errorResponse.error.errors
-        }
-      });
+    if (this.form.touched) {
+      if (this.paciente.pacienteId) {
+        this.pacienteService.updatePaciente(this.paciente).subscribe(result => {
+          localStorage.setItem("paciente", JSON.stringify(result));
+          this.goForward(this.stepper);
+        }, (errorResponse: HttpErrorResponse) => {
+          this.catchError(errorResponse);
+        });
+      } else {
+        this.pacienteService.savePaciente(this.paciente).subscribe(result => {
+          localStorage.setItem("paciente", JSON.stringify(result));
+          this.goForward(this.stepper);
+        }, (errorResponse: HttpErrorResponse) => {
+          this.catchError(errorResponse);
+        });
+      }
     } else {
-      this.pacienteService.savePaciente(this.paciente).subscribe(result => {
-        this.goForward(this.stepper);
-      }, (errorResponse: HttpErrorResponse) => {
-        if (errorResponse.error.errors) {
-          this.erros = errorResponse.error.errors
-        }
-      });
+      this.goForward(this.stepper);
     }
   }
 
   concatDominio(dominio: string) {
     if (!this.form.get('email').value.includes("@")) {
       this.form.get('email').setValue(`${this.form.get('email').value}@${dominio}`)
+    } else {
+      let email = this.form.get('email').value.split("@")[0];
+      this.form.get('email').setValue(`${email}@${dominio}`)
     }
   }
 

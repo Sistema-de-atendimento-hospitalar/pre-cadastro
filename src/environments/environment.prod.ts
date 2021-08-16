@@ -1,4 +1,5 @@
 export const environment = {
-  apiUrl: 'http://3.142.232.220:32769', //ajustar para o load balance
+  apiUrl: 'https://xax2jzjto3.execute-api.us-east-2.amazonaws.com/dev',
+  apiUrlNotification: 'https://xax2jzjto3.execute-api.us-east-2.amazonaws.com/dev',
   production: true
 };

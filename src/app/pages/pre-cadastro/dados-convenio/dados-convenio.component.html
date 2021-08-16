@@ -10,47 +10,11 @@
                         <mat-radio-button class="optionConvenio" (click)="clearConvenio()" [value]="false">Não</mat-radio-button>
                     </mat-radio-group>
                 </div>
-                 <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="convenio != null && !convenio">
-                   <!-- <h1 name="convenio">Pagamento Particular</h1>
-                    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="formaPagamento">
-                        <mat-radio-button class="example-radio-button" *ngFor="let pagamento of pagamento" [value]="pagamento">
-                            {{pagamento}}
-                        </mat-radio-button>
-                    </mat-radio-group>
-                    <div class="texto" *ngIf="formaPagamento">Sua preferência para de forma de pagamento é {{formaPagamento}}!
-                    </div>-->
+                <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="convenio != null && !convenio">
                     <div class="row col-lg-12 col-md-12 col-sm-12 button" id="opcaoNao">
-                        <app-button></app-button>
+                        <app-button (click)="nextPage()"></app-button>
                     </div>
-                </div> 
-
-                <!-- <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="convenio == true && !hasConvenio">
-                    <h1>Modo de acesso</h1>
-
-                    <mat-radio-group aria-label="Selecione a opção" [(ngModel)]="modoAcesso" name="optionConvenio" class="example-radio-group">
-                        <mat-radio-button class="example-radio-button" [value]="true">Código cartão</mat-radio-button>
-                        <mat-radio-button class="example-radio-button" [value]="false">Cadastro cartão
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </div> -->
-
-                <!-- <div class="col-lg-12 col-md-12 col-sm-12 cadastroCodigo" *ngIf="modoAcesso && convenio">
-                    <h1>Código Cartão</h1>
-                    <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="codigoCartaoCovenio" mask="0000000000" required placeholder="Código gerado" />
-                    <button class="btn row-md-12 buttonValidar" (click)="validarCodigoAcesso()" [disabled]="!codigoCartaoCovenio && !codigoValidado">validar</button>
-
-                    <div class="row" *ngIf="codigoValidado == true">
-                        <span class="col-md-12">convenio: {{cartaoSaude.convenio}}</span>
-                        <span class="col-md-12">tipoContrato: {{cartaoSaude.tipoContrato}} </span>
-                        <span class="col-md-12">rede: {{cartaoSaude.rede}}</span>
-                        <span class="col-md-12">numeroCarteira: {{cartaoSaude.numeroCarteira}} </span>
-                        <span class="col-md-12">validade: {{cartaoSaude.validade | date }} </span>
-                    </div>
-
-                    <div class="row col-lg-12 col-md-12 col-sm-12 button" *ngIf="codigoValidado == true">
-                        <app-button [disabled]="form.invalid"></app-button>
-                    </div>
-                </div> -->
+                </div>
 
                 <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="nextPage()">
                     <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="(convenio) || hasConvenio">
