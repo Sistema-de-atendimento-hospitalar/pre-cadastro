@@ -49,16 +49,16 @@ export class PacienteService {
     return this.http.post<Paciente>(`${this.API_URL}`, paciente, httpOptions);
   }
 
-  saveEndereco(enderecos: Endereco[], paciente: Paciente): Observable<Paciente> {
-    return this.http.post<Paciente>(`${this.API_URL}/${paciente.pacienteId}/endereco`, enderecos);
+  saveEndereco(enderecos: Endereco[], paciente: Paciente): Observable<Endereco[]> {
+    return this.http.post<Endereco[]>(`${this.API_URL}/${paciente.pacienteId}/endereco`, enderecos);
   }
 
-  saveTelefone(telefones: Telefone[], paciente: Paciente): Observable<Paciente> {
-    return this.http.post<Paciente>(`${this.API_URL}/${paciente.pacienteId}/telefone`, telefones);
+  saveTelefone(telefones: Telefone[], paciente: Paciente): Observable<Telefone[]> {
+    return this.http.post<Telefone[]>(`${this.API_URL}/${paciente.pacienteId}/telefone`, telefones);
   }
 
-  saveCartaoSaude(cartaoSaude: CartaoSaude, paciente: Paciente): Observable<Paciente> {
-    return this.http.post<Paciente>(`${this.API_URL}/${paciente.pacienteId}/cartaoSaude`, cartaoSaude);
+  saveCartaoSaude(cartaoSaude: CartaoSaude, paciente: Paciente): Observable<CartaoSaude> {
+    return this.http.post<CartaoSaude>(`${this.API_URL}/${paciente.pacienteId}/cartaoSaude`, cartaoSaude);
   }
 
   updatePaciente(paciente: Paciente): Observable<Paciente> {

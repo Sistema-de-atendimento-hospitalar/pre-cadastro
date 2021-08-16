@@ -86,7 +86,9 @@ export class GenericComponent {
         }
 
         this.dialog.open(ModalGenericComponent, config);
-        callback();
+        if (callback != null) {
+            callback();
+        }        
     }
 
     catchError(errorResponse: HttpErrorResponse) {

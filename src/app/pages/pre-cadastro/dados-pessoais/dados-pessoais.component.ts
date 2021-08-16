@@ -50,6 +50,15 @@ export class DadosPessoaisComponent extends GenericComponent implements OnInit {
     });
 
     this.estado = { value: this.paciente.estadoExpedidor };
+    //this.load(this.stepper);
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex).toString());
+  }
+
+  load(stepper: MatStepper) {
+    let selectedIndex = localStorage.getItem("selectedIndex")
+    if (selectedIndex) {
+      stepper.selectedIndex = Number.parseInt(selectedIndex)
+    }
   }
 
   converterToModel(form: FormGroup, model: Paciente) {

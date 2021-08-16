@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
@@ -6,7 +6,11 @@ import { MatStepper } from '@angular/material/stepper';
   templateUrl: './step.component.html',
   styleUrls: ['./step.component.scss']
 })
-export class StepComponent {
+export class StepComponent implements OnInit {
+
+  ngOnInit(): void {
+    
+  }
 
   load(stepper: MatStepper) {
     let selectedIndex = localStorage.getItem("selectedIndex")

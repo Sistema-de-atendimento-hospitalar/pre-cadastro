@@ -22,7 +22,7 @@ export class AutorizationComponent extends GenericComponent implements OnInit {
   public selectedOption: boolean;
   private tokenRequest: TokenRequest;
   private validarTokenRequest: ValidarTokenRequest;
-  private isDev = environment.production
+  private isDev = !environment.production
 
   constructor(
     private autorizationService: AutorizationService,
@@ -60,15 +60,19 @@ export class AutorizationComponent extends GenericComponent implements OnInit {
 
     this.validarTokenRequest.token = this.form.get('token').value;
 
-    this.autorizationService.validToken(this.validarTokenRequest).subscribe(result => {
+    if (this.isDev) {
       this.loadPaciente()
-    }, (errorResponse: HttpErrorResponse) => {
-      if (errorResponse.error) {
-        this.erros = {
-          "token": errorResponse.error.detail
+    } else {
+      this.autorizationService.validToken(this.validarTokenRequest).subscribe(result => {
+        this.loadPaciente()
+      }, (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error) {
+          this.erros = {
+            "token": errorResponse.error.detail
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   loadPaciente() {

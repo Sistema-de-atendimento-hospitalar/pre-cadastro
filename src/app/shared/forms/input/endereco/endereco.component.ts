@@ -68,11 +68,16 @@ export class EnderecoComponent extends GenericComponent implements OnInit {
 
     if (endereco.enderecoId) {
       this.pacienteService.deleteEndereco(endereco, this.paciente).subscribe(result => {
+        this.enderecos.splice(this.indice, 1);
+        this.paciente.enderecos = this.enderecos;
+        localStorage.setItem("paciente", JSON.stringify(this.paciente));
         this.openGenericDialog('Sucesso', 'Exclusão efetuada com sucesso!')
       });
+    } else {
+      this.enderecos.splice(this.indice, 1);
+      this.paciente.enderecos = this.enderecos;
+      localStorage.setItem("paciente", JSON.stringify(this.paciente));
     }
-
-    this.enderecos.splice(this.indice, 1);
   }
 
 }

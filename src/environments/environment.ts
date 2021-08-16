@@ -4,8 +4,8 @@
 
 export const environment = {
   //apiUrl: 'https://xax2jzjto3.execute-api.us-east-2.amazonaws.com/dev',
-  apiUrl: 'http://3.14.127.175:32768/pre-cadastro',
-  apiUrlNotification: 'http://18.216.99.75:32777/notification',
+  apiUrl: 'http://localhost:8081/pre-cadastro',
+  apiUrlNotification: 'https://xax2jzjto3.execute-api.us-east-2.amazonaws.com/dev',
   production: false
 };
 

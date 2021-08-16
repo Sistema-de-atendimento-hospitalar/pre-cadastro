@@ -30,6 +30,7 @@ export class DadosTelefoneComponent extends GenericComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex).toString());
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
     if (!!this.paciente.telefones && this.paciente.telefones.length > 0) {
       this.paciente.telefones.map(telefone => this.telefones.push(telefone));
@@ -72,6 +73,7 @@ export class DadosTelefoneComponent extends GenericComponent implements OnInit {
       if (this.paciente.pacienteId) {
         this.paciente.telefones = this.telefones;
         this.pacienteService.updateTelefone(this.telefones, this.paciente).subscribe(result => {
+          this.paciente.telefones = result;
           localStorage.setItem("paciente", JSON.stringify(this.paciente));
           this.goForward(this.stepper);
         });
@@ -79,6 +81,8 @@ export class DadosTelefoneComponent extends GenericComponent implements OnInit {
         this.pacienteService.saveTelefone(this.telefones, this.paciente).subscribe(
           result => {
             if (result) {
+              this.paciente.telefones = result
+              localStorage.setItem("paciente", JSON.stringify(this.paciente));
               this.goForward(this.stepper);
             }
           }

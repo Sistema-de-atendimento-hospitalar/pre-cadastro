@@ -20,9 +20,6 @@ export class DadosConvenioComponent extends GenericComponent implements OnInit {
   formaPagamento: string;
   pagamento: string[] = ['Cartão de crédito', 'Pix', 'Dinheiro'];
   hasConvenio = false
-  hasPagamentoParticular = false
-  modoAcesso: boolean = null;
-  codigoCartaoCovenio: number = null;
   codigoValidado = false;
   @Input() stepper: MatStepper;
 
@@ -33,6 +30,7 @@ export class DadosConvenioComponent extends GenericComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex).toString());
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
     if (this.paciente.cartaoSaude) {
       this.cartaoSaude = this.paciente.cartaoSaude;
@@ -70,36 +68,44 @@ export class DadosConvenioComponent extends GenericComponent implements OnInit {
   }
 
   nextPage() {
-
-    if (!this.convenio) {
-      this.pacienteService.deleteCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
-        localStorage.setItem("paciente", JSON.stringify(this.paciente));
-        this.goForward(this.stepper);
-      });
-    }
-
     localStorage.setItem("selectedIndex", (this.stepper.selectedIndex + 1).toString());
-    this.cartaoSaude = this.converterToModel(this.form, this.cartaoSaude);
-    if (this.paciente.pacienteId) {
-      this.paciente.cartaoSaude = this.cartaoSaude;
-      this.pacienteService.updateCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
+
+    if (!this.convenio && !!this.paciente.cartaoSaude) {
+      this.pacienteService.deleteCartaoSaude(this.paciente.cartaoSaude, this.paciente).subscribe(result => {
+        this.paciente.cartaoSaude = null
         localStorage.setItem("paciente", JSON.stringify(this.paciente));
+        this.clearConvenio();
         this.goForward(this.stepper);
+        return false;
       });
+    } else if (!this.convenio) {
+      this.goForward(this.stepper);
     } else {
-      this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(
-        result => {
-          if (result) {
-            this.goForward(this.stepper);
+      this.cartaoSaude = this.converterToModel(this.form, this.cartaoSaude);
+      if (!!this.paciente.cartaoSaude) {
+        this.paciente.cartaoSaude = this.cartaoSaude;
+        this.pacienteService.updateCartaoSaude(this.cartaoSaude, this.paciente).subscribe(result => {
+          this.paciente.cartaoSaude = result;
+          localStorage.setItem("paciente", JSON.stringify(this.paciente));
+          this.goForward(this.stepper);
+        });
+      } else {
+        this.pacienteService.saveCartaoSaude(this.cartaoSaude, this.paciente).subscribe(
+          result => {
+            if (result) {
+              this.paciente.cartaoSaude = result;
+              localStorage.setItem("paciente", JSON.stringify(this.paciente));
+              this.goForward(this.stepper);
+            }
           }
-        }
-      );
+        );
+      }
     }
   }
 
   clearConvenio() {
     //this.cartaoSaude = null;
-    this.paciente.cartaoSaude = null;
+    //this.paciente.cartaoSaude = null;
     this.hasConvenio = false;
     this.convenio = null;
   }

@@ -25,6 +25,7 @@ export class DadosConfirmacaoComponent extends GenericComponent implements OnIni
   }
 
   ngOnInit(): void {
+    localStorage.setItem("selectedIndex", (this.stepper.selectedIndex).toString());
     this.paciente = this.pacienteService.getPacienteFromLocalStore();
   }
 
